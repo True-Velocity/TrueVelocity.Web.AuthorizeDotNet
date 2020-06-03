@@ -5,6 +5,7 @@ using AuthorizeNet.Api.V1.Contracts;
 using Bet.Extensions.AuthorizeNet.Api.V1.Clients;
 using Bet.Extensions.AuthorizeNet.Options;
 
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -35,7 +36,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 configure.BaseAddress = options.LetsEncryptUri;
             });
 
-            services.AddScoped<CustomerProfileClient>();
+            services.TryAddTransient<IAuthorizeNetClient<CreateCustomerProfileRequest, CreateCustomerProfileResponse>, AuthorizeNetClient<CreateCustomerProfileRequest, CreateCustomerProfileResponse>>();
+            services.TryAddTransient<IAuthorizeNetClient<GetCustomerProfileRequest, GetCustomerProfileResponse>, AuthorizeNetClient<GetCustomerProfileRequest, GetCustomerProfileResponse>>();
+            services.TryAddTransient<IAuthorizeNetClient<DeleteCustomerProfileRequest, DeleteCustomerProfileResponse>, AuthorizeNetClient<DeleteCustomerProfileRequest, DeleteCustomerProfileResponse>>();
+
+            services.TryAddTransient<CustomerProfileClient>();
 
             return services;
         }

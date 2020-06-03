@@ -24,15 +24,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfLong
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<long> _long;
         
@@ -54,7 +45,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Long collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool LongSpecified
         {
             get
@@ -81,15 +71,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfNumericString
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _numericString;
         
@@ -115,7 +96,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the NumericString collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool NumericStringSpecified
         {
             get
@@ -142,15 +122,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfString
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _string;
         
@@ -172,7 +143,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the String collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool StringSpecified
         {
             get
@@ -199,15 +169,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfLineItem
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<LineItemType> _lineItem;
         
@@ -229,7 +190,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the LineItem collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool LineItemSpecified
         {
             get
@@ -255,15 +215,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class LineItemType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Minimum length: 1.</para>
@@ -304,15 +255,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("unitPrice")]
         public decimal UnitPrice { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("taxable")]
-        public bool Taxable { get; set; }
+        public bool TaxableValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Taxable-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Taxable property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TaxableSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TaxableValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> Taxable
+        {
+            get
+            {
+                if (this.TaxableValueSpecified)
+                {
+                    return this.TaxableValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TaxableValue = value.GetValueOrDefault();
+                this.TaxableValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 12.</para>
@@ -332,59 +306,182 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Total number of digits: 5.</para>
         /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("taxRate")]
-        public decimal TaxRate { get; set; }
+        public decimal TaxRateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TaxRate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxRate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TaxRateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TaxRateValueSpecified { get; set; }
         
+        /// <summary>
+        /// <para xml:lang="en">Total number of digits: 5.</para>
+        /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> TaxRate
+        {
+            get
+            {
+                if (this.TaxRateValueSpecified)
+                {
+                    return this.TaxRateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TaxRateValue = value.GetValueOrDefault();
+                this.TaxRateValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("taxAmount")]
-        public decimal TaxAmount { get; set; }
+        public decimal TaxAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TaxAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TaxAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TaxAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> TaxAmount
+        {
+            get
+            {
+                if (this.TaxAmountValueSpecified)
+                {
+                    return this.TaxAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TaxAmountValue = value.GetValueOrDefault();
+                this.TaxAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("nationalTax")]
-        public decimal NationalTax { get; set; }
+        public decimal NationalTaxValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die NationalTax-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the NationalTax property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool NationalTaxSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool NationalTaxValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> NationalTax
+        {
+            get
+            {
+                if (this.NationalTaxValueSpecified)
+                {
+                    return this.NationalTaxValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.NationalTaxValue = value.GetValueOrDefault();
+                this.NationalTaxValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("localTax")]
-        public decimal LocalTax { get; set; }
+        public decimal LocalTaxValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die LocalTax-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the LocalTax property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LocalTaxSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool LocalTaxValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> LocalTax
+        {
+            get
+            {
+                if (this.LocalTaxValueSpecified)
+                {
+                    return this.LocalTaxValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.LocalTaxValue = value.GetValueOrDefault();
+                this.LocalTaxValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Total number of digits: 5.</para>
         /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("vatRate")]
-        public decimal VatRate { get; set; }
+        public decimal VatRateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die VatRate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the VatRate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool VatRateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool VatRateValueSpecified { get; set; }
+        
+        /// <summary>
+        /// <para xml:lang="en">Total number of digits: 5.</para>
+        /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> VatRate
+        {
+            get
+            {
+                if (this.VatRateValueSpecified)
+                {
+                    return this.VatRateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.VatRateValue = value.GetValueOrDefault();
+                this.VatRateValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 20.</para>
@@ -411,35 +508,108 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Total number of digits: 5.</para>
         /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("alternateTaxRate")]
-        public decimal AlternateTaxRate { get; set; }
+        public decimal AlternateTaxRateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die AlternateTaxRate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AlternateTaxRate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AlternateTaxRateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool AlternateTaxRateValueSpecified { get; set; }
         
+        /// <summary>
+        /// <para xml:lang="en">Total number of digits: 5.</para>
+        /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> AlternateTaxRate
+        {
+            get
+            {
+                if (this.AlternateTaxRateValueSpecified)
+                {
+                    return this.AlternateTaxRateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.AlternateTaxRateValue = value.GetValueOrDefault();
+                this.AlternateTaxRateValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("alternateTaxAmount")]
-        public decimal AlternateTaxAmount { get; set; }
+        public decimal AlternateTaxAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die AlternateTaxAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AlternateTaxAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AlternateTaxAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool AlternateTaxAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> AlternateTaxAmount
+        {
+            get
+            {
+                if (this.AlternateTaxAmountValueSpecified)
+                {
+                    return this.AlternateTaxAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.AlternateTaxAmountValue = value.GetValueOrDefault();
+                this.AlternateTaxAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("totalAmount")]
-        public decimal TotalAmount { get; set; }
+        public decimal TotalAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TotalAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TotalAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TotalAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TotalAmountValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> TotalAmount
+        {
+            get
+            {
+                if (this.TotalAmountValueSpecified)
+                {
+                    return this.TotalAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TotalAmountValue = value.GetValueOrDefault();
+                this.TotalAmountValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 15.</para>
@@ -466,45 +636,141 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Total number of digits: 5.</para>
         /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("discountRate")]
-        public decimal DiscountRate { get; set; }
+        public decimal DiscountRateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DiscountRate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DiscountRate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DiscountRateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DiscountRateValueSpecified { get; set; }
         
+        /// <summary>
+        /// <para xml:lang="en">Total number of digits: 5.</para>
+        /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> DiscountRate
+        {
+            get
+            {
+                if (this.DiscountRateValueSpecified)
+                {
+                    return this.DiscountRateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DiscountRateValue = value.GetValueOrDefault();
+                this.DiscountRateValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("discountAmount")]
-        public decimal DiscountAmount { get; set; }
+        public decimal DiscountAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DiscountAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DiscountAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DiscountAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DiscountAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> DiscountAmount
+        {
+            get
+            {
+                if (this.DiscountAmountValueSpecified)
+                {
+                    return this.DiscountAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DiscountAmountValue = value.GetValueOrDefault();
+                this.DiscountAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("taxIncludedInTotal")]
-        public bool TaxIncludedInTotal { get; set; }
+        public bool TaxIncludedInTotalValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TaxIncludedInTotal-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxIncludedInTotal property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TaxIncludedInTotalSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TaxIncludedInTotalValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> TaxIncludedInTotal
+        {
+            get
+            {
+                if (this.TaxIncludedInTotalValueSpecified)
+                {
+                    return this.TaxIncludedInTotalValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TaxIncludedInTotalValue = value.GetValueOrDefault();
+                this.TaxIncludedInTotalValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("taxIsAfterDiscount")]
-        public bool TaxIsAfterDiscount { get; set; }
+        public bool TaxIsAfterDiscountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TaxIsAfterDiscount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxIsAfterDiscount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TaxIsAfterDiscountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TaxIsAfterDiscountValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> TaxIsAfterDiscount
+        {
+            get
+            {
+                if (this.TaxIsAfterDiscountValueSpecified)
+                {
+                    return this.TaxIsAfterDiscountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TaxIsAfterDiscountValue = value.GetValueOrDefault();
+                this.TaxIsAfterDiscountValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -514,15 +780,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ArrayOfBatchStatisticType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<BatchStatisticType> _statistic;
@@ -545,7 +802,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Statistic collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool StatisticSpecified
         {
             get
@@ -572,15 +828,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class BatchStatisticType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("accountType")]
         public string AccountType { get; set; }
         
@@ -605,135 +852,434 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("errorCount")]
         public int ErrorCount { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("returnedItemAmount")]
-        public decimal ReturnedItemAmount { get; set; }
+        public decimal ReturnedItemAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ReturnedItemAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ReturnedItemAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ReturnedItemAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ReturnedItemAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> ReturnedItemAmount
+        {
+            get
+            {
+                if (this.ReturnedItemAmountValueSpecified)
+                {
+                    return this.ReturnedItemAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ReturnedItemAmountValue = value.GetValueOrDefault();
+                this.ReturnedItemAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("returnedItemCount")]
-        public int ReturnedItemCount { get; set; }
+        public int ReturnedItemCountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ReturnedItemCount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ReturnedItemCount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ReturnedItemCountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ReturnedItemCountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> ReturnedItemCount
+        {
+            get
+            {
+                if (this.ReturnedItemCountValueSpecified)
+                {
+                    return this.ReturnedItemCountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ReturnedItemCountValue = value.GetValueOrDefault();
+                this.ReturnedItemCountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("chargebackAmount")]
-        public decimal ChargebackAmount { get; set; }
+        public decimal ChargebackAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ChargebackAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ChargebackAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ChargebackAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ChargebackAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> ChargebackAmount
+        {
+            get
+            {
+                if (this.ChargebackAmountValueSpecified)
+                {
+                    return this.ChargebackAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ChargebackAmountValue = value.GetValueOrDefault();
+                this.ChargebackAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("chargebackCount")]
-        public int ChargebackCount { get; set; }
+        public int ChargebackCountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ChargebackCount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ChargebackCount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ChargebackCountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ChargebackCountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> ChargebackCount
+        {
+            get
+            {
+                if (this.ChargebackCountValueSpecified)
+                {
+                    return this.ChargebackCountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ChargebackCountValue = value.GetValueOrDefault();
+                this.ChargebackCountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("correctionNoticeCount")]
-        public int CorrectionNoticeCount { get; set; }
+        public int CorrectionNoticeCountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die CorrectionNoticeCount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the CorrectionNoticeCount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CorrectionNoticeCountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool CorrectionNoticeCountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> CorrectionNoticeCount
+        {
+            get
+            {
+                if (this.CorrectionNoticeCountValueSpecified)
+                {
+                    return this.CorrectionNoticeCountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.CorrectionNoticeCountValue = value.GetValueOrDefault();
+                this.CorrectionNoticeCountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("chargeChargeBackAmount")]
-        public decimal ChargeChargeBackAmount { get; set; }
+        public decimal ChargeChargeBackAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ChargeChargeBackAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ChargeChargeBackAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ChargeChargeBackAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ChargeChargeBackAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> ChargeChargeBackAmount
+        {
+            get
+            {
+                if (this.ChargeChargeBackAmountValueSpecified)
+                {
+                    return this.ChargeChargeBackAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ChargeChargeBackAmountValue = value.GetValueOrDefault();
+                this.ChargeChargeBackAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("chargeChargeBackCount")]
-        public int ChargeChargeBackCount { get; set; }
+        public int ChargeChargeBackCountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ChargeChargeBackCount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ChargeChargeBackCount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ChargeChargeBackCountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ChargeChargeBackCountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> ChargeChargeBackCount
+        {
+            get
+            {
+                if (this.ChargeChargeBackCountValueSpecified)
+                {
+                    return this.ChargeChargeBackCountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ChargeChargeBackCountValue = value.GetValueOrDefault();
+                this.ChargeChargeBackCountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("refundChargeBackAmount")]
-        public decimal RefundChargeBackAmount { get; set; }
+        public decimal RefundChargeBackAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die RefundChargeBackAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the RefundChargeBackAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RefundChargeBackAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool RefundChargeBackAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> RefundChargeBackAmount
+        {
+            get
+            {
+                if (this.RefundChargeBackAmountValueSpecified)
+                {
+                    return this.RefundChargeBackAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.RefundChargeBackAmountValue = value.GetValueOrDefault();
+                this.RefundChargeBackAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("refundChargeBackCount")]
-        public int RefundChargeBackCount { get; set; }
+        public int RefundChargeBackCountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die RefundChargeBackCount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the RefundChargeBackCount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RefundChargeBackCountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool RefundChargeBackCountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> RefundChargeBackCount
+        {
+            get
+            {
+                if (this.RefundChargeBackCountValueSpecified)
+                {
+                    return this.RefundChargeBackCountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.RefundChargeBackCountValue = value.GetValueOrDefault();
+                this.RefundChargeBackCountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("chargeReturnedItemsAmount")]
-        public decimal ChargeReturnedItemsAmount { get; set; }
+        public decimal ChargeReturnedItemsAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ChargeReturnedItemsAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ChargeReturnedItemsAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ChargeReturnedItemsAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ChargeReturnedItemsAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> ChargeReturnedItemsAmount
+        {
+            get
+            {
+                if (this.ChargeReturnedItemsAmountValueSpecified)
+                {
+                    return this.ChargeReturnedItemsAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ChargeReturnedItemsAmountValue = value.GetValueOrDefault();
+                this.ChargeReturnedItemsAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("chargeReturnedItemsCount")]
-        public int ChargeReturnedItemsCount { get; set; }
+        public int ChargeReturnedItemsCountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ChargeReturnedItemsCount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ChargeReturnedItemsCount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ChargeReturnedItemsCountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ChargeReturnedItemsCountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> ChargeReturnedItemsCount
+        {
+            get
+            {
+                if (this.ChargeReturnedItemsCountValueSpecified)
+                {
+                    return this.ChargeReturnedItemsCountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ChargeReturnedItemsCountValue = value.GetValueOrDefault();
+                this.ChargeReturnedItemsCountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("refundReturnedItemsAmount")]
-        public decimal RefundReturnedItemsAmount { get; set; }
+        public decimal RefundReturnedItemsAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die RefundReturnedItemsAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the RefundReturnedItemsAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RefundReturnedItemsAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool RefundReturnedItemsAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> RefundReturnedItemsAmount
+        {
+            get
+            {
+                if (this.RefundReturnedItemsAmountValueSpecified)
+                {
+                    return this.RefundReturnedItemsAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.RefundReturnedItemsAmountValue = value.GetValueOrDefault();
+                this.RefundReturnedItemsAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("refundReturnedItemsCount")]
-        public int RefundReturnedItemsCount { get; set; }
+        public int RefundReturnedItemsCountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die RefundReturnedItemsCount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the RefundReturnedItemsCount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RefundReturnedItemsCountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool RefundReturnedItemsCountValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> RefundReturnedItemsCount
+        {
+            get
+            {
+                if (this.RefundReturnedItemsCountValueSpecified)
+                {
+                    return this.RefundReturnedItemsCountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.RefundReturnedItemsCountValue = value.GetValueOrDefault();
+                this.RefundReturnedItemsCountValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -743,15 +1289,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ArrayOfBatchDetailsType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<BatchDetailsType> _batch;
@@ -774,7 +1311,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Batch collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool BatchSpecified
         {
             get
@@ -802,40 +1338,77 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Pattern: [0-9]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
         [System.Xml.Serialization.XmlElementAttribute("batchId")]
         public string BatchId { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("settlementTimeUTC", DataType="dateTime")]
-        public System.DateTime SettlementTimeUTC { get; set; }
+        public System.DateTime SettlementTimeUTCValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die SettlementTimeUTC-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the SettlementTimeUTC property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SettlementTimeUTCSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool SettlementTimeUTCValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<System.DateTime> SettlementTimeUTC
+        {
+            get
+            {
+                if (this.SettlementTimeUTCValueSpecified)
+                {
+                    return this.SettlementTimeUTCValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.SettlementTimeUTCValue = value.GetValueOrDefault();
+                this.SettlementTimeUTCValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("settlementTimeLocal", DataType="dateTime")]
-        public System.DateTime SettlementTimeLocal { get; set; }
+        public System.DateTime SettlementTimeLocalValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die SettlementTimeLocal-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the SettlementTimeLocal property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SettlementTimeLocalSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool SettlementTimeLocalValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<System.DateTime> SettlementTimeLocal
+        {
+            get
+            {
+                if (this.SettlementTimeLocalValueSpecified)
+                {
+                    return this.SettlementTimeLocalValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.SettlementTimeLocalValue = value.GetValueOrDefault();
+                this.SettlementTimeLocalValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("settlementState")]
         public string SettlementState { get; set; }
@@ -849,8 +1422,44 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("product")]
         public string Product { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("statistics")]
-        public ArrayOfBatchStatisticType Statistics { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<BatchStatisticType> _statistics;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("statistics")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("statistic")]
+        public System.Collections.ObjectModel.Collection<BatchStatisticType> Statistics
+        {
+            get
+            {
+                return this._statistics;
+            }
+            set
+            {
+                this._statistics = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Statistics-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the Statistics collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool StatisticsSpecified
+        {
+            get
+            {
+                return (this.Statistics.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="BatchDetailsType" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="BatchDetailsType" /> class.</para>
+        /// </summary>
+        public BatchDetailsType()
+        {
+            this._statistics = new System.Collections.ObjectModel.Collection<BatchStatisticType>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -860,15 +1469,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ArrayOfTransactionSummaryType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TransactionSummaryType> _transaction;
@@ -891,7 +1491,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Transaction collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool TransactionSpecified
         {
             get
@@ -917,15 +1516,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionSummaryType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Pattern: [0-9]+.</para>
@@ -973,15 +1563,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("subscription")]
         public SubscriptionPaymentType Subscription { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("hasReturnedItems")]
-        public bool HasReturnedItems { get; set; }
+        public bool HasReturnedItemsValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die HasReturnedItems-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the HasReturnedItems property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool HasReturnedItemsSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool HasReturnedItemsValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> HasReturnedItems
+        {
+            get
+            {
+                if (this.HasReturnedItemsValueSpecified)
+                {
+                    return this.HasReturnedItemsValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.HasReturnedItemsValue = value.GetValueOrDefault();
+                this.HasReturnedItemsValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("fraudInformation")]
         public FraudInformationType FraudInformation { get; set; }
@@ -1002,7 +1615,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Minimum inclusive value: 0.</para>
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("id")]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
         public int Id { get; set; }
         
         /// <summary>
@@ -1019,15 +1631,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class FraudInformationType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _fraudFilterList;
@@ -1067,15 +1670,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfFraudFilterType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _fraudFilter;
         
@@ -1111,15 +1705,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Pattern: [0-9]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
@@ -1149,15 +1734,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ARBTransactionList
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ArbTransaction> _arbTransaction;
         
@@ -1179,7 +1755,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the ArbTransaction collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ArbTransactionSpecified
         {
             get
@@ -1207,15 +1782,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Pattern: [0-9]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
@@ -1225,35 +1791,104 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("response")]
         public string Response { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("submitTimeUTC", DataType="dateTime")]
-        public System.DateTime SubmitTimeUTC { get; set; }
+        public System.DateTime SubmitTimeUTCValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die SubmitTimeUTC-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the SubmitTimeUTC property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SubmitTimeUTCSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool SubmitTimeUTCValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<System.DateTime> SubmitTimeUTC
+        {
+            get
+            {
+                if (this.SubmitTimeUTCValueSpecified)
+                {
+                    return this.SubmitTimeUTCValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.SubmitTimeUTCValue = value.GetValueOrDefault();
+                this.SubmitTimeUTCValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("payNum")]
-        public int PayNum { get; set; }
+        public int PayNumValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die PayNum-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the PayNum property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PayNumSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool PayNumValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> PayNum
+        {
+            get
+            {
+                if (this.PayNumValueSpecified)
+                {
+                    return this.PayNumValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.PayNumValue = value.GetValueOrDefault();
+                this.PayNumValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("attemptNum")]
-        public int AttemptNum { get; set; }
+        public int AttemptNumValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die AttemptNum-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AttemptNum property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AttemptNumSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool AttemptNumValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> AttemptNum
+        {
+            get
+            {
+                if (this.AttemptNumValueSpecified)
+                {
+                    return this.AttemptNumValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.AttemptNumValue = value.GetValueOrDefault();
+                this.AttemptNumValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -1264,15 +1899,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EmailSettingsType))]
     public partial class ArrayOfSetting
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<SettingType> _setting;
@@ -1295,7 +1921,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Setting collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool SettingSpecified
         {
             get
@@ -1322,15 +1947,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class SettingType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("settingName")]
         public string SettingName { get; set; }
         
@@ -1345,15 +1961,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ArrayOfFDSFilter
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<FDSFilterType> _fDSFilter;
@@ -1376,7 +1983,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the FDSFilter collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool FDSFilterSpecified
         {
             get
@@ -1403,15 +2009,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class FDSFilterType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("name")]
         public string Name { get; set; }
         
@@ -1426,15 +2023,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ArrayOfPermissionType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<PermissionType> _permission;
@@ -1457,7 +2045,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Permission collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool PermissionSpecified
         {
             get
@@ -1484,15 +2071,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class PermissionType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("permissionName")]
         public string PermissionName { get; set; }
     }
@@ -1504,15 +2082,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ArrayOfContactDetail
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ContactDetailType> _contactDetail;
@@ -1535,7 +2104,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the ContactDetail collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ContactDetailSpecified
         {
             get
@@ -1561,15 +2129,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ContactDetailType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 255.</para>
@@ -1993,15 +2552,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Minimum length: 5.</para>
         /// <para xml:lang="en">Maximum length: 20.</para>
         /// </summary>
@@ -2036,15 +2586,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class DriversLicenseMaskedType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Minimum length: 8.</para>
@@ -2083,15 +2624,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CustomerAddressType))]
     public partial class NameAndAddressType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 50.</para>
@@ -2158,15 +2690,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class MerchantContactType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("merchantName")]
         public string MerchantName { get; set; }
         
@@ -2197,15 +2720,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransRetailInfoType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private string _marketType = "2";
@@ -2244,15 +2758,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Minimum length: 4.</para>
         /// <para xml:lang="en">Maximum length: 16.</para>
         /// </summary>
@@ -2279,15 +2784,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CreditCardTrackType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("track1")]
         public string Track1 { get; set; }
         
@@ -2312,15 +2808,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("cardCode")]
         public string CardCode { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("isPaymentToken")]
-        public bool IsPaymentToken { get; set; }
+        public bool IsPaymentTokenValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IsPaymentToken-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IsPaymentToken property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsPaymentTokenSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IsPaymentTokenValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IsPaymentToken
+        {
+            get
+            {
+                if (this.IsPaymentTokenValueSpecified)
+                {
+                    return this.IsPaymentTokenValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IsPaymentTokenValue = value.GetValueOrDefault();
+                this.IsPaymentTokenValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("cryptogram")]
         public string Cryptogram { get; set; }
@@ -2342,15 +2861,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CreditCardMaskedType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Minimum length: 8.</para>
@@ -2385,15 +2895,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("issuerNumber")]
         public string IssuerNumber { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("isPaymentToken")]
-        public bool IsPaymentToken { get; set; }
+        public bool IsPaymentTokenValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IsPaymentToken-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IsPaymentToken property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsPaymentTokenSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IsPaymentTokenValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IsPaymentToken
+        {
+            get
+            {
+                if (this.IsPaymentTokenValueSpecified)
+                {
+                    return this.IsPaymentTokenValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IsPaymentTokenValue = value.GetValueOrDefault();
+                this.IsPaymentTokenValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -2403,15 +2936,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CardArt
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("cardBrand")]
         public string CardBrand { get; set; }
@@ -2437,15 +2961,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CcAuthenticationType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("authenticationIndicator")]
         public string AuthenticationIndicator { get; set; }
         
@@ -2461,24 +2976,38 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class BankAccountType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("accountType")]
-        public BankAccountTypeEnum AccountType { get; set; }
+        public BankAccountTypeEnum AccountTypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die AccountType-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AccountType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AccountTypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool AccountTypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<BankAccountTypeEnum> AccountType
+        {
+            get
+            {
+                if (this.AccountTypeValueSpecified)
+                {
+                    return this.AccountTypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.AccountTypeValue = value.GetValueOrDefault();
+                this.AccountTypeValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 9.</para>
@@ -2501,15 +3030,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("nameOnAccount")]
         public string NameOnAccount { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("echeckType")]
-        public EcheckTypeEnum EcheckType { get; set; }
+        public EcheckTypeEnum EcheckTypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die EcheckType-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the EcheckType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool EcheckTypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool EcheckTypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<EcheckTypeEnum> EcheckType
+        {
+            get
+            {
+                if (this.EcheckTypeValueSpecified)
+                {
+                    return this.EcheckTypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.EcheckTypeValue = value.GetValueOrDefault();
+                this.EcheckTypeValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 50.</para>
@@ -2534,24 +3086,38 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class BankAccountMaskedType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("accountType")]
-        public BankAccountTypeEnum AccountType { get; set; }
+        public BankAccountTypeEnum AccountTypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die AccountType-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AccountType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AccountTypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool AccountTypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<BankAccountTypeEnum> AccountType
+        {
+            get
+            {
+                if (this.AccountTypeValueSpecified)
+                {
+                    return this.AccountTypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.AccountTypeValue = value.GetValueOrDefault();
+                this.AccountTypeValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Minimum length: 8.</para>
@@ -2578,15 +3144,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("nameOnAccount")]
         public string NameOnAccount { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("echeckType")]
-        public EcheckTypeEnum EcheckType { get; set; }
+        public EcheckTypeEnum EcheckTypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die EcheckType-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the EcheckType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool EcheckTypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool EcheckTypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<EcheckTypeEnum> EcheckType
+        {
+            get
+            {
+                if (this.EcheckTypeValueSpecified)
+                {
+                    return this.EcheckTypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.EcheckTypeValue = value.GetValueOrDefault();
+                this.EcheckTypeValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 50.</para>
@@ -2604,15 +3193,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class OpaqueDataType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("dataDescriptor")]
         public string DataDescriptor { get; set; }
         
@@ -2622,15 +3202,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("dataKey")]
         public string DataKey { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("expirationTimeStamp", DataType="dateTime")]
-        public System.DateTime ExpirationTimeStamp { get; set; }
+        public System.DateTime ExpirationTimeStampValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ExpirationTimeStamp-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ExpirationTimeStamp property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ExpirationTimeStampSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ExpirationTimeStampValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<System.DateTime> ExpirationTimeStamp
+        {
+            get
+            {
+                if (this.ExpirationTimeStampValueSpecified)
+                {
+                    return this.ExpirationTimeStampValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ExpirationTimeStampValue = value.GetValueOrDefault();
+                this.ExpirationTimeStampValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -2640,15 +3243,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PaymentSimpleType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("creditCard")]
         public CreditCardSimpleType CreditCard { get; set; }
@@ -2664,15 +3258,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PaymentType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("creditCard")]
         public CreditCardType CreditCard { get; set; }
@@ -2707,15 +3292,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class EncryptedTrackDataType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("FormOfPayment")]
         public KeyBlock FormOfPayment { get; set; }
     }
@@ -2728,15 +3304,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class KeyBlock
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("Value")]
         public KeyValue Value { get; set; }
     }
@@ -2748,15 +3315,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class KeyValue
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("Encoding")]
         public EncodingType Encoding { get; set; }
@@ -2800,15 +3358,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class KeyManagementScheme
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("DUKPT")]
         public KeyManagementSchemeDUKPT DUKPT { get; set; }
     }
@@ -2820,15 +3369,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class KeyManagementSchemeDUKPT
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("Operation")]
         public OperationType Operation { get; set; }
@@ -2860,15 +3400,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class KeyManagementSchemeDUKPTMode
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("PIN")]
         public string PIN { get; set; }
         
@@ -2884,15 +3415,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class KeyManagementSchemeDUKPTDeviceInfo
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
     }
@@ -2905,15 +3427,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class KeyManagementSchemeDUKPTEncryptedData
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("Value")]
         public string Value { get; set; }
     }
@@ -2925,15 +3438,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PayPalType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 2048.</para>
@@ -2986,15 +3490,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class PaymentEmvType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("emvData")]
         public object EmvData { get; set; }
         
@@ -3013,15 +3508,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class PaymentMaskedType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("creditCard")]
         public CreditCardMaskedType CreditCard { get; set; }
         
@@ -3039,15 +3525,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TokenMaskedType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("tokenSource")]
         public string TokenSource { get; set; }
@@ -3078,15 +3555,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Maximum length: 20.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(20)]
@@ -3100,25 +3568,71 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("description")]
         public string Description { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("discountAmount")]
-        public decimal DiscountAmount { get; set; }
+        public decimal DiscountAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DiscountAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DiscountAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DiscountAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DiscountAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> DiscountAmount
+        {
+            get
+            {
+                if (this.DiscountAmountValueSpecified)
+                {
+                    return this.DiscountAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DiscountAmountValue = value.GetValueOrDefault();
+                this.DiscountAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("taxIsAfterDiscount")]
-        public bool TaxIsAfterDiscount { get; set; }
+        public bool TaxIsAfterDiscountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TaxIsAfterDiscount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxIsAfterDiscount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TaxIsAfterDiscountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TaxIsAfterDiscountValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> TaxIsAfterDiscount
+        {
+            get
+            {
+                if (this.TaxIsAfterDiscountValueSpecified)
+                {
+                    return this.TaxIsAfterDiscountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TaxIsAfterDiscountValue = value.GetValueOrDefault();
+                this.TaxIsAfterDiscountValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 3.</para>
@@ -3162,15 +3676,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("summaryCommodityCode")]
         public string SummaryCommodityCode { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("purchaseOrderDateUTC", DataType="date")]
-        public System.DateTime PurchaseOrderDateUTC { get; set; }
+        public System.DateTime PurchaseOrderDateUTCValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die PurchaseOrderDateUTC-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the PurchaseOrderDateUTC property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PurchaseOrderDateUTCSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool PurchaseOrderDateUTCValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<System.DateTime> PurchaseOrderDateUTC
+        {
+            get
+            {
+                if (this.PurchaseOrderDateUTCValueSpecified)
+                {
+                    return this.PurchaseOrderDateUTCValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.PurchaseOrderDateUTCValue = value.GetValueOrDefault();
+                this.PurchaseOrderDateUTCValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 25.</para>
@@ -3246,22 +3783,44 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CustomerType
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("type")]
-        public CustomerTypeEnum Type { get; set; }
+        public CustomerTypeEnum TypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Type-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Type property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<CustomerTypeEnum> Type
+        {
+            get
+            {
+                if (this.TypeValueSpecified)
+                {
+                    return this.TypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TypeValue = value.GetValueOrDefault();
+                this.TypeValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 20.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(20)]
         [System.Xml.Serialization.XmlElementAttribute("id")]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
         public string Id { get; set; }
         
         /// <summary>
@@ -3306,22 +3865,44 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CustomerDataType
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("type")]
-        public CustomerTypeEnum Type { get; set; }
+        public CustomerTypeEnum TypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Type-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Type property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<CustomerTypeEnum> Type
+        {
+            get
+            {
+                if (this.TypeValueSpecified)
+                {
+                    return this.TypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TypeValue = value.GetValueOrDefault();
+                this.TypeValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 20.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(20)]
         [System.Xml.Serialization.XmlElementAttribute("id")]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
         public string Id { get; set; }
         
         /// <summary>
@@ -3351,15 +3932,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class MerchantAuthenticationType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 25.</para>
@@ -3414,15 +3986,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Maximum length: 25.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(25)]
@@ -3444,15 +4007,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class FingerPrintType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("hashValue")]
         public string HashValue { get; set; }
@@ -3477,15 +4031,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PaymentDetails
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("currency")]
         public string Currency { get; set; }
@@ -3536,7 +4081,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.ComponentModel.DataAnnotations.MinLengthAttribute(1)]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(64)]
         [System.Xml.Serialization.XmlElementAttribute("id")]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
         public string Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("token")]
@@ -3564,15 +4108,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WebCheckOutDataTypeToken
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Minimum length: 4.</para>
@@ -3628,15 +4163,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class SecurePaymentContainerErrorType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("code")]
         public string Code { get; set; }
         
@@ -3652,57 +4178,125 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class PaymentScheduleType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("interval")]
         public PaymentScheduleTypeInterval Interval { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("startDate", DataType="date")]
-        public System.DateTime StartDate { get; set; }
+        public System.DateTime StartDateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die StartDate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the StartDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StartDateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool StartDateValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<System.DateTime> StartDate
+        {
+            get
+            {
+                if (this.StartDateValueSpecified)
+                {
+                    return this.StartDateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.StartDateValue = value.GetValueOrDefault();
+                this.StartDateValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Minimum inclusive value: 1.</para>
         /// <para xml:lang="en">Maximum inclusive value: 32000.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RangeAttribute(typeof(short), "1", "32000")]
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("totalOccurrences")]
-        public short TotalOccurrences { get; set; }
+        public short TotalOccurrencesValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TotalOccurrences-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TotalOccurrences property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TotalOccurrencesSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TotalOccurrencesValueSpecified { get; set; }
+        
+        /// <summary>
+        /// <para xml:lang="en">Minimum inclusive value: 1.</para>
+        /// <para xml:lang="en">Maximum inclusive value: 32000.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<short> TotalOccurrences
+        {
+            get
+            {
+                if (this.TotalOccurrencesValueSpecified)
+                {
+                    return this.TotalOccurrencesValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TotalOccurrencesValue = value.GetValueOrDefault();
+                this.TotalOccurrencesValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Minimum inclusive value: 0.</para>
         /// <para xml:lang="en">Maximum inclusive value: 32000.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RangeAttribute(typeof(short), "0", "32000")]
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("trialOccurrences")]
-        public short TrialOccurrences { get; set; }
+        public short TrialOccurrencesValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TrialOccurrences-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TrialOccurrences property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TrialOccurrencesSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TrialOccurrencesValueSpecified { get; set; }
+        
+        /// <summary>
+        /// <para xml:lang="en">Minimum inclusive value: 0.</para>
+        /// <para xml:lang="en">Maximum inclusive value: 32000.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<short> TrialOccurrences
+        {
+            get
+            {
+                if (this.TrialOccurrencesValueSpecified)
+                {
+                    return this.TrialOccurrencesValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TrialOccurrencesValue = value.GetValueOrDefault();
+                this.TrialOccurrencesValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -3712,15 +4306,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PaymentScheduleTypeInterval
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Minimum inclusive value: 1.</para>
@@ -3743,15 +4328,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Maximum length: 50.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(50)]
@@ -3765,29 +4341,83 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Minimum inclusive value: 0.01.</para>
         /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("amount")]
-        public decimal Amount { get; set; }
+        public decimal AmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Amount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Amount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool AmountValueSpecified { get; set; }
+        
+        /// <summary>
+        /// <para xml:lang="en">Minimum inclusive value: 0.01.</para>
+        /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> Amount
+        {
+            get
+            {
+                if (this.AmountValueSpecified)
+                {
+                    return this.AmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.AmountValue = value.GetValueOrDefault();
+                this.AmountValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
         /// <para xml:lang="en">Minimum inclusive value: 0.00.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("trialAmount")]
-        public decimal TrialAmount { get; set; }
+        public decimal TrialAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TrialAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TrialAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TrialAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TrialAmountValueSpecified { get; set; }
+        
+        /// <summary>
+        /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
+        /// <para xml:lang="en">Minimum inclusive value: 0.00.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> TrialAmount
+        {
+            get
+            {
+                if (this.TrialAmountValueSpecified)
+                {
+                    return this.TrialAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TrialAmountValue = value.GetValueOrDefault();
+                this.TrialAmountValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("payment")]
         public PaymentType Payment { get; set; }
@@ -3817,15 +4447,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Maximum length: 50.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(50)]
@@ -3839,39 +4460,116 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Minimum inclusive value: 0.01.</para>
         /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("amount")]
-        public decimal Amount { get; set; }
+        public decimal AmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Amount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Amount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool AmountValueSpecified { get; set; }
+        
+        /// <summary>
+        /// <para xml:lang="en">Minimum inclusive value: 0.01.</para>
+        /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> Amount
+        {
+            get
+            {
+                if (this.AmountValueSpecified)
+                {
+                    return this.AmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.AmountValue = value.GetValueOrDefault();
+                this.AmountValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
         /// <para xml:lang="en">Minimum inclusive value: 0.00.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("trialAmount")]
-        public decimal TrialAmount { get; set; }
+        public decimal TrialAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TrialAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TrialAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TrialAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TrialAmountValueSpecified { get; set; }
         
+        /// <summary>
+        /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
+        /// <para xml:lang="en">Minimum inclusive value: 0.00.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> TrialAmount
+        {
+            get
+            {
+                if (this.TrialAmountValueSpecified)
+                {
+                    return this.TrialAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TrialAmountValue = value.GetValueOrDefault();
+                this.TrialAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("status")]
-        public ARBSubscriptionStatusEnum Status { get; set; }
+        public ARBSubscriptionStatusEnum StatusValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Status-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Status property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool StatusValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<ARBSubscriptionStatusEnum> Status
+        {
+            get
+            {
+                if (this.StatusValueSpecified)
+                {
+                    return this.StatusValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.StatusValue = value.GetValueOrDefault();
+                this.StatusValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("profile")]
         public SubscriptionCustomerProfileType Profile { get; set; }
@@ -3879,8 +4577,44 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("order")]
         public OrderType Order { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("arbTransactions")]
-        public ARBTransactionList ArbTransactions { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<ArbTransaction> _arbTransactions;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("arbTransactions")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("arbTransaction")]
+        public System.Collections.ObjectModel.Collection<ArbTransaction> ArbTransactions
+        {
+            get
+            {
+                return this._arbTransactions;
+            }
+            set
+            {
+                this._arbTransactions = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ArbTransactions-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the ArbTransactions collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ArbTransactionsSpecified
+        {
+            get
+            {
+                return (this.ArbTransactions.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="ARBSubscriptionMaskedType" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="ARBSubscriptionMaskedType" /> class.</para>
+        /// </summary>
+        public ARBSubscriptionMaskedType()
+        {
+            this._arbTransactions = new System.Collections.ObjectModel.Collection<ArbTransaction>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -3931,15 +4665,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Maximum length: 20.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(20)]
@@ -3983,15 +4708,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("customerPaymentProfileId")]
         public string CustomerPaymentProfileId { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("defaultPaymentProfile")]
-        public bool DefaultPaymentProfile { get; set; }
+        public bool DefaultPaymentProfileValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DefaultPaymentProfile-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DefaultPaymentProfile property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DefaultPaymentProfileSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DefaultPaymentProfileValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> DefaultPaymentProfile
+        {
+            get
+            {
+                if (this.DefaultPaymentProfileValueSpecified)
+                {
+                    return this.DefaultPaymentProfileValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DefaultPaymentProfileValue = value.GetValueOrDefault();
+                this.DefaultPaymentProfileValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("payment")]
         public PaymentMaskedType Payment { get; set; }
@@ -4034,7 +4782,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the SubscriptionIds collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool SubscriptionIdsSpecified
         {
             get
@@ -4064,24 +4811,38 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CustomerPaymentProfileBaseType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("customerType")]
-        public CustomerTypeEnum CustomerType { get; set; }
+        public CustomerTypeEnum CustomerTypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die CustomerType-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the CustomerType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CustomerTypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool CustomerTypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<CustomerTypeEnum> CustomerType
+        {
+            get
+            {
+                if (this.CustomerTypeValueSpecified)
+                {
+                    return this.CustomerTypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.CustomerTypeValue = value.GetValueOrDefault();
+                this.CustomerTypeValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("billTo")]
         public CustomerAddressType BillTo { get; set; }
@@ -4122,15 +4883,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class SubscriptionIdList
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _subscriptionId;
         
@@ -4156,7 +4908,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the SubscriptionId collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool SubscriptionIdSpecified
         {
             get
@@ -4200,15 +4951,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Maximum length: 60.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(60)]
@@ -4236,15 +4978,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("devicePlatform")]
         public string DevicePlatform { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("deviceActivation")]
-        public DeviceActivationEnum DeviceActivation { get; set; }
+        public DeviceActivationEnum DeviceActivationValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DeviceActivation-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DeviceActivation property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceActivationSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DeviceActivationValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<DeviceActivationEnum> DeviceActivation
+        {
+            get
+            {
+                if (this.DeviceActivationValueSpecified)
+                {
+                    return this.DeviceActivationValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DeviceActivationValue = value.GetValueOrDefault();
+                this.DeviceActivationValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -4254,15 +5019,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SubMerchantType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 40.</para>
@@ -4350,27 +5106,41 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class TransactionRequestType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("transactionType")]
         public string TransactionType { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("amount")]
-        public decimal Amount { get; set; }
+        public decimal AmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Amount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Amount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool AmountValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> Amount
+        {
+            get
+            {
+                if (this.AmountValueSpecified)
+                {
+                    return this.AmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.AmountValue = value.GetValueOrDefault();
+                this.AmountValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("currencyCode")]
         public string CurrencyCode { get; set; }
@@ -4402,8 +5172,46 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("order")]
         public OrderType Order { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("lineItems")]
-        public ArrayOfLineItem LineItems { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<LineItemType> _lineItems;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("lineItems")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("lineItem")]
+        public System.Collections.ObjectModel.Collection<LineItemType> LineItems
+        {
+            get
+            {
+                return this._lineItems;
+            }
+            set
+            {
+                this._lineItems = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die LineItems-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the LineItems collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LineItemsSpecified
+        {
+            get
+            {
+                return (this.LineItems.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="TransactionRequestType" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="TransactionRequestType" /> class.</para>
+        /// </summary>
+        public TransactionRequestType()
+        {
+            this._lineItems = new System.Collections.ObjectModel.Collection<LineItemType>();
+            this._transactionSettings = new System.Collections.ObjectModel.Collection<SettingType>();
+            this._userFields = new System.Collections.ObjectModel.Collection<UserField>();
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("tax")]
         public ExtendedAmountType Tax { get; set; }
@@ -4414,15 +5222,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("shipping")]
         public ExtendedAmountType Shipping { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("taxExempt")]
-        public bool TaxExempt { get; set; }
+        public bool TaxExemptValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TaxExempt-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxExempt property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TaxExemptSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TaxExemptValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> TaxExempt
+        {
+            get
+            {
+                if (this.TaxExemptValueSpecified)
+                {
+                    return this.TaxExemptValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TaxExemptValue = value.GetValueOrDefault();
+                this.TaxExemptValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("poNumber")]
         public string PoNumber { get; set; }
@@ -4448,14 +5279,41 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("employeeId")]
         public string EmployeeId { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<SettingType> _transactionSettings;
+        
         /// <summary>
         /// <para>Allowed values for settingName are: emailCustomer, merchantEmail, allowPartialAuth, headerEmailReceipt, footerEmailReceipt, recurringBilling, duplicateWindow, testRequest.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Allowed values for settingName are: emailCustomer, merchantEmail, allowPartialAut" +
             "h, headerEmailReceipt, footerEmailReceipt, recurringBilling, duplicateWindow, te" +
             "stRequest.")]
-        [System.Xml.Serialization.XmlElementAttribute("transactionSettings")]
-        public ArrayOfSetting TransactionSettings { get; set; }
+        [System.Xml.Serialization.XmlArrayAttribute("transactionSettings")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("setting")]
+        public System.Collections.ObjectModel.Collection<SettingType> TransactionSettings
+        {
+            get
+            {
+                return this._transactionSettings;
+            }
+            set
+            {
+                this._transactionSettings = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TransactionSettings-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the TransactionSettings collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TransactionSettingsSpecified
+        {
+            get
+            {
+                return (this.TransactionSettings.Count != 0);
+            }
+        }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<UserField> _userFields;
@@ -4479,22 +5337,12 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the UserFields collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool UserFieldsSpecified
         {
             get
             {
                 return (this.UserFields.Count != 0);
             }
-        }
-        
-        /// <summary>
-        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="TransactionRequestType" /> Klasse.</para>
-        /// <para xml:lang="en">Initializes a new instance of the <see cref="TransactionRequestType" /> class.</para>
-        /// </summary>
-        public TransactionRequestType()
-        {
-            this._userFields = new System.Collections.ObjectModel.Collection<UserField>();
         }
         
         [System.Xml.Serialization.XmlElementAttribute("surcharge")]
@@ -4530,24 +5378,38 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CustomerProfilePaymentType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("createProfile")]
-        public bool CreateProfile { get; set; }
+        public bool CreateProfileValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die CreateProfile-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the CreateProfile property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateProfileSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool CreateProfileValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> CreateProfile
+        {
+            get
+            {
+                if (this.CreateProfileValueSpecified)
+                {
+                    return this.CreateProfileValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.CreateProfileValue = value.GetValueOrDefault();
+                this.CreateProfileValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Pattern: [0-9]+.</para>
@@ -4580,7 +5442,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
         [System.Xml.Serialization.XmlElementAttribute("paymentProfileId")]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
         public string PaymentProfileId { get; set; }
         
         /// <summary>
@@ -4602,7 +5463,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         [System.Xml.Serialization.XmlElementAttribute("id")]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
         public string Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("name")]
@@ -4619,15 +5479,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ExtendedAmountType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Minimum inclusive value: 0.00.</para>
@@ -4659,15 +5510,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class TransactionRequestTypeUserFields
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<UserField> _userField;
         
@@ -4689,7 +5531,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the UserField collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool UserFieldSpecified
         {
             get
@@ -4716,15 +5557,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class UserField
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("name")]
         public string Name { get; set; }
         
@@ -4740,54 +5572,137 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ProcessingOptions
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("isFirstRecurringPayment")]
-        public bool IsFirstRecurringPayment { get; set; }
+        public bool IsFirstRecurringPaymentValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IsFirstRecurringPayment-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IsFirstRecurringPayment property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsFirstRecurringPaymentSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IsFirstRecurringPaymentValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IsFirstRecurringPayment
+        {
+            get
+            {
+                if (this.IsFirstRecurringPaymentValueSpecified)
+                {
+                    return this.IsFirstRecurringPaymentValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IsFirstRecurringPaymentValue = value.GetValueOrDefault();
+                this.IsFirstRecurringPaymentValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("isFirstSubsequentAuth")]
-        public bool IsFirstSubsequentAuth { get; set; }
+        public bool IsFirstSubsequentAuthValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IsFirstSubsequentAuth-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IsFirstSubsequentAuth property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsFirstSubsequentAuthSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IsFirstSubsequentAuthValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IsFirstSubsequentAuth
+        {
+            get
+            {
+                if (this.IsFirstSubsequentAuthValueSpecified)
+                {
+                    return this.IsFirstSubsequentAuthValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IsFirstSubsequentAuthValue = value.GetValueOrDefault();
+                this.IsFirstSubsequentAuthValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("isSubsequentAuth")]
-        public bool IsSubsequentAuth { get; set; }
+        public bool IsSubsequentAuthValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IsSubsequentAuth-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IsSubsequentAuth property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsSubsequentAuthSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IsSubsequentAuthValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IsSubsequentAuth
+        {
+            get
+            {
+                if (this.IsSubsequentAuthValueSpecified)
+                {
+                    return this.IsSubsequentAuthValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IsSubsequentAuthValue = value.GetValueOrDefault();
+                this.IsSubsequentAuthValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("isStoredCredentials")]
-        public bool IsStoredCredentials { get; set; }
+        public bool IsStoredCredentialsValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IsStoredCredentials-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IsStoredCredentials property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsStoredCredentialsSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IsStoredCredentialsValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IsStoredCredentials
+        {
+            get
+            {
+                if (this.IsStoredCredentialsValueSpecified)
+                {
+                    return this.IsStoredCredentialsValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IsStoredCredentialsValue = value.GetValueOrDefault();
+                this.IsStoredCredentialsValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -4799,30 +5714,44 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Maximum length: 255.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(255)]
         [System.Xml.Serialization.XmlElementAttribute("originalNetworkTransId")]
         public string OriginalNetworkTransId { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("reason")]
-        public MerchantInitTransReasonEnum Reason { get; set; }
+        public MerchantInitTransReasonEnum ReasonValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Reason-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Reason property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ReasonSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ReasonValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<MerchantInitTransReasonEnum> Reason
+        {
+            get
+            {
+                if (this.ReasonValueSpecified)
+                {
+                    return this.ReasonValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ReasonValue = value.GetValueOrDefault();
+                this.ReasonValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -4852,44 +5781,104 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class OtherTaxType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("nationalTaxAmount")]
-        public decimal NationalTaxAmount { get; set; }
+        public decimal NationalTaxAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die NationalTaxAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the NationalTaxAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool NationalTaxAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool NationalTaxAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> NationalTaxAmount
+        {
+            get
+            {
+                if (this.NationalTaxAmountValueSpecified)
+                {
+                    return this.NationalTaxAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.NationalTaxAmountValue = value.GetValueOrDefault();
+                this.NationalTaxAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("localTaxAmount")]
-        public decimal LocalTaxAmount { get; set; }
+        public decimal LocalTaxAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die LocalTaxAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the LocalTaxAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LocalTaxAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool LocalTaxAmountValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> LocalTaxAmount
+        {
+            get
+            {
+                if (this.LocalTaxAmountValueSpecified)
+                {
+                    return this.LocalTaxAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.LocalTaxAmountValue = value.GetValueOrDefault();
+                this.LocalTaxAmountValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("alternateTaxAmount")]
-        public decimal AlternateTaxAmount { get; set; }
+        public decimal AlternateTaxAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die AlternateTaxAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AlternateTaxAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AlternateTaxAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool AlternateTaxAmountValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> AlternateTaxAmount
+        {
+            get
+            {
+                if (this.AlternateTaxAmountValueSpecified)
+                {
+                    return this.AlternateTaxAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.AlternateTaxAmountValue = value.GetValueOrDefault();
+                this.AlternateTaxAmountValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 15.</para>
@@ -4902,25 +5891,75 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Total number of digits: 5.</para>
         /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("vatTaxRate")]
-        public decimal VatTaxRate { get; set; }
+        public decimal VatTaxRateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die VatTaxRate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the VatTaxRate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool VatTaxRateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool VatTaxRateValueSpecified { get; set; }
         
+        /// <summary>
+        /// <para xml:lang="en">Total number of digits: 5.</para>
+        /// <para xml:lang="en">Total number of digits in fraction: 5.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> VatTaxRate
+        {
+            get
+            {
+                if (this.VatTaxRateValueSpecified)
+                {
+                    return this.VatTaxRateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.VatTaxRateValue = value.GetValueOrDefault();
+                this.VatTaxRateValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("vatTaxAmount")]
-        public decimal VatTaxAmount { get; set; }
+        public decimal VatTaxAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die VatTaxAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the VatTaxAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool VatTaxAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool VatTaxAmountValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> VatTaxAmount
+        {
+            get
+            {
+                if (this.VatTaxAmountValueSpecified)
+                {
+                    return this.VatTaxAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.VatTaxAmountValue = value.GetValueOrDefault();
+                this.VatTaxAmountValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -5178,15 +6217,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class EmvTag
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("name")]
         public string Name { get; set; }
         
@@ -5221,15 +6251,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("taxId")]
         public string TaxId { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("defaultPaymentProfile")]
-        public bool DefaultPaymentProfile { get; set; }
+        public bool DefaultPaymentProfileValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DefaultPaymentProfile-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DefaultPaymentProfile property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DefaultPaymentProfileSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DefaultPaymentProfileValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> DefaultPaymentProfile
+        {
+            get
+            {
+                if (this.DefaultPaymentProfileValueSpecified)
+                {
+                    return this.DefaultPaymentProfileValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DefaultPaymentProfileValue = value.GetValueOrDefault();
+                this.DefaultPaymentProfileValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -5277,7 +6330,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the PaymentProfiles collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool PaymentProfilesSpecified
         {
             get
@@ -5317,7 +6369,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the ShipToList collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ShipToListSpecified
         {
             get
@@ -5326,15 +6377,38 @@ namespace AuthorizeNet.Api.V1.Contracts
             }
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("profileType")]
-        public CustomerProfileTypeEnum ProfileType { get; set; }
+        public CustomerProfileTypeEnum ProfileTypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ProfileType-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ProfileType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ProfileTypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ProfileTypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<CustomerProfileTypeEnum> ProfileType
+        {
+            get
+            {
+                if (this.ProfileTypeValueSpecified)
+                {
+                    return this.ProfileTypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ProfileTypeValue = value.GetValueOrDefault();
+                this.ProfileTypeValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -5345,15 +6419,38 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CustomerProfileInfoExType : CustomerProfileExType
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("profileType")]
-        public CustomerProfileTypeEnum ProfileType { get; set; }
+        public CustomerProfileTypeEnum ProfileTypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ProfileType-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ProfileType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ProfileTypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ProfileTypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<CustomerProfileTypeEnum> ProfileType
+        {
+            get
+            {
+                if (this.ProfileTypeValueSpecified)
+                {
+                    return this.ProfileTypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ProfileTypeValue = value.GetValueOrDefault();
+                this.ProfileTypeValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -5385,7 +6482,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the PaymentProfiles collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool PaymentProfilesSpecified
         {
             get
@@ -5425,7 +6521,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the ShipToList collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ShipToListSpecified
         {
             get
@@ -5434,15 +6529,38 @@ namespace AuthorizeNet.Api.V1.Contracts
             }
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("profileType")]
-        public CustomerProfileTypeEnum ProfileType { get; set; }
+        public CustomerProfileTypeEnum ProfileTypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ProfileType-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ProfileType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ProfileTypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ProfileTypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<CustomerProfileTypeEnum> ProfileType
+        {
+            get
+            {
+                if (this.ProfileTypeValueSpecified)
+                {
+                    return this.ProfileTypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ProfileTypeValue = value.GetValueOrDefault();
+                this.ProfileTypeValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -5458,15 +6576,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ProfileTransRefundType))]
     public partial class ProfileTransAmountType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Minimum inclusive value: 0.01.</para>
@@ -5505,7 +6614,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the LineItems collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool LineItemsSpecified
         {
             get
@@ -5559,25 +6667,71 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("order")]
         public OrderExType Order { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("taxExempt")]
-        public bool TaxExempt { get; set; }
+        public bool TaxExemptValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TaxExempt-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxExempt property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TaxExemptSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TaxExemptValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> TaxExempt
+        {
+            get
+            {
+                if (this.TaxExemptValueSpecified)
+                {
+                    return this.TaxExemptValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TaxExemptValue = value.GetValueOrDefault();
+                this.TaxExemptValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("recurringBilling")]
-        public bool RecurringBilling { get; set; }
+        public bool RecurringBillingValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die RecurringBilling-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the RecurringBilling property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RecurringBillingSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool RecurringBillingValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> RecurringBilling
+        {
+            get
+            {
+                if (this.RecurringBillingValueSpecified)
+                {
+                    return this.RecurringBillingValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.RecurringBillingValue = value.GetValueOrDefault();
+                this.RecurringBillingValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Minimum length: 3.</para>
@@ -5749,15 +6903,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
-        /// <summary>
         /// <para xml:lang="en">Pattern: [0-9]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
@@ -5794,15 +6939,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ProfileTransactionType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("profileTransAuthCapture")]
         public ProfileTransAuthCaptureType ProfileTransAuthCapture { get; set; }
         
@@ -5829,15 +6965,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionDetailsType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Pattern: [0-9]+.</para>
@@ -5915,8 +7042,47 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("FDSFilterAction")]
         public string FDSFilterAction { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("FDSFilters")]
-        public ArrayOfFDSFilter FDSFilters { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<FDSFilterType> _fDSFilters;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("FDSFilters")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("FDSFilter")]
+        public System.Collections.ObjectModel.Collection<FDSFilterType> FDSFilters
+        {
+            get
+            {
+                return this._fDSFilters;
+            }
+            set
+            {
+                this._fDSFilters = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die FDSFilters-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the FDSFilters collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool FDSFiltersSpecified
+        {
+            get
+            {
+                return (this.FDSFilters.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="TransactionDetailsType" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="TransactionDetailsType" /> class.</para>
+        /// </summary>
+        public TransactionDetailsType()
+        {
+            this._fDSFilters = new System.Collections.ObjectModel.Collection<FDSFilterType>();
+            this._lineItems = new System.Collections.ObjectModel.Collection<LineItemType>();
+            this._returnedItems = new System.Collections.ObjectModel.Collection<ReturnedItemType>();
+            this._emvDetails = new System.Collections.ObjectModel.Collection<TransactionDetailsTypeEmvDetailsTag>();
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("batch")]
         public BatchDetailsType Batch { get; set; }
@@ -5928,15 +7094,42 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Minimum inclusive value: 0.00.</para>
         /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("requestedAmount")]
-        public decimal RequestedAmount { get; set; }
+        public decimal RequestedAmountValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die RequestedAmount-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the RequestedAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RequestedAmountSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool RequestedAmountValueSpecified { get; set; }
+        
+        /// <summary>
+        /// <para xml:lang="en">Minimum inclusive value: 0.00.</para>
+        /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> RequestedAmount
+        {
+            get
+            {
+                if (this.RequestedAmountValueSpecified)
+                {
+                    return this.RequestedAmountValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.RequestedAmountValue = value.GetValueOrDefault();
+                this.RequestedAmountValueSpecified = value.HasValue;
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Minimum inclusive value: 0.00.</para>
@@ -5961,31 +7154,107 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("duty")]
         public ExtendedAmountType Duty { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("lineItems")]
-        public ArrayOfLineItem LineItems { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<LineItemType> _lineItems;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("lineItems")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("lineItem")]
+        public System.Collections.ObjectModel.Collection<LineItemType> LineItems
+        {
+            get
+            {
+                return this._lineItems;
+            }
+            set
+            {
+                this._lineItems = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die LineItems-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the LineItems collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LineItemsSpecified
+        {
+            get
+            {
+                return (this.LineItems.Count != 0);
+            }
+        }
         
         /// <summary>
         /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
         /// </summary>
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("prepaidBalanceRemaining")]
-        public decimal PrepaidBalanceRemaining { get; set; }
+        public decimal PrepaidBalanceRemainingValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die PrepaidBalanceRemaining-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the PrepaidBalanceRemaining property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PrepaidBalanceRemainingSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool PrepaidBalanceRemainingValueSpecified { get; set; }
         
+        /// <summary>
+        /// <para xml:lang="en">Total number of digits in fraction: 4.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<decimal> PrepaidBalanceRemaining
+        {
+            get
+            {
+                if (this.PrepaidBalanceRemainingValueSpecified)
+                {
+                    return this.PrepaidBalanceRemainingValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.PrepaidBalanceRemainingValue = value.GetValueOrDefault();
+                this.PrepaidBalanceRemainingValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("taxExempt")]
-        public bool TaxExempt { get; set; }
+        public bool TaxExemptValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TaxExempt-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxExempt property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TaxExemptSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TaxExemptValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> TaxExempt
+        {
+            get
+            {
+                if (this.TaxExemptValueSpecified)
+                {
+                    return this.TaxExemptValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TaxExemptValue = value.GetValueOrDefault();
+                this.TaxExemptValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("payment")]
         public PaymentMaskedType Payment { get; set; }
@@ -5999,15 +7268,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("shipTo")]
         public NameAndAddressType ShipTo { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("recurringBilling")]
-        public bool RecurringBilling { get; set; }
+        public bool RecurringBillingValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die RecurringBilling-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the RecurringBilling property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RecurringBillingSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool RecurringBillingValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> RecurringBilling
+        {
+            get
+            {
+                if (this.RecurringBillingValueSpecified)
+                {
+                    return this.RecurringBillingValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.RecurringBillingValue = value.GetValueOrDefault();
+                this.RecurringBillingValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("customerIP")]
         public string CustomerIP { get; set; }
@@ -6049,23 +7341,12 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the ReturnedItems collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ReturnedItemsSpecified
         {
             get
             {
                 return (this.ReturnedItems.Count != 0);
             }
-        }
-        
-        /// <summary>
-        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="TransactionDetailsType" /> Klasse.</para>
-        /// <para xml:lang="en">Initializes a new instance of the <see cref="TransactionDetailsType" /> class.</para>
-        /// </summary>
-        public TransactionDetailsType()
-        {
-            this._returnedItems = new System.Collections.ObjectModel.Collection<ReturnedItemType>();
-            this._emvDetails = new System.Collections.ObjectModel.Collection<TransactionDetailsTypeEmvDetailsTag>();
         }
         
         [System.Xml.Serialization.XmlElementAttribute("solution")]
@@ -6093,7 +7374,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the EmvDetails collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool EmvDetailsSpecified
         {
             get
@@ -6129,15 +7409,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfReturnedItem
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ReturnedItemType> _returnedItem;
         
@@ -6159,7 +7430,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the ReturnedItem collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ReturnedItemSpecified
         {
             get
@@ -6191,7 +7461,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
         [System.Xml.Serialization.XmlElementAttribute("id")]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
         public string Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("dateUTC", DataType="dateTime")]
@@ -6214,15 +7483,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionDetailsTypeEmvDetails
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TransactionDetailsTypeEmvDetailsTag> _tag;
@@ -6258,15 +7518,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class TransactionDetailsTypeEmvDetailsTag
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("tagId")]
         public string TagId { get; set; }
         
@@ -6281,15 +7532,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionResponse
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("responseCode")]
         public string ResponseCode { get; set; }
@@ -6358,7 +7600,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Messages collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool MessagesSpecified
         {
             get
@@ -6401,7 +7642,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Errors collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ErrorsSpecified
         {
             get
@@ -6432,7 +7672,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the SplitTenderPayments collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool SplitTenderPaymentsSpecified
         {
             get
@@ -6463,7 +7702,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the UserFields collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool UserFieldsSpecified
         {
             get
@@ -6503,15 +7741,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class TransactionResponsePrePaidCard
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("requestedAmount")]
         public string RequestedAmount { get; set; }
         
@@ -6529,15 +7758,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionResponseMessages
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TransactionResponseMessagesMessage> _message;
@@ -6560,7 +7780,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Message collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool MessageSpecified
         {
             get
@@ -6587,15 +7806,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class TransactionResponseMessagesMessage
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("code")]
         public string Code { get; set; }
         
@@ -6610,15 +7820,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionResponseErrors
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TransactionResponseErrorsError> _error;
@@ -6641,7 +7842,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Error collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ErrorSpecified
         {
             get
@@ -6668,15 +7868,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class TransactionResponseErrorsError
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("errorCode")]
         public string ErrorCode { get; set; }
         
@@ -6691,15 +7882,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionResponseSplitTenderPayments
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TransactionResponseSplitTenderPaymentsSplitTenderPayment> _splitTenderPayment;
@@ -6722,7 +7904,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the SplitTenderPayment collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool SplitTenderPaymentSpecified
         {
             get
@@ -6748,15 +7929,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionResponseSplitTenderPaymentsSplitTenderPayment
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("transId")]
         public string TransId { get; set; }
@@ -6794,15 +7966,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class TransactionResponseUserFields
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<UserField> _userField;
         
@@ -6824,7 +7987,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the UserField collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool UserFieldSpecified
         {
             get
@@ -6851,15 +8013,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class TransactionResponseSecureAcceptance
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("SecureAcceptanceUrl")]
         public string SecureAcceptanceUrl { get; set; }
         
@@ -6877,15 +8030,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionResponseEmvResponse
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("tlvData")]
         public string TlvData { get; set; }
@@ -6912,7 +8056,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Tags collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool TagsSpecified
         {
             get
@@ -6938,15 +8081,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TransactionResponseEmvResponseTags
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<EmvTag> _tag;
@@ -7028,15 +8162,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ANetApiRequest
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("merchantAuthentication")]
         public MerchantAuthenticationType MerchantAuthentication { get; set; }
         
@@ -7090,15 +8215,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class MessagesType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("resultCode")]
         public MessageTypeEnum ResultCode { get; set; }
         
@@ -7135,15 +8251,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class MessagesTypeMessage
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("code")]
         public string Code { get; set; }
@@ -7206,15 +8313,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ANetApiResponse
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("refId")]
         public string RefId { get; set; }
         
@@ -7233,15 +8331,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CreateProfileResponse
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("messages")]
         public MessagesType Messages { get; set; }
         
@@ -7252,11 +8341,83 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("customerProfileId")]
         public string CustomerProfileId { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("customerPaymentProfileIdList")]
-        public ArrayOfNumericString CustomerPaymentProfileIdList { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _customerPaymentProfileIdList;
         
-        [System.Xml.Serialization.XmlElementAttribute("customerShippingAddressIdList")]
-        public ArrayOfNumericString CustomerShippingAddressIdList { get; set; }
+        /// <summary>
+        /// <para xml:lang="en">Pattern: [0-9]+.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
+        [System.Xml.Serialization.XmlArrayAttribute("customerPaymentProfileIdList")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("numericString")]
+        public System.Collections.ObjectModel.Collection<string> CustomerPaymentProfileIdList
+        {
+            get
+            {
+                return this._customerPaymentProfileIdList;
+            }
+            set
+            {
+                this._customerPaymentProfileIdList = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die CustomerPaymentProfileIdList-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the CustomerPaymentProfileIdList collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CustomerPaymentProfileIdListSpecified
+        {
+            get
+            {
+                return (this.CustomerPaymentProfileIdList.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="CreateProfileResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="CreateProfileResponse" /> class.</para>
+        /// </summary>
+        public CreateProfileResponse()
+        {
+            this._customerPaymentProfileIdList = new System.Collections.ObjectModel.Collection<string>();
+            this._customerShippingAddressIdList = new System.Collections.ObjectModel.Collection<string>();
+        }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _customerShippingAddressIdList;
+        
+        /// <summary>
+        /// <para xml:lang="en">Pattern: [0-9]+.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
+        [System.Xml.Serialization.XmlArrayAttribute("customerShippingAddressIdList")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("numericString")]
+        public System.Collections.ObjectModel.Collection<string> CustomerShippingAddressIdList
+        {
+            get
+            {
+                return this._customerShippingAddressIdList;
+            }
+            set
+            {
+                this._customerShippingAddressIdList = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die CustomerShippingAddressIdList-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the CustomerShippingAddressIdList collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CustomerShippingAddressIdListSpecified
+        {
+            get
+            {
+                return (this.CustomerShippingAddressIdList.Count != 0);
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -7266,15 +8427,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class HeldTransactionRequestType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("action")]
         public AfdsTransactionEnum Action { get; set; }
@@ -7304,15 +8456,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class TransactionListSorting
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("orderBy")]
         public TransactionListOrderFieldEnum OrderBy { get; set; }
         
@@ -7327,15 +8470,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class Paging
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Minimum inclusive value: 1.</para>
@@ -7361,15 +8495,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ARBGetSubscriptionListSorting
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("orderBy")]
         public ARBGetSubscriptionListOrderFieldEnum OrderBy { get; set; }
@@ -7439,15 +8564,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfSubscription
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<SubscriptionDetail> _subscriptionDetail;
         
@@ -7469,7 +8585,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the SubscriptionDetail collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool SubscriptionDetailSpecified
         {
             get
@@ -7497,7 +8612,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     {
         
         [System.Xml.Serialization.XmlElementAttribute("id")]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
         public int Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("name")]
@@ -7546,15 +8660,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("customerPaymentProfileId")]
         public int CustomerPaymentProfileId { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("customerShippingProfileId")]
-        public int CustomerShippingProfileId { get; set; }
+        public int CustomerShippingProfileIdValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die CustomerShippingProfileId-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the CustomerShippingProfileId property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CustomerShippingProfileIdSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool CustomerShippingProfileIdValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> CustomerShippingProfileId
+        {
+            get
+            {
+                if (this.CustomerShippingProfileIdValueSpecified)
+                {
+                    return this.CustomerShippingProfileIdValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.CustomerShippingProfileIdValue = value.GetValueOrDefault();
+                this.CustomerShippingProfileIdValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -7564,15 +8701,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CustomerProfileSummaryType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("customerProfileId")]
         public string CustomerProfileId { get; set; }
@@ -7608,15 +8736,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CustomerPaymentProfileSorting
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlElementAttribute("orderBy")]
         public CustomerPaymentProfileOrderFieldEnum OrderBy { get; set; }
         
@@ -7642,24 +8761,38 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class CustomerPaymentProfileListItemType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("defaultPaymentProfile")]
-        public bool DefaultPaymentProfile { get; set; }
+        public bool DefaultPaymentProfileValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DefaultPaymentProfile-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DefaultPaymentProfile property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DefaultPaymentProfileSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DefaultPaymentProfileValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> DefaultPaymentProfile
+        {
+            get
+            {
+                if (this.DefaultPaymentProfileValueSpecified)
+                {
+                    return this.DefaultPaymentProfileValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DefaultPaymentProfileValue = value.GetValueOrDefault();
+                this.DefaultPaymentProfileValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("customerPaymentProfileId")]
         public int CustomerPaymentProfileId { get; set; }
@@ -7682,15 +8815,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfCustomerPaymentProfileListItemType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<CustomerPaymentProfileListItemType> _paymentProfile;
         
@@ -7712,7 +8836,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the PaymentProfile collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool PaymentProfileSpecified
         {
             get
@@ -7739,15 +8862,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfAUResponseType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuResponseType> _auResponse;
         
@@ -7769,7 +8883,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the AuResponse collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool AuResponseSpecified
         {
             get
@@ -7795,15 +8908,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuResponseType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("auReasonCode")]
         public string AuReasonCode { get; set; }
@@ -7839,15 +8943,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ListOfAUDetailsType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuUpdateType> _auUpdate;
         
@@ -7869,7 +8964,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the AuUpdate collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool AuUpdateSpecified
         {
             get
@@ -7909,7 +9003,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the AuDelete collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool AuDeleteSpecified
         {
             get
@@ -7943,15 +9036,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AuUpdateType))]
     public partial class AuDetailsType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("customerProfileID")]
         public long CustomerProfileID { get; set; }
@@ -7995,15 +9079,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfCurrencyCode
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _currency;
         
@@ -8031,7 +9106,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Currency collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool CurrencySpecified
         {
             get
@@ -8058,15 +9132,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfCardType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _cardType;
         
@@ -8088,7 +9153,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the CardType collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool CardTypeSpecified
         {
             get
@@ -8123,11 +9187,46 @@ namespace AuthorizeNet.Api.V1.Contracts
         public string Name { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("id")]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
         public int Id { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("cardTypes")]
-        public ArrayOfCardType CardTypes { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _cardTypes;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("cardTypes")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("cardType", IsNullable=true)]
+        public System.Collections.ObjectModel.Collection<string> CardTypes
+        {
+            get
+            {
+                return this._cardTypes;
+            }
+            set
+            {
+                this._cardTypes = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die CardTypes-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the CardTypes collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CardTypesSpecified
+        {
+            get
+            {
+                return (this.CardTypes.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="ProcessorType" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="ProcessorType" /> class.</para>
+        /// </summary>
+        public ProcessorType()
+        {
+            this._cardTypes = new System.Collections.ObjectModel.Collection<string>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -8137,15 +9236,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ArrayOfProcessorType
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ProcessorType> _processor;
@@ -8168,7 +9258,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the Processor collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ProcessorSpecified
         {
             get
@@ -8195,15 +9284,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfMarketType
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _marketType;
         
@@ -8229,7 +9309,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the MarketType collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool MarketTypeSpecified
         {
             get
@@ -8256,15 +9335,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfProductCode
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _productCode;
         
@@ -8290,7 +9360,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the ProductCode collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool ProductCodeSpecified
         {
             get
@@ -8350,15 +9419,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ArrayOfPaymentMethod
     {
         
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<PaymentMethodsTypeEnum> _paymentMethod;
         
@@ -8380,7 +9440,6 @@ namespace AuthorizeNet.Api.V1.Contracts
         /// <para xml:lang="en">Gets a value indicating whether the PaymentMethod collection is empty.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute()]
         public bool PaymentMethodSpecified
         {
             get
@@ -8471,15 +9530,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.Xml.Serialization.XmlRootAttribute("isAliveRequest", Namespace="AnetApi/xml/v1/schema/AnetApiSchema.xsd")]
     public partial class IsAliveRequest
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         /// <summary>
         /// <para xml:lang="en">Maximum length: 20.</para>
@@ -8638,15 +9688,38 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ARBGetSubscriptionStatusResponse : ANetApiResponse
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("status")]
-        public ARBSubscriptionStatusEnum Status { get; set; }
+        public ARBSubscriptionStatusEnum StatusValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Status-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Status property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool StatusValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<ARBSubscriptionStatusEnum> Status
+        {
+            get
+            {
+                if (this.StatusValueSpecified)
+                {
+                    return this.StatusValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.StatusValue = value.GetValueOrDefault();
+                this.StatusValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -8661,15 +9734,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("profile")]
         public CustomerProfileType Profile { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("validationMode")]
-        public ValidationModeEnum ValidationMode { get; set; }
+        public ValidationModeEnum ValidationModeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ValidationMode-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ValidationMode property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValidationModeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ValidationModeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<ValidationModeEnum> ValidationMode
+        {
+            get
+            {
+                if (this.ValidationModeValueSpecified)
+                {
+                    return this.ValidationModeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ValidationModeValue = value.GetValueOrDefault();
+                this.ValidationModeValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -8688,14 +9784,75 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("customerProfileId")]
         public string CustomerProfileId { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("customerPaymentProfileIdList")]
-        public ArrayOfNumericString CustomerPaymentProfileIdList { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _customerPaymentProfileIdList;
         
-        [System.Xml.Serialization.XmlElementAttribute("customerShippingAddressIdList")]
-        public ArrayOfNumericString CustomerShippingAddressIdList { get; set; }
+        /// <summary>
+        /// <para xml:lang="en">Pattern: [0-9]+.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
+        [System.Xml.Serialization.XmlArrayAttribute("customerPaymentProfileIdList")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("numericString")]
+        public System.Collections.ObjectModel.Collection<string> CustomerPaymentProfileIdList
+        {
+            get
+            {
+                return this._customerPaymentProfileIdList;
+            }
+            set
+            {
+                this._customerPaymentProfileIdList = value;
+            }
+        }
         
-        [System.Xml.Serialization.XmlElementAttribute("validationDirectResponseList")]
-        public ArrayOfString ValidationDirectResponseList { get; set; }
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="CreateCustomerProfileResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="CreateCustomerProfileResponse" /> class.</para>
+        /// </summary>
+        public CreateCustomerProfileResponse()
+        {
+            this._customerPaymentProfileIdList = new System.Collections.ObjectModel.Collection<string>();
+            this._customerShippingAddressIdList = new System.Collections.ObjectModel.Collection<string>();
+            this._validationDirectResponseList = new System.Collections.ObjectModel.Collection<string>();
+        }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _customerShippingAddressIdList;
+        
+        /// <summary>
+        /// <para xml:lang="en">Pattern: [0-9]+.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
+        [System.Xml.Serialization.XmlArrayAttribute("customerShippingAddressIdList")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("numericString")]
+        public System.Collections.ObjectModel.Collection<string> CustomerShippingAddressIdList
+        {
+            get
+            {
+                return this._customerShippingAddressIdList;
+            }
+            set
+            {
+                this._customerShippingAddressIdList = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _validationDirectResponseList;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("validationDirectResponseList")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("string")]
+        public System.Collections.ObjectModel.Collection<string> ValidationDirectResponseList
+        {
+            get
+            {
+                return this._validationDirectResponseList;
+            }
+            set
+            {
+                this._validationDirectResponseList = value;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -8717,15 +9874,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("paymentProfile")]
         public CustomerPaymentProfileType PaymentProfile { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("validationMode")]
-        public ValidationModeEnum ValidationMode { get; set; }
+        public ValidationModeEnum ValidationModeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ValidationMode-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ValidationMode property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValidationModeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ValidationModeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<ValidationModeEnum> ValidationMode
+        {
+            get
+            {
+                if (this.ValidationModeValueSpecified)
+                {
+                    return this.ValidationModeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ValidationModeValue = value.GetValueOrDefault();
+                this.ValidationModeValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -8778,15 +9958,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("address")]
         public CustomerAddressType Address { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("defaultShippingAddress")]
-        public bool DefaultShippingAddress { get; set; }
+        public bool DefaultShippingAddressValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DefaultShippingAddress-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DefaultShippingAddress property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DefaultShippingAddressSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DefaultShippingAddressValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> DefaultShippingAddress
+        {
+            get
+            {
+                if (this.DefaultShippingAddressValueSpecified)
+                {
+                    return this.DefaultShippingAddressValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DefaultShippingAddressValue = value.GetValueOrDefault();
+                this.DefaultShippingAddressValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -8839,35 +10042,104 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("customerProfileId")]
         public string CustomerProfileId { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("defaultPaymentProfile")]
-        public bool DefaultPaymentProfile { get; set; }
+        public bool DefaultPaymentProfileValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DefaultPaymentProfile-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DefaultPaymentProfile property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DefaultPaymentProfileSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DefaultPaymentProfileValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> DefaultPaymentProfile
+        {
+            get
+            {
+                if (this.DefaultPaymentProfileValueSpecified)
+                {
+                    return this.DefaultPaymentProfileValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DefaultPaymentProfileValue = value.GetValueOrDefault();
+                this.DefaultPaymentProfileValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("defaultShippingAddress")]
-        public bool DefaultShippingAddress { get; set; }
+        public bool DefaultShippingAddressValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DefaultShippingAddress-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DefaultShippingAddress property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DefaultShippingAddressSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DefaultShippingAddressValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> DefaultShippingAddress
+        {
+            get
+            {
+                if (this.DefaultShippingAddressValueSpecified)
+                {
+                    return this.DefaultShippingAddressValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DefaultShippingAddressValue = value.GetValueOrDefault();
+                this.DefaultShippingAddressValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("profileType")]
-        public CustomerProfileTypeEnum ProfileType { get; set; }
+        public CustomerProfileTypeEnum ProfileTypeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ProfileType-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ProfileType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ProfileTypeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ProfileTypeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<CustomerProfileTypeEnum> ProfileType
+        {
+            get
+            {
+                if (this.ProfileTypeValueSpecified)
+                {
+                    return this.ProfileTypeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ProfileTypeValue = value.GetValueOrDefault();
+                this.ProfileTypeValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -8896,25 +10168,71 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("email")]
         public string Email { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("unmaskExpirationDate")]
-        public bool UnmaskExpirationDate { get; set; }
+        public bool UnmaskExpirationDateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die UnmaskExpirationDate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the UnmaskExpirationDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UnmaskExpirationDateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool UnmaskExpirationDateValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> UnmaskExpirationDate
+        {
+            get
+            {
+                if (this.UnmaskExpirationDateValueSpecified)
+                {
+                    return this.UnmaskExpirationDateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.UnmaskExpirationDateValue = value.GetValueOrDefault();
+                this.UnmaskExpirationDateValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("includeIssuerInfo")]
-        public bool IncludeIssuerInfo { get; set; }
+        public bool IncludeIssuerInfoValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IncludeIssuerInfo-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IncludeIssuerInfo property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IncludeIssuerInfoSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IncludeIssuerInfoValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IncludeIssuerInfo
+        {
+            get
+            {
+                if (this.IncludeIssuerInfoValueSpecified)
+                {
+                    return this.IncludeIssuerInfoValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IncludeIssuerInfoValue = value.GetValueOrDefault();
+                this.IncludeIssuerInfoValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -8929,8 +10247,48 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("profile")]
         public CustomerProfileMaskedType Profile { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("subscriptionIds")]
-        public SubscriptionIdList SubscriptionIds { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _subscriptionIds;
+        
+        /// <summary>
+        /// <para xml:lang="en">Pattern: [0-9]+.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
+        [System.Xml.Serialization.XmlArrayAttribute("subscriptionIds")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("subscriptionId")]
+        public System.Collections.ObjectModel.Collection<string> SubscriptionIds
+        {
+            get
+            {
+                return this._subscriptionIds;
+            }
+            set
+            {
+                this._subscriptionIds = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die SubscriptionIds-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the SubscriptionIds collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SubscriptionIdsSpecified
+        {
+            get
+            {
+                return (this.SubscriptionIds.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetCustomerProfileResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetCustomerProfileResponse" /> class.</para>
+        /// </summary>
+        public GetCustomerProfileResponse()
+        {
+            this._subscriptionIds = new System.Collections.ObjectModel.Collection<string>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -8956,25 +10314,71 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("customerPaymentProfileId")]
         public string CustomerPaymentProfileId { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("unmaskExpirationDate")]
-        public bool UnmaskExpirationDate { get; set; }
+        public bool UnmaskExpirationDateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die UnmaskExpirationDate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the UnmaskExpirationDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UnmaskExpirationDateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool UnmaskExpirationDateValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> UnmaskExpirationDate
+        {
+            get
+            {
+                if (this.UnmaskExpirationDateValueSpecified)
+                {
+                    return this.UnmaskExpirationDateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.UnmaskExpirationDateValue = value.GetValueOrDefault();
+                this.UnmaskExpirationDateValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("includeIssuerInfo")]
-        public bool IncludeIssuerInfo { get; set; }
+        public bool IncludeIssuerInfoValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IncludeIssuerInfo-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IncludeIssuerInfo property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IncludeIssuerInfoSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IncludeIssuerInfoValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IncludeIssuerInfo
+        {
+            get
+            {
+                if (this.IncludeIssuerInfoValueSpecified)
+                {
+                    return this.IncludeIssuerInfoValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IncludeIssuerInfoValue = value.GetValueOrDefault();
+                this.IncludeIssuerInfoValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9023,21 +10427,84 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetCustomerShippingAddressResponse : ANetApiResponse
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("defaultShippingAddress")]
-        public bool DefaultShippingAddress { get; set; }
+        public bool DefaultShippingAddressValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DefaultShippingAddress-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DefaultShippingAddress property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DefaultShippingAddressSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DefaultShippingAddressValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> DefaultShippingAddress
+        {
+            get
+            {
+                if (this.DefaultShippingAddressValueSpecified)
+                {
+                    return this.DefaultShippingAddressValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DefaultShippingAddressValue = value.GetValueOrDefault();
+                this.DefaultShippingAddressValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("address")]
         public CustomerAddressExType Address { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("subscriptionIds")]
-        public SubscriptionIdList SubscriptionIds { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _subscriptionIds;
+        
+        /// <summary>
+        /// <para xml:lang="en">Pattern: [0-9]+.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
+        [System.Xml.Serialization.XmlArrayAttribute("subscriptionIds")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("subscriptionId")]
+        public System.Collections.ObjectModel.Collection<string> SubscriptionIds
+        {
+            get
+            {
+                return this._subscriptionIds;
+            }
+            set
+            {
+                this._subscriptionIds = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die SubscriptionIds-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the SubscriptionIds collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SubscriptionIdsSpecified
+        {
+            get
+            {
+                return (this.SubscriptionIds.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetCustomerShippingAddressResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetCustomerShippingAddressResponse" /> class.</para>
+        /// </summary>
+        public GetCustomerShippingAddressResponse()
+        {
+            this._subscriptionIds = new System.Collections.ObjectModel.Collection<string>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9082,15 +10549,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("paymentProfile")]
         public CustomerPaymentProfileExType PaymentProfile { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("validationMode")]
-        public ValidationModeEnum ValidationMode { get; set; }
+        public ValidationModeEnum ValidationModeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ValidationMode-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ValidationMode property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValidationModeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ValidationModeValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<ValidationModeEnum> ValidationMode
+        {
+            get
+            {
+                if (this.ValidationModeValueSpecified)
+                {
+                    return this.ValidationModeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ValidationModeValue = value.GetValueOrDefault();
+                this.ValidationModeValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9129,15 +10619,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("address")]
         public CustomerAddressExType Address { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("defaultShippingAddress")]
-        public bool DefaultShippingAddress { get; set; }
+        public bool DefaultShippingAddressValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die DefaultShippingAddress-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DefaultShippingAddress property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DefaultShippingAddressSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool DefaultShippingAddressValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> DefaultShippingAddress
+        {
+            get
+            {
+                if (this.DefaultShippingAddressValueSpecified)
+                {
+                    return this.DefaultShippingAddressValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.DefaultShippingAddressValue = value.GetValueOrDefault();
+                this.DefaultShippingAddressValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9364,8 +10877,35 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetCustomerProfileIdsResponse : ANetApiResponse
     {
         
-        [System.Xml.Serialization.XmlElementAttribute("ids")]
-        public ArrayOfNumericString Ids { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _ids;
+        
+        /// <summary>
+        /// <para xml:lang="en">Pattern: [0-9]+.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9]+")]
+        [System.Xml.Serialization.XmlArrayAttribute("ids")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("numericString")]
+        public System.Collections.ObjectModel.Collection<string> Ids
+        {
+            get
+            {
+                return this._ids;
+            }
+            set
+            {
+                this._ids = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetCustomerProfileIdsResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetCustomerProfileIdsResponse" /> class.</para>
+        /// </summary>
+        public GetCustomerProfileIdsResponse()
+        {
+            this._ids = new System.Collections.ObjectModel.Collection<string>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9532,35 +11072,104 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetSettledBatchListRequest : ANetApiRequest
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("includeStatistics")]
-        public bool IncludeStatistics { get; set; }
+        public bool IncludeStatisticsValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IncludeStatistics-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IncludeStatistics property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IncludeStatisticsSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IncludeStatisticsValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IncludeStatistics
+        {
+            get
+            {
+                if (this.IncludeStatisticsValueSpecified)
+                {
+                    return this.IncludeStatisticsValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IncludeStatisticsValue = value.GetValueOrDefault();
+                this.IncludeStatisticsValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("firstSettlementDate", DataType="dateTime")]
-        public System.DateTime FirstSettlementDate { get; set; }
+        public System.DateTime FirstSettlementDateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die FirstSettlementDate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the FirstSettlementDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool FirstSettlementDateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool FirstSettlementDateValueSpecified { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<System.DateTime> FirstSettlementDate
+        {
+            get
+            {
+                if (this.FirstSettlementDateValueSpecified)
+                {
+                    return this.FirstSettlementDateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.FirstSettlementDateValue = value.GetValueOrDefault();
+                this.FirstSettlementDateValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("lastSettlementDate", DataType="dateTime")]
-        public System.DateTime LastSettlementDate { get; set; }
+        public System.DateTime LastSettlementDateValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die LastSettlementDate-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the LastSettlementDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LastSettlementDateSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool LastSettlementDateValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<System.DateTime> LastSettlementDate
+        {
+            get
+            {
+                if (this.LastSettlementDateValueSpecified)
+                {
+                    return this.LastSettlementDateValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.LastSettlementDateValue = value.GetValueOrDefault();
+                this.LastSettlementDateValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9572,8 +11181,44 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetSettledBatchListResponse : ANetApiResponse
     {
         
-        [System.Xml.Serialization.XmlElementAttribute("batchList")]
-        public ArrayOfBatchDetailsType BatchList { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<BatchDetailsType> _batchList;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("batchList")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("batch")]
+        public System.Collections.ObjectModel.Collection<BatchDetailsType> BatchList
+        {
+            get
+            {
+                return this._batchList;
+            }
+            set
+            {
+                this._batchList = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die BatchList-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the BatchList collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool BatchListSpecified
+        {
+            get
+            {
+                return (this.BatchList.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetSettledBatchListResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetSettledBatchListResponse" /> class.</para>
+        /// </summary>
+        public GetSettledBatchListResponse()
+        {
+            this._batchList = new System.Collections.ObjectModel.Collection<BatchDetailsType>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9608,18 +11253,77 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetTransactionListResponse : ANetApiResponse
     {
         
-        [System.Xml.Serialization.XmlElementAttribute("transactions")]
-        public ArrayOfTransactionSummaryType Transactions { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<TransactionSummaryType> _transactions;
         
+        [System.Xml.Serialization.XmlArrayAttribute("transactions")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("transaction")]
+        public System.Collections.ObjectModel.Collection<TransactionSummaryType> Transactions
+        {
+            get
+            {
+                return this._transactions;
+            }
+            set
+            {
+                this._transactions = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Transactions-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the Transactions collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TransactionsSpecified
+        {
+            get
+            {
+                return (this.Transactions.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetTransactionListResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetTransactionListResponse" /> class.</para>
+        /// </summary>
+        public GetTransactionListResponse()
+        {
+            this._transactions = new System.Collections.ObjectModel.Collection<TransactionSummaryType>();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("totalNumInResultSet")]
-        public int TotalNumInResultSet { get; set; }
+        public int TotalNumInResultSetValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TotalNumInResultSet-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TotalNumInResultSet property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TotalNumInResultSetSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TotalNumInResultSetValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> TotalNumInResultSet
+        {
+            get
+            {
+                if (this.TotalNumInResultSetValueSpecified)
+                {
+                    return this.TotalNumInResultSetValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TotalNumInResultSetValue = value.GetValueOrDefault();
+                this.TotalNumInResultSetValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9638,12 +11342,48 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("customerProfileId")]
         public string CustomerProfileId { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<SettingType> _hostedProfileSettings;
+        
         /// <summary>
         /// <para>Allowed values for settingName are: hostedProfileReturnUrl, hostedProfileReturnUrlText, hostedProfilePageBorderVisible, hostedProfileIFrameCommunicatorUrl, hostedProfileHeadingBgColor, hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired, hostedProfileBillingAddressOptions, hostedProfileManageOptions, hostedProfilePaymentOptions, hostedProfileSaveButtonText.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(@"Allowed values for settingName are: hostedProfileReturnUrl, hostedProfileReturnUrlText, hostedProfilePageBorderVisible, hostedProfileIFrameCommunicatorUrl, hostedProfileHeadingBgColor, hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired, hostedProfileBillingAddressOptions, hostedProfileManageOptions, hostedProfilePaymentOptions, hostedProfileSaveButtonText.")]
-        [System.Xml.Serialization.XmlElementAttribute("hostedProfileSettings")]
-        public ArrayOfSetting HostedProfileSettings { get; set; }
+        [System.Xml.Serialization.XmlArrayAttribute("hostedProfileSettings")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("setting")]
+        public System.Collections.ObjectModel.Collection<SettingType> HostedProfileSettings
+        {
+            get
+            {
+                return this._hostedProfileSettings;
+            }
+            set
+            {
+                this._hostedProfileSettings = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die HostedProfileSettings-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the HostedProfileSettings collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool HostedProfileSettingsSpecified
+        {
+            get
+            {
+                return (this.HostedProfileSettings.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetHostedProfilePageRequest" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetHostedProfilePageRequest" /> class.</para>
+        /// </summary>
+        public GetHostedProfilePageRequest()
+        {
+            this._hostedProfileSettings = new System.Collections.ObjectModel.Collection<SettingType>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9668,15 +11408,38 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetUnsettledTransactionListRequest : ANetApiRequest
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("status")]
-        public TransactionGroupStatusEnum Status { get; set; }
+        public TransactionGroupStatusEnum StatusValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Status-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Status property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool StatusValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<TransactionGroupStatusEnum> Status
+        {
+            get
+            {
+                if (this.StatusValueSpecified)
+                {
+                    return this.StatusValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.StatusValue = value.GetValueOrDefault();
+                this.StatusValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("sorting")]
         public TransactionListSorting Sorting { get; set; }
@@ -9697,12 +11460,48 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("transactionRequest")]
         public TransactionRequestType TransactionRequest { get; set; }
         
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<SettingType> _hostedPaymentSettings;
+        
         /// <summary>
         /// <para>Allowed values for settingName are: hostedPaymentIFrameCommunicatorUrl, hostedPaymentButtonOptions, hostedPaymentReturnOptions, hostedPaymentOrderOptions, hostedPaymentPaymentOptions, hostedPaymentBillingAddressOptions, hostedPaymentShippingAddressOptions, hostedPaymentSecurityOptions, hostedPaymentCustomerOptions, hostedPaymentStyleOptions</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(@"Allowed values for settingName are: hostedPaymentIFrameCommunicatorUrl, hostedPaymentButtonOptions, hostedPaymentReturnOptions, hostedPaymentOrderOptions, hostedPaymentPaymentOptions, hostedPaymentBillingAddressOptions, hostedPaymentShippingAddressOptions, hostedPaymentSecurityOptions, hostedPaymentCustomerOptions, hostedPaymentStyleOptions")]
-        [System.Xml.Serialization.XmlElementAttribute("hostedPaymentSettings")]
-        public ArrayOfSetting HostedPaymentSettings { get; set; }
+        [System.Xml.Serialization.XmlArrayAttribute("hostedPaymentSettings")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("setting")]
+        public System.Collections.ObjectModel.Collection<SettingType> HostedPaymentSettings
+        {
+            get
+            {
+                return this._hostedPaymentSettings;
+            }
+            set
+            {
+                this._hostedPaymentSettings = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die HostedPaymentSettings-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the HostedPaymentSettings collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool HostedPaymentSettingsSpecified
+        {
+            get
+            {
+                return (this.HostedPaymentSettings.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetHostedPaymentPageRequest" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetHostedPaymentPageRequest" /> class.</para>
+        /// </summary>
+        public GetHostedPaymentPageRequest()
+        {
+            this._hostedPaymentSettings = new System.Collections.ObjectModel.Collection<SettingType>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9727,18 +11526,77 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetUnsettledTransactionListResponse : ANetApiResponse
     {
         
-        [System.Xml.Serialization.XmlElementAttribute("transactions")]
-        public ArrayOfTransactionSummaryType Transactions { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<TransactionSummaryType> _transactions;
         
+        [System.Xml.Serialization.XmlArrayAttribute("transactions")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("transaction")]
+        public System.Collections.ObjectModel.Collection<TransactionSummaryType> Transactions
+        {
+            get
+            {
+                return this._transactions;
+            }
+            set
+            {
+                this._transactions = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die Transactions-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the Transactions collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TransactionsSpecified
+        {
+            get
+            {
+                return (this.Transactions.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetUnsettledTransactionListResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetUnsettledTransactionListResponse" /> class.</para>
+        /// </summary>
+        public GetUnsettledTransactionListResponse()
+        {
+            this._transactions = new System.Collections.ObjectModel.Collection<TransactionSummaryType>();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("totalNumInResultSet")]
-        public int TotalNumInResultSet { get; set; }
+        public int TotalNumInResultSetValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TotalNumInResultSet-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TotalNumInResultSet property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TotalNumInResultSetSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TotalNumInResultSetValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> TotalNumInResultSet
+        {
+            get
+            {
+                if (this.TotalNumInResultSetValueSpecified)
+                {
+                    return this.TotalNumInResultSetValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TotalNumInResultSetValue = value.GetValueOrDefault();
+                this.TotalNumInResultSetValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9786,8 +11644,31 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("merchantContact")]
         public MerchantContactType MerchantContact { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("userPermissions")]
-        public ArrayOfPermissionType UserPermissions { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<PermissionType> _userPermissions;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("userPermissions")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("permission")]
+        public System.Collections.ObjectModel.Collection<PermissionType> UserPermissions
+        {
+            get
+            {
+                return this._userPermissions;
+            }
+            set
+            {
+                this._userPermissions = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="MobileDeviceLoginResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="MobileDeviceLoginResponse" /> class.</para>
+        /// </summary>
+        public MobileDeviceLoginResponse()
+        {
+            this._userPermissions = new System.Collections.ObjectModel.Collection<PermissionType>();
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("merchantAccount")]
         public TransRetailInfoType MerchantAccount { get; set; }
@@ -9874,18 +11755,77 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class ARBGetSubscriptionListResponse : ANetApiResponse
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("totalNumInResultSet")]
-        public int TotalNumInResultSet { get; set; }
+        public int TotalNumInResultSetValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TotalNumInResultSet-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TotalNumInResultSet property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TotalNumInResultSetSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TotalNumInResultSetValueSpecified { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("subscriptionDetails")]
-        public ArrayOfSubscription SubscriptionDetails { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> TotalNumInResultSet
+        {
+            get
+            {
+                if (this.TotalNumInResultSetValueSpecified)
+                {
+                    return this.TotalNumInResultSetValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TotalNumInResultSetValue = value.GetValueOrDefault();
+                this.TotalNumInResultSetValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<SubscriptionDetail> _subscriptionDetails;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("subscriptionDetails")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("subscriptionDetail", IsNullable=true)]
+        public System.Collections.ObjectModel.Collection<SubscriptionDetail> SubscriptionDetails
+        {
+            get
+            {
+                return this._subscriptionDetails;
+            }
+            set
+            {
+                this._subscriptionDetails = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die SubscriptionDetails-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the SubscriptionDetails collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SubscriptionDetailsSpecified
+        {
+            get
+            {
+                return (this.SubscriptionDetails.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="ARBGetSubscriptionListResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="ARBGetSubscriptionListResponse" /> class.</para>
+        /// </summary>
+        public ARBGetSubscriptionListResponse()
+        {
+            this._subscriptionDetails = new System.Collections.ObjectModel.Collection<SubscriptionDetail>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9896,15 +11836,6 @@ namespace AuthorizeNet.Api.V1.Contracts
     [System.Xml.Serialization.XmlRootAttribute("EnumCollection", Namespace="AnetApi/xml/v1/schema/AnetApiSchema.xsd")]
     public partial class EnumCollection
     {
-        
-        /// <summary>
-        /// <para xml:lang="de">Ruft einen Wert ab, der diese Entität eindeutig identifiziert, oder legt diesen fest.</para>
-        /// <para xml:lang="en">Gets or sets a value uniquely identifying this entity.</para>
-        /// </summary>
-        [System.ComponentModel.DescriptionAttribute("Gets or sets a value uniquely identifying this entity.")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.ComponentModel.DataAnnotations.KeyAttribute()]
-        public long Id { get; set; }
         
         [System.Xml.Serialization.XmlElementAttribute("customerProfileSummaryType")]
         public CustomerProfileSummaryType CustomerProfileSummaryType { get; set; }
@@ -9977,8 +11908,44 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("totalNumInResultSet")]
         public int TotalNumInResultSet { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("paymentProfiles")]
-        public ArrayOfCustomerPaymentProfileListItemType PaymentProfiles { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<CustomerPaymentProfileListItemType> _paymentProfiles;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("paymentProfiles")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("paymentProfile", IsNullable=true)]
+        public System.Collections.ObjectModel.Collection<CustomerPaymentProfileListItemType> PaymentProfiles
+        {
+            get
+            {
+                return this._paymentProfiles;
+            }
+            set
+            {
+                this._paymentProfiles = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die PaymentProfiles-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the PaymentProfiles collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PaymentProfilesSpecified
+        {
+            get
+            {
+                return (this.PaymentProfiles.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetCustomerPaymentProfileListResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetCustomerPaymentProfileListResponse" /> class.</para>
+        /// </summary>
+        public GetCustomerPaymentProfileListResponse()
+        {
+            this._paymentProfiles = new System.Collections.ObjectModel.Collection<CustomerPaymentProfileListItemType>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -9997,15 +11964,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("subscriptionId")]
         public string SubscriptionId { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("includeTransactions")]
-        public bool IncludeTransactions { get; set; }
+        public bool IncludeTransactionsValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IncludeTransactions-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IncludeTransactions property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IncludeTransactionsSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IncludeTransactionsValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IncludeTransactions
+        {
+            get
+            {
+                if (this.IncludeTransactionsValueSpecified)
+                {
+                    return this.IncludeTransactionsValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IncludeTransactionsValue = value.GetValueOrDefault();
+                this.IncludeTransactionsValueSpecified = value.HasValue;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -10079,8 +12069,44 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetAUJobSummaryResponse : ANetApiResponse
     {
         
-        [System.Xml.Serialization.XmlElementAttribute("auSummary")]
-        public ArrayOfAUResponseType AuSummary { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<AuResponseType> _auSummary;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("auSummary")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("auResponse")]
+        public System.Collections.ObjectModel.Collection<AuResponseType> AuSummary
+        {
+            get
+            {
+                return this._auSummary;
+            }
+            set
+            {
+                this._auSummary = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die AuSummary-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the AuSummary collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AuSummarySpecified
+        {
+            get
+            {
+                return (this.AuSummary.Count != 0);
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetAUJobSummaryResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetAUJobSummaryResponse" /> class.</para>
+        /// </summary>
+        public GetAUJobSummaryResponse()
+        {
+            this._auSummary = new System.Collections.ObjectModel.Collection<AuResponseType>();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]
@@ -10101,15 +12127,38 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("month")]
         public string Month { get; set; }
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("modifiedTypeFilter")]
-        public AUJobTypeEnum ModifiedTypeFilter { get; set; }
+        public AUJobTypeEnum ModifiedTypeFilterValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ModifiedTypeFilter-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ModifiedTypeFilter property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ModifiedTypeFilterSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool ModifiedTypeFilterValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<AUJobTypeEnum> ModifiedTypeFilter
+        {
+            get
+            {
+                if (this.ModifiedTypeFilterValueSpecified)
+                {
+                    return this.ModifiedTypeFilterValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.ModifiedTypeFilterValue = value.GetValueOrDefault();
+                this.ModifiedTypeFilterValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("paging")]
         public Paging Paging { get; set; }
@@ -10124,15 +12173,38 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetAUJobDetailsResponse : ANetApiResponse
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("totalNumInResultSet")]
-        public int TotalNumInResultSet { get; set; }
+        public int TotalNumInResultSetValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die TotalNumInResultSet-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TotalNumInResultSet property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TotalNumInResultSetSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool TotalNumInResultSetValueSpecified { get; set; }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<int> TotalNumInResultSet
+        {
+            get
+            {
+                if (this.TotalNumInResultSetValueSpecified)
+                {
+                    return this.TotalNumInResultSetValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.TotalNumInResultSetValue = value.GetValueOrDefault();
+                this.TotalNumInResultSetValueSpecified = value.HasValue;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("auDetails")]
         public ListOfAUDetailsType AuDetails { get; set; }
@@ -10157,18 +12229,69 @@ namespace AuthorizeNet.Api.V1.Contracts
     public partial class GetMerchantDetailsResponse : ANetApiResponse
     {
         
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [System.Xml.Serialization.XmlElementAttribute("isTestMode")]
-        public bool IsTestMode { get; set; }
+        public bool IsTestModeValue { get; set; }
         
         /// <summary>
         /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die IsTestMode-Eigenschaft spezifiziert ist, oder legt diesen fest.</para>
         /// <para xml:lang="en">Gets or sets a value indicating whether the IsTestMode property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsTestModeSpecified { get; set; }
+        [System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public bool IsTestModeValueSpecified { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("processors")]
-        public ArrayOfProcessorType Processors { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public System.Nullable<bool> IsTestMode
+        {
+            get
+            {
+                if (this.IsTestModeValueSpecified)
+                {
+                    return this.IsTestModeValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                this.IsTestModeValue = value.GetValueOrDefault();
+                this.IsTestModeValueSpecified = value.HasValue;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<ProcessorType> _processors;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("processors")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("processor", IsNullable=true)]
+        public System.Collections.ObjectModel.Collection<ProcessorType> Processors
+        {
+            get
+            {
+                return this._processors;
+            }
+            set
+            {
+                this._processors = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Initialisiert eine neue Instanz der <see cref="GetMerchantDetailsResponse" /> Klasse.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GetMerchantDetailsResponse" /> class.</para>
+        /// </summary>
+        public GetMerchantDetailsResponse()
+        {
+            this._processors = new System.Collections.ObjectModel.Collection<ProcessorType>();
+            this._marketTypes = new System.Collections.ObjectModel.Collection<string>();
+            this._productCodes = new System.Collections.ObjectModel.Collection<string>();
+            this._paymentMethods = new System.Collections.ObjectModel.Collection<PaymentMethodsTypeEnum>();
+            this._currencies = new System.Collections.ObjectModel.Collection<string>();
+            this._contactDetails = new System.Collections.ObjectModel.Collection<ContactDetailType>();
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("merchantName")]
         public string MerchantName { get; set; }
@@ -10180,17 +12303,87 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("gatewayId")]
         public string GatewayId { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("marketTypes")]
-        public ArrayOfMarketType MarketTypes { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _marketTypes;
         
-        [System.Xml.Serialization.XmlElementAttribute("productCodes")]
-        public ArrayOfProductCode ProductCodes { get; set; }
+        /// <summary>
+        /// <para xml:lang="en">Maximum length: 50.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.MaxLengthAttribute(50)]
+        [System.Xml.Serialization.XmlArrayAttribute("marketTypes")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("marketType", IsNullable=true)]
+        public System.Collections.ObjectModel.Collection<string> MarketTypes
+        {
+            get
+            {
+                return this._marketTypes;
+            }
+            set
+            {
+                this._marketTypes = value;
+            }
+        }
         
-        [System.Xml.Serialization.XmlElementAttribute("paymentMethods")]
-        public ArrayOfPaymentMethod PaymentMethods { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _productCodes;
         
-        [System.Xml.Serialization.XmlElementAttribute("currencies")]
-        public ArrayOfCurrencyCode Currencies { get; set; }
+        /// <summary>
+        /// <para xml:lang="en">Maximum length: 3.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.MaxLengthAttribute(3)]
+        [System.Xml.Serialization.XmlArrayAttribute("productCodes")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("productCode", IsNullable=true)]
+        public System.Collections.ObjectModel.Collection<string> ProductCodes
+        {
+            get
+            {
+                return this._productCodes;
+            }
+            set
+            {
+                this._productCodes = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<PaymentMethodsTypeEnum> _paymentMethods;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("paymentMethods")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("paymentMethod", IsNullable=true)]
+        public System.Collections.ObjectModel.Collection<PaymentMethodsTypeEnum> PaymentMethods
+        {
+            get
+            {
+                return this._paymentMethods;
+            }
+            set
+            {
+                this._paymentMethods = value;
+            }
+        }
+        
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<string> _currencies;
+        
+        /// <summary>
+        /// <para xml:lang="en">Minimum length: 3.</para>
+        /// <para xml:lang="en">Maximum length: 3.</para>
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.MinLengthAttribute(3)]
+        [System.ComponentModel.DataAnnotations.MaxLengthAttribute(3)]
+        [System.Xml.Serialization.XmlArrayAttribute("currencies")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("currency", IsNullable=true)]
+        public System.Collections.ObjectModel.Collection<string> Currencies
+        {
+            get
+            {
+                return this._currencies;
+            }
+            set
+            {
+                this._currencies = value;
+            }
+        }
         
         [System.Xml.Serialization.XmlElementAttribute("publicClientKey")]
         public string PublicClientKey { get; set; }
@@ -10205,8 +12398,35 @@ namespace AuthorizeNet.Api.V1.Contracts
         [System.Xml.Serialization.XmlElementAttribute("merchantTimeZone")]
         public string MerchantTimeZone { get; set; }
         
-        [System.Xml.Serialization.XmlElementAttribute("contactDetails")]
-        public ArrayOfContactDetail ContactDetails { get; set; }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        private System.Collections.ObjectModel.Collection<ContactDetailType> _contactDetails;
+        
+        [System.Xml.Serialization.XmlArrayAttribute("contactDetails")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("contactDetail")]
+        public System.Collections.ObjectModel.Collection<ContactDetailType> ContactDetails
+        {
+            get
+            {
+                return this._contactDetails;
+            }
+            set
+            {
+                this._contactDetails = value;
+            }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="de">Ruft einen Wert ab, der angibt, ob die ContactDetails-Collection leer ist.</para>
+        /// <para xml:lang="en">Gets a value indicating whether the ContactDetails collection is empty.</para>
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ContactDetailsSpecified
+        {
+            get
+            {
+                return (this.ContactDetails.Count != 0);
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.0.425.0")]

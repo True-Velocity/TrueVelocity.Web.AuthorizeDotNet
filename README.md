@@ -28,10 +28,18 @@ The goal of this repository is to implement Authorize.Net Web Api with the lates
 - [ ]
 - [ ]
 
+## Other functionality
+
+- [ ] Support for `HttpClient` proxy configuration
+
 ## Regenerate Contracts
 
 [XmlSchemaClassGenerator](https://github.com/mganss/XmlSchemaClassGenerator)
 
 ```dotnetcli
+
    dotnet xscgen -f AnetApiSchema.xsd -o Api\V1\Contracts -n =AuthorizeNet.Api.V1.Contracts --csm Public
+
+   dotnet xscgen AnetApiSchema.xsd -o Api\V1\Contracts -n =AuthorizeNet.Api.V1.Contracts --csm Public -0
+
 ```
