@@ -1,3 +1,5 @@
+using AuthorizeNet.Worker.Services;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -18,6 +20,8 @@ namespace AuthorizeNet.Worker
                     {
                         services.AddHostedService<Worker>();
                         services.AddAuthorizeNet();
+                        services.AddScoped<CustomerService>();
+                        services.AddScoped<TransactionService>();
                     });
         }
     }

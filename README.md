@@ -15,10 +15,10 @@ The goal of this repository is to implement Authorize.Net Web Api with the lates
 
 ## [Customer Profiles](https://developer.authorize.net/api/reference/features/customer_profiles.html)
 
-- [ ] Create Customer Profile
-- [ ] Get Customer Profile
-- [ ] Get Customer Profile IDs
-- [ ] Update Customer Profile
+- [x] Create Customer Profile
+- [x] Get Customer Profile
+- [x] Get Customer Profile IDs
+- [x] Update Customer Profile
 - [ ]
 - [ ]
 - [ ]

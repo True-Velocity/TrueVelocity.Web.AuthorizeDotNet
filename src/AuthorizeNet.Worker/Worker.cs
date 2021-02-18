@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using AuthorizeNet.Api.V1.Contracts;
+using AuthorizeNet.Worker.Services;
 
 using Bet.Extensions.AuthorizeNet.Api.V1.Clients;
 
@@ -29,52 +30,15 @@ namespace AuthorizeNet.Worker
             while (!stoppingToken.IsCancellationRequested)
             {
                 using var scope = _provider.CreateScope();
+                var sp = scope.ServiceProvider;
+                var customerService = sp.GetRequiredService<CustomerService>();
+                var transactionService = sp.GetRequiredService<TransactionService>();
 
-                var customerProfileClient = scope.ServiceProvider
-                    .GetRequiredService<CustomerProfileClient>();
+                // await customerService.TestCustomerProfileAsync(stoppingToken);
 
-                var profiles = new Collection<CustomerPaymentProfileType>
-                {
-                    new CustomerPaymentProfileType
-                    {
-                        CustomerType = CustomerTypeEnum.Business,
-                        Payment = new PaymentType
-                        {
-                            CreditCard = new CreditCardType
-                            {
-                                CardNumber = "4111111111111111",
-                                ExpirationDate = "2020-12"
-                            }
-                        }
-                    }
-                };
+                await transactionService.TestTransactionAsync(stoppingToken);
 
-                var request = new CreateCustomerProfileRequest
-                {
-                    Profile = new CustomerProfileType
-                    {
-                        Description = "Test Customer Account",
-                        Email = "email2@email.com",
-                        MerchantCustomerId = "CustomerId-2",
-                        ProfileType = CustomerProfileTypeEnum.Regular,
-                        PaymentProfiles = profiles,
-                    },
-
-                    ValidationMode = ValidationModeEnum.TestMode
-                };
-
-                var result = await customerProfileClient.CreateAsync(request, stoppingToken);
-
-                var delResult = await customerProfileClient.DeleteAsync(new DeleteCustomerProfileRequest
-                {
-                    CustomerProfileId = "1512050990",
-                    RefId = "ref1"
-                });
-
-                _logger.LogDebug(result.Messages.ResultCode.ToString());
-
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(TimeSpan.FromSeconds(20), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(40), stoppingToken);
             }
         }
     }
