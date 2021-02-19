@@ -61,4 +61,3 @@ finally
 {
     Log.CloseAndFlush();
 }
-

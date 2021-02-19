@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>dotnet-authorizenet.worker-aaa7a275-c389-43bd-a456-707c7b56498c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

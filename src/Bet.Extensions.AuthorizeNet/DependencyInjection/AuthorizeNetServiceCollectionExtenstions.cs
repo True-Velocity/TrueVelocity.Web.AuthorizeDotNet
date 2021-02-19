@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 return new MerchantAuthenticationType
                 {
                     Name = options.ClientName,
-                    TransactionKey = options.TransactionKey
+                    TransactionKey = options.TransactionKey,
                 };
             });
 

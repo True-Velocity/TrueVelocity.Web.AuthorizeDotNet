@@ -37,6 +37,7 @@ namespace AuthorizeNet.Worker.Services
                 RefId = refId,
                 TransactionRequest = new TransactionRequestType
                 {
+                    CustomerIP = "128.136.19.100",
                     TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.AuthCaptureTransaction),
                     Amount = 5.0m,
                     Payment = new PaymentType
@@ -69,6 +70,7 @@ namespace AuthorizeNet.Worker.Services
                 RefId = refId,
                 TransactionRequest = new TransactionRequestType
                 {
+                    CustomerIP = "128.136.19.100",
                     TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.RefundTransaction),
                     Amount = 2.0m,
                     Payment = new PaymentType

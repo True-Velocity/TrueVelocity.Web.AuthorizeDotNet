@@ -61,7 +61,7 @@ namespace AuthorizeNet.Worker.Services
                 },
 
                 ValidationMode = _options.IsSandBox ? ValidationModeEnum.TestMode : ValidationModeEnum.LiveMode,
-                RefId = refId
+                RefId = refId,
             };
 
             var result = await _customerProfileClient.CreateAsync(request, cancellationToken);
