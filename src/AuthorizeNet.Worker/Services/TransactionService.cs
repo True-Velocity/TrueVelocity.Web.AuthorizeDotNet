@@ -53,7 +53,7 @@ namespace AuthorizeNet.Worker.Services
 
             var response = await _transactionClient.CreateAsync(request, cancellationToken);
 
-            _logger.LogInformation("Created: {code}", response.Messages.ResultCode.ToString());
+            _logger.LogInformation("Created AuthCapture Transaction: {code}", response.Messages.ResultCode.ToString());
 
             var batchRequest = new GetSettledBatchListRequest
             {
@@ -62,7 +62,7 @@ namespace AuthorizeNet.Worker.Services
             };
 
             var batchResponse = await _transactionClient.GetBatchListAsync(batchRequest, cancellationToken);
-            _logger.LogInformation("Created: {code}", batchResponse.Messages.ResultCode.ToString());
+            _logger.LogInformation("Created batch transaction list: {code}", batchResponse.Messages.ResultCode.ToString());
 
             var refundRequest = new CreateTransactionRequest
             {
@@ -84,7 +84,7 @@ namespace AuthorizeNet.Worker.Services
             };
 
             var refundReponse = await _transactionClient.CreateAsync(refundRequest, cancellationToken);
-            _logger.LogInformation("Created: {code}", refundReponse.Messages.ResultCode.ToString());
+            _logger.LogInformation("Created Refund Transaction: {code}", refundReponse.Messages.ResultCode.ToString());
         }
     }
 }

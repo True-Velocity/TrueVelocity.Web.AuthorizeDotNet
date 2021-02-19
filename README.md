@@ -5,7 +5,9 @@
 ![Nuget](https://img.shields.io/nuget/dt/Bet.Extensions.AuthorizeNet)
 [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https://f.feedz.io/kdcllc/kdcllc/shield/Bet.Extensions.AuthorizeNet/latest)](https://f.feedz.io/kdcllc/kdcllc/packages/Bet.Extensions.AuthorizeNet/latest/download)
 
-The goal of this repository is to implement Authorize.Net Web Api with the latest Microsoft DotNetCore technology.
+The goal of this repository is to implement [Authorize.Net API](https://developer.authorize.net/api/upgrade_guide.html#aim) the latest Microsoft DotNetCore technology.
+
+The implementation is build with `Microsoft.Extensions.Http.Polly` library for `HttpClient` management.
 
 [API Reference](https://developer.authorize.net/api/reference/index.html#apireferenceheader)
 
@@ -27,6 +29,11 @@ The goal of this repository is to implement Authorize.Net Web Api with the lates
 - [ ]
 - [ ]
 - [ ]
+
+## Authoroze.net
+
+- https://sandbox.authorize.net/
+- https://login.authorize.net/
 
 ## Other functionality
 
