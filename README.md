@@ -5,7 +5,14 @@
 ![Nuget](https://img.shields.io/nuget/dt/Bet.Extensions.AuthorizeNet)
 [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https://f.feedz.io/kdcllc/kdcllc/shield/Bet.Extensions.AuthorizeNet/latest)](https://f.feedz.io/kdcllc/kdcllc/packages/Bet.Extensions.AuthorizeNet/latest/download)
 
-The goal of this repository is to implement Authorize.Net Web Api with the latest Microsoft DotNetCore technology.
+The goal of this repository is to implement [Authorize.Net API](https://developer.authorize.net/api/upgrade_guide.html#aim) the latest Microsoft DotNetCore technology.
+
+The implementation is build with `Microsoft.Extensions.Http.Polly` library for `HttpClient` management.
+
+The solution is split into two projets:
+1. `Bet.Extensions.AuthorizeNet` - base library that supports `dotnetcore` and `json`.
+2. `AuthorizeNet.Worker` example was created using `[Bet.Extensions.Templating](https://github.com/kdcllc/Bet.Extensions.Templating)
+
 
 [API Reference](https://developer.authorize.net/api/reference/index.html#apireferenceheader)
 
@@ -15,22 +22,40 @@ The goal of this repository is to implement Authorize.Net Web Api with the lates
 
 ## [Customer Profiles](https://developer.authorize.net/api/reference/features/customer_profiles.html)
 
-- [ ] Create Customer Profile
-- [ ] Get Customer Profile
-- [ ] Get Customer Profile IDs
-- [ ] Update Customer Profile
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
+
+### Customer Profile
+https://github.com/AuthorizeNet/sample-code-csharp/tree/master/CustomerProfiles
+`CustomerProfileClient` implements:
+- [x] Create Customer Profile
+- [x] Get Customer Profile
+- [x] Get Customer Profile IDs
+- [x] Update Customer Profile
+
+### Customer Payment Profile
+`CustomerPaymentProfileClient` implements:
+- [x] Create Customer Payment Profile
+- [x] Get Customer Payment Profile 
+- [x] Get Customer Payment Profile List
+- [x] Update Customer Payment Profile
+- [x] Delete Customer Payment Profile 
+- [x] Validate Customer Payment Profile
+
+### Transactions
+https://github.com/AuthorizeNet/sample-code-csharp/tree/master/PaymentTransactions
+`TransactionClient` implements:
+- [x] Create Transaction
+- [x] Get Transaction Details
+- [x] Get Settled Batch List
+- [x] Get Transaction List
+
+## Authoroze.net
+
+- https://sandbox.authorize.net/
+- https://login.authorize.net/
 
 ## Other functionality
 
-- [ ] Support for `HttpClient` proxy configuration
+- [x] Support for `HttpClient` proxy configuration
 
 ## Regenerate Contracts
 
@@ -43,3 +68,13 @@ The goal of this repository is to implement Authorize.Net Web Api with the lates
    dotnet xscgen AnetApiSchema.xsd -o Api\V1\Contracts -n =AuthorizeNet.Api.V1.Contracts --csm Public -0
 
 ```
+
+## Reference
+
+- https://www.authorize.net/content/dam/anet-redesign/documents/AIM_guide.pdf
+- [Upgrade Guide](https://developer.authorize.net/api/upgrade_guide.html)
+- [Payment Transactions](https://developer.authorize.net/api/reference/features/payment_transactions.html)
+- [Customer Profiles](https://developer.authorize.net/api/reference/features/customer_profiles.html)
+- [eCheck.Net](https://developer.authorize.net/api/reference/features/echeck.html)
+- [Authorize.net Test Credit Card Numbers](https://www.leadcommerce.com/support-articles/authorize.net-test-credit-card-numbers.html)
+- [Validate Credit Card Numbers](https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s20.html)

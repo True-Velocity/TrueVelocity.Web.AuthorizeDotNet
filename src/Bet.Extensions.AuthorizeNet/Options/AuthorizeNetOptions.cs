@@ -6,7 +6,7 @@ namespace Bet.Extensions.AuthorizeNet.Options
     {
         public bool IsSandBox { get; set; }
 
-        public Uri LetsEncryptUri => IsSandBox
+        public Uri BaseUri => IsSandBox
             ? new Uri("https://apitest.authorize.net/xml/v1/request.api")
             : new Uri("https://api.authorize.net/xml/v1/request.api");
 

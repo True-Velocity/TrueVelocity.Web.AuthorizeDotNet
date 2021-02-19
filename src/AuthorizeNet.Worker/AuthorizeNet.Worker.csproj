@@ -1,18 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>dotnet-AuthorizeNet.Worker-51F805F0-46C6-4334-A67F-1A1D787BCD0F</UserSecretsId>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>dotnet-authorizenet.worker-aaa7a275-c389-43bd-a456-707c7b56498c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Bet.Extensions.Templating.Console" Version="1.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.*" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.*" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Bet.Extensions.AuthorizeNet\Bet.Extensions.AuthorizeNet.csproj" />
   </ItemGroup>
+
 </Project>
