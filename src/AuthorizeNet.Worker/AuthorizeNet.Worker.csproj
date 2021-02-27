@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Bet.Extensions.Templating.Console" Version="1.0.*" />
+    <PackageReference Include="Bogus" Version="33.0.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.*" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.*" />
   </ItemGroup>

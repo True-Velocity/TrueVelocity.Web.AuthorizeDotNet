@@ -39,6 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddTransient<IAuthorizeNetClient<CreateCustomerProfileRequest, CreateCustomerProfileResponse>, AuthorizeNetClient<CreateCustomerProfileRequest, CreateCustomerProfileResponse>>();
             services.TryAddTransient<IAuthorizeNetClient<GetCustomerProfileRequest, GetCustomerProfileResponse>, AuthorizeNetClient<GetCustomerProfileRequest, GetCustomerProfileResponse>>();
             services.TryAddTransient<IAuthorizeNetClient<DeleteCustomerProfileRequest, DeleteCustomerProfileResponse>, AuthorizeNetClient<DeleteCustomerProfileRequest, DeleteCustomerProfileResponse>>();
+            services.TryAddTransient<IAuthorizeNetClient<UpdateCustomerProfileRequest, UpdateCustomerProfileResponse>, AuthorizeNetClient<UpdateCustomerProfileRequest, UpdateCustomerProfileResponse>>();
 
             services.TryAddTransient<ICustomerProfileClient, CustomerProfileClient>();
 
@@ -55,6 +56,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddTransient<IAuthorizeNetClient<GetTransactionDetailsRequest, GetTransactionDetailsResponse>, AuthorizeNetClient<GetTransactionDetailsRequest, GetTransactionDetailsResponse>>();
             services.TryAddTransient<IAuthorizeNetClient<GetSettledBatchListRequest, GetSettledBatchListResponse>, AuthorizeNetClient<GetSettledBatchListRequest, GetSettledBatchListResponse>>();
             services.TryAddTransient<IAuthorizeNetClient<GetTransactionListRequest, GetTransactionListResponse>, AuthorizeNetClient<GetTransactionListRequest, GetTransactionListResponse>>();
+            services.TryAddTransient<IAuthorizeNetClient<GetUnsettledTransactionListRequest, GetUnsettledTransactionListResponse>, AuthorizeNetClient<GetUnsettledTransactionListRequest, GetUnsettledTransactionListResponse>>();
 
             services.TryAddTransient<ITransactionClient, TransactionClient>();
 

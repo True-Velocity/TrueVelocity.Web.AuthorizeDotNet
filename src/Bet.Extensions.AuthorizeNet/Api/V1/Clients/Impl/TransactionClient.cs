@@ -11,17 +11,20 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
         private readonly IAuthorizeNetClient<GetTransactionDetailsRequest, GetTransactionDetailsResponse> _get;
         private readonly IAuthorizeNetClient<GetSettledBatchListRequest, GetSettledBatchListResponse> _getBatchList;
         private readonly IAuthorizeNetClient<GetTransactionListRequest, GetTransactionListResponse> _getList;
+        private readonly IAuthorizeNetClient<GetUnsettledTransactionListRequest, GetUnsettledTransactionListResponse> _getUnsettledList;
 
         public TransactionClient(
             IAuthorizeNetClient<CreateTransactionRequest, CreateTransactionResponse> create,
             IAuthorizeNetClient<GetTransactionDetailsRequest, GetTransactionDetailsResponse> get,
             IAuthorizeNetClient<GetSettledBatchListRequest, GetSettledBatchListResponse> getBatchList,
-            IAuthorizeNetClient<GetTransactionListRequest, GetTransactionListResponse> getList)
+            IAuthorizeNetClient<GetTransactionListRequest, GetTransactionListResponse> getList,
+            IAuthorizeNetClient<GetUnsettledTransactionListRequest, GetUnsettledTransactionListResponse> getUnsettledList)
         {
             _create = create ?? throw new System.ArgumentNullException(nameof(create));
             _get = get ?? throw new System.ArgumentNullException(nameof(get));
             _getBatchList = getBatchList ?? throw new System.ArgumentNullException(nameof(getBatchList));
             _getList = getList ?? throw new System.ArgumentNullException(nameof(getList));
+            _getUnsettledList = getUnsettledList ?? throw new System.ArgumentNullException(nameof(getUnsettledList));
         }
 
         public Task<CreateTransactionResponse> CreateAsync(
@@ -50,6 +53,13 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
              CancellationToken cancellationToken = default)
         {
             return _getList.PostAsync(request, cancellationToken);
+        }
+
+        public Task<GetUnsettledTransactionListResponse> GetUnsettledListAsync(
+                 GetUnsettledTransactionListRequest request,
+                 CancellationToken cancellationToken = default)
+        {
+            return _getUnsettledList.PostAsync(request, cancellationToken);
         }
     }
 }

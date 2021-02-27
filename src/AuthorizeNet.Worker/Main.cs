@@ -15,6 +15,7 @@ namespace AuthorizeNet.Worker
         private readonly ILogger<Main> _logger;
         private readonly CustomerService _customerService;
         private readonly TransactionService _transactionService;
+        private readonly SampleData _sampleData;
         private readonly IHostApplicationLifetime _applicationLifetime;
 
         public IConfiguration Configuration { get; set; }
@@ -22,12 +23,14 @@ namespace AuthorizeNet.Worker
         public Main(
             CustomerService customerService,
             TransactionService transactionService,
+            SampleData sampleData,
             IHostApplicationLifetime applicationLifetime,
             IConfiguration configuration,
             ILogger<Main> logger)
         {
             _customerService = customerService;
             _transactionService = transactionService;
+            _sampleData = sampleData ?? throw new ArgumentNullException(nameof(sampleData));
             _applicationLifetime = applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -40,9 +43,17 @@ namespace AuthorizeNet.Worker
 
             var ts = CancellationTokenSource.CreateLinkedTokenSource(_applicationLifetime.ApplicationStopping);
 
-            await _customerService.TestCustomerProfileAsync(ts.Token);
+            // await _transactionService.GetUnsettledTransactionAsync(ts.Token);
 
-            await _transactionService.TestTransactionAsync(ts.Token);
+            foreach (var card in _sampleData.GetCustomerProfiles())
+            {
+                await _customerService.TestCustomerProfileAsync(card, ts.Token);
+            }
+
+            //await _transactionService.TestTransactionAsync(ts.Token);
+
+            // validates existing payment profile
+            //await _customerService.ValidateCustomerProfileAsync(ts.Token);
 
             _logger.LogInformation("Main executed");
 

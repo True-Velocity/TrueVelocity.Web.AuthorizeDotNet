@@ -1,25 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 using AuthorizeNet.Api.V1.Contracts;
+using AuthorizeNet.Worker.Options;
 
 using Bet.Extensions.AuthorizeNet.Api.V1.Clients;
 
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace AuthorizeNet.Worker.Services
 {
     public class TransactionService
     {
         private readonly ITransactionClient _transactionClient;
+        private readonly AppOptions _options;
         private readonly ILogger<TransactionService> _logger;
 
         public TransactionService(
             ITransactionClient transactionClient,
+            IOptions<AppOptions> options,
             ILogger<TransactionService> logger)
         {
             _transactionClient = transactionClient ?? throw new ArgumentNullException(nameof(transactionClient));
+            _options = options.Value;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
@@ -37,7 +44,7 @@ namespace AuthorizeNet.Worker.Services
                 RefId = refId,
                 TransactionRequest = new TransactionRequestType
                 {
-                    CustomerIP = "128.136.19.100",
+                    CustomerIP = _options.IpAddress,
                     TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.AuthCaptureTransaction),
                     Amount = 5.0m,
                     Payment = new PaymentType
@@ -70,7 +77,7 @@ namespace AuthorizeNet.Worker.Services
                 RefId = refId,
                 TransactionRequest = new TransactionRequestType
                 {
-                    CustomerIP = "128.136.19.100",
+                    CustomerIP = _options.IpAddress,
                     TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.RefundTransaction),
                     Amount = 2.0m,
                     Payment = new PaymentType
@@ -87,6 +94,38 @@ namespace AuthorizeNet.Worker.Services
 
             var refundReponse = await _transactionClient.CreateAsync(refundRequest, cancellationToken);
             _logger.LogInformation("Created Refund Transaction: {code}", refundReponse.Messages.ResultCode.ToString());
+        }
+
+        public async Task GetUnsettledTransactionAsync(CancellationToken cancellationToken)
+        {
+            var pageNumber = 1;
+            var list = new List<GetUnsettledTransactionListResponse>();
+
+            var result = await GetUnsettlePageAsync(pageNumber, list, cancellationToken);
+
+            _logger.LogInformation("{count}", result.Count());
+        }
+
+        private async Task<List<GetUnsettledTransactionListResponse>> GetUnsettlePageAsync(int pageNumber, List<GetUnsettledTransactionListResponse> refList, CancellationToken cancellationToken = default)
+        {
+            var request = new GetUnsettledTransactionListRequest
+            {
+                Paging = new Paging
+                {
+                    Limit = 10,
+                    Offset = pageNumber
+                },
+                Status = TransactionGroupStatusEnum.Any,
+            };
+
+            var response = await _transactionClient.GetUnsettledListAsync(request, cancellationToken);
+            if (response.Transactions.Count != 0)
+            {
+               refList.Add(response);
+               await GetUnsettlePageAsync(pageNumber + 1, refList, cancellationToken);
+            }
+
+            return refList;
         }
     }
 }
