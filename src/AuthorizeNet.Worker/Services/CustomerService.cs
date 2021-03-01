@@ -20,12 +20,14 @@ namespace AuthorizeNet.Worker.Services
         private readonly AuthorizeNetOptions _options;
         private readonly ICustomerProfileClient _customerProfileClient;
         private readonly ICustomerPaymentProfileClient _customerPaymentProfileClient;
+        private readonly SampleData _sampleData;
         private readonly ILogger<CustomerService> _logger;
 
         public CustomerService(
             IOptions<AuthorizeNetOptions> options,
             ICustomerProfileClient customerProfileClient,
             ICustomerPaymentProfileClient customerPaymentProfileClient,
+            SampleData sampleData,
             ILogger<CustomerService> logger)
         {
             if (options is null)
@@ -36,14 +38,16 @@ namespace AuthorizeNet.Worker.Services
             _options = options.Value;
             _customerProfileClient = customerProfileClient ?? throw new ArgumentNullException(nameof(customerProfileClient));
             _customerPaymentProfileClient = customerPaymentProfileClient ?? throw new ArgumentNullException(nameof(customerPaymentProfileClient));
+            _sampleData = sampleData;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task TestCustomerProfileAsync(CustomerProfile profile, CancellationToken cancellationToken)
         {
-            var validationMode = _options.IsSandBox ? ValidationModeEnum.TestMode : ValidationModeEnum.LiveMode;
+            // set validation mode for the call.
+            var validationMode = ValidationModeEnum.LiveMode; //_options.IsSandBox ? ValidationModeEnum.TestMode : ValidationModeEnum.LiveMode;
 
-            // 1. get customer id
+            // 1. create customer / payment profile with validation enabled.
             var paymentProfiles = new Collection<CustomerPaymentProfileType>
             {
                 new CustomerPaymentProfileType
@@ -74,6 +78,8 @@ namespace AuthorizeNet.Worker.Services
 
             var createRequest = new CreateCustomerProfileRequest
             {
+                RefId = profile.ReferenceId,
+                ValidationMode = validationMode,
                 Profile = new CustomerProfileType
                 {
                     Description = profile.Description,
@@ -82,42 +88,107 @@ namespace AuthorizeNet.Worker.Services
                     ProfileType = profile.CustomerProfileType,
                     PaymentProfiles = paymentProfiles,
                 },
-
-                ValidationMode = validationMode,
-                RefId = profile.ReferenceId,
             };
 
-            // create
             var createResponse = await _customerProfileClient.CreateAsync(createRequest, cancellationToken);
 
-            var customerProfileId = createResponse.CustomerProfileId;
-            var customerPaymentProfileId = createResponse.CustomerPaymentProfileIdList[0];
+            // validation list is in the same order as it has been submitted by the client code
+            var parsedCreation = new PaymentGatewayResponse(createResponse.ValidationDirectResponseList[0]);
 
-            _logger.LogInformation("CreateResponse - {customerProfileId} - {paymentProfile}", customerProfileId, createResponse.CustomerPaymentProfileIdList[0]);
-            DisplayResponse("CreateResponse", createResponse);
-
-            // validate
+            // creation for the profile was successful
             if (createResponse.Messages.ResultCode == MessageTypeEnum.Ok)
             {
-                var validateRequest = new ValidateCustomerPaymentProfileRequest
+                var customerProfileId = createResponse.CustomerProfileId;
+                var customerPaymentProfileId = createResponse.CustomerPaymentProfileIdList[0];
+
+                _logger.LogInformation(
+                    "CreateResponse - {customerProfileId} - {paymentProfile} - {asvCode}",
+                    customerProfileId,
+                    createResponse.CustomerPaymentProfileIdList[0],
+                    parsedCreation.AVSResponseText);
+
+                DisplayResponse("CreateResponse", createResponse);
+
+                // 2. create another payment profile
+                var secondaryProfile = _sampleData.GetCustomerProfiles()[1];
+
+                var secondaryProfileRequest = new CreateCustomerPaymentProfileRequest
                 {
-                    CustomerPaymentProfileId = customerPaymentProfileId,
+                    RefId = profile.ReferenceId,
+                    ValidationMode = validationMode,
                     CustomerProfileId = customerProfileId,
-                    ValidationMode = ValidationModeEnum.LiveMode,
-                    RefId = profile.ReferenceId
+                    PaymentProfile = new CustomerPaymentProfileType
+                    {
+                        Payment = new PaymentType
+                        {
+                            CreditCard = new CreditCardType
+                            {
+                                CardCode = secondaryProfile.CardCode,
+                                CardNumber = secondaryProfile.CardNumber,
+                                ExpirationDate = secondaryProfile.ExpirationDate,
+                            }
+                        },
+                        CustomerType = CustomerTypeEnum.Business,
+                        BillTo = new CustomerAddressType
+                        {
+                            FirstName = secondaryProfile.FirstName,
+                            LastName = secondaryProfile.LastName,
+                            Address = secondaryProfile.StreetLine,
+                            Company = secondaryProfile.Company,
+                            City = secondaryProfile.City,
+                            State = secondaryProfile.StateOrProvice,
+                            Zip = secondaryProfile.ZipCode,
+                            Country = secondaryProfile.Country
+                        }
+                    }
                 };
 
-                var validateResponse = await _customerPaymentProfileClient.ValidateAsync(validateRequest, cancellationToken);
-                var parsedValidation = new PaymentGatewayResponse(validateResponse.DirectResponse);
+                var secondaryPaymentResponse = await _customerPaymentProfileClient.CreateAsync(secondaryProfileRequest, cancellationToken);
+                var secondaryProfileId = secondaryPaymentResponse.CustomerPaymentProfileId;
 
-                if (validateResponse.Messages.ResultCode == MessageTypeEnum.Error)
+                if (secondaryPaymentResponse.Messages.ResultCode == MessageTypeEnum.Ok)
                 {
-                    _logger.LogWarning("{cardNumber}-{expDate}-{ccv}-{zip}", profile.CardNumber, profile.ExpirationDate, profile.CardCode, profile.ZipCode);
-                    _logger.LogWarning(validateResponse.DirectResponse);
-                }
+                    var validateRequest = new ValidateCustomerPaymentProfileRequest
+                    {
+                        CustomerPaymentProfileId = secondaryProfileId,
+                        CustomerProfileId = customerProfileId,
+                        ValidationMode = validationMode,
+                        RefId = profile.ReferenceId
+                    };
 
-                DisplayResponse("ValidationResponse", validateResponse);
+                    var validateResponse = await _customerPaymentProfileClient.ValidateAsync(validateRequest, cancellationToken);
+                    var parsedValidation = new PaymentGatewayResponse(validateResponse?.DirectResponse);
+
+                    if (validateResponse.Messages.ResultCode == MessageTypeEnum.Error)
+                    {
+                        _logger.LogWarning("{cardNumber}-{expDate}-{ccv}-{zip}-{parsed}", profile.CardNumber, profile.ExpirationDate, profile.CardCode, profile.ZipCode, parsedValidation.ResponseReasonText);
+                        _logger.LogWarning(validateResponse.DirectResponse);
+                    }
+
+                    DisplayResponse("ValidationResponse", validateResponse);
+
+                    // get customer profile
+                    var customerRequest = new GetCustomerProfileRequest
+                    {
+                        CustomerProfileId = customerProfileId
+                    };
+
+                    var customerResponse = await _customerProfileClient.GetAsync(customerRequest, cancellationToken);
+                    DisplayResponse(" GetCustomerProfileResponse", customerResponse);
+
+                    var paymentRequest = new GetCustomerPaymentProfileRequest
+                    {
+                        CustomerPaymentProfileId = customerPaymentProfileId,
+                        CustomerProfileId = customerProfileId,
+                        UnmaskExpirationDate = true
+                    };
+
+                    var paymentResponse = await _customerPaymentProfileClient.GetAsync(paymentRequest, cancellationToken);
+                    DisplayResponse(" GetCustomerPaymentProfileResponse", paymentResponse);
+                }
             }
+
+            _logger.LogWarning("CreateResponse - {responseCode}", parsedCreation.ResponseCode);
 
             // delete
             var deleteResponse = await _customerProfileClient.DeleteAsync(new DeleteCustomerProfileRequest
@@ -125,26 +196,7 @@ namespace AuthorizeNet.Worker.Services
                 CustomerProfileId = createResponse.CustomerProfileId,
                 RefId = profile.ReferenceId
             });
-
             DisplayResponse("DeleteResponse", deleteResponse);
-        }
-
-        public async Task ValidateCustomerProfileAsync(CancellationToken cancellationToken)
-        {
-            var request = new ValidateCustomerPaymentProfileRequest
-            {
-                CustomerPaymentProfileId = "1234567",
-                CustomerProfileId = "910111213",
-                ValidationMode = ValidationModeEnum.LiveMode,
-                RefId = "123"
-            };
-
-            var response = await _customerPaymentProfileClient.ValidateAsync(request, cancellationToken);
-
-            var error = response?.Messages?.ResultCode == MessageTypeEnum.Error ? "Error" : "Success";
-            var message = $"Code: {response.Messages.Message[0].Code} Text: {response.Messages.Message[0].Text}";
-
-            _logger.LogInformation("Payment Profile {error} with: {message}", error, message);
         }
 
         private void DisplayResponse(string action, ANetApiResponse response)

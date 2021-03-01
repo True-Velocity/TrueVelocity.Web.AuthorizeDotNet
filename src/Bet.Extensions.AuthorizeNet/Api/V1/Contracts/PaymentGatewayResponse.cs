@@ -10,6 +10,15 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
     /// </summary>
     public class PaymentGatewayResponse
     {
+        private string _responseCode;
+        private string _responseReasonCode;
+        private string _aVSResponseCode;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PaymentGatewayResponse"/> class.
+        /// Create an instance for class in order to parse out the values from the string.
+        /// </summary>
+        /// <param name="input"></param>
         public PaymentGatewayResponse(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -18,11 +27,11 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
             }
 
             var parsed = input.Split(',');
-            ResponseCode = parsed[0];
-            ResponseReasonCode = parsed[2];
+            _responseCode = parsed[0];
+            _responseReasonCode = parsed[2];
             ResponseReasonText = parsed[3];
             AuthorizationCode = parsed[4];
-            AVSResponse = parsed[5];
+            _aVSResponseCode = parsed[5];
             TransactionId = parsed[6];
             InvoiceNumber = parsed[7];
             Description = parsed[8];
@@ -45,7 +54,14 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
         /// 3 = Error
         /// 4 = Held for review.
         /// </summary>
-        public string ResponseCode { get; set; }
+        public ResponseCodeEnum ResponseCode => _responseCode switch
+        {
+            "1" => ResponseCodeEnum.Approved,
+            "2" => ResponseCodeEnum.Declined,
+            "3" => ResponseCodeEnum.Error,
+            "4" => ResponseCodeEnum.HeldForReview,
+            _ => ResponseCodeEnum.Unknown,
+        };
 
         /// <summary>
         /// 3 Response
@@ -56,7 +72,14 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
         /// 3 - There has been an error processing this transaction.
         /// 4 - This transaction is being held for review.
         /// </summary>
-        public string ResponseReasonCode { get; set; }
+        public string ResponseReasonCode => _responseReasonCode switch
+        {
+            "1" => "This transaction has been approved",
+            "2" => "This transaction has been declined",
+            "3" => "There has been an error processing this transaction",
+            "4" => "This transaction is being held for review",
+            _ => "This transaction is an uknown state.",
+        };
 
         /// <summary>
         /// 4 Response Reason Text
@@ -89,7 +112,25 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
         ///  Z = Five digit ZIP matches, Address (Street) does not
         /// Notes: Indicates the result of the AVS filter.
         /// </summary>
-        public string AVSResponse { get; set; }
+        public string AVSResponseCode => _aVSResponseCode;
+
+        public string AVSResponseText => _aVSResponseCode switch
+        {
+            "A" => "Address(Street) matches, ZIP does not",
+            "B" => "Address information not provided for AVS check",
+            "E" => "AVS error",
+            "G" => "Non-U.S.Card Issuing Bank",
+            "N" => "No Match on Address(Street) or ZIP",
+            "P" => "AVS not applicable for this transaction",
+            "R" => "Retry—System unavailable or timed out",
+            "S" => "Service not supported by issuer",
+            "U" => "Address information is unavailable",
+            "W" => "Nine digit ZIP matches, Address (Street) does not",
+            "X" => "Address(Street) and nine digit ZIP match",
+            "Y" => "Address(Street) and five digit ZIP match",
+            "Z" => "Five digit ZIP matches, Address (Street) does not",
+            _ => "Unknown"
+        };
 
         /// <summary>
         /// 7 Transaction ID Value: The payment gateway-assigned identification number for the transaction.

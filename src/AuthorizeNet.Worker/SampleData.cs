@@ -10,10 +10,8 @@ namespace AuthorizeNet.Worker
 {
     public class SampleData
     {
-        public List<CustomerProfile> GetCustomerProfiles()
+        public string[] CardNumbers => new[]
         {
-            var cardNumbers = new[]
-            {
                 "370000000000002",          // American Express
                 "6011000000000012",         // Discover
                 "4007000000027",            // Visa
@@ -22,19 +20,19 @@ namespace AuthorizeNet.Worker
                 "5424000000000015",         // Mastercard
                 "2223000010309703",         // Mastercard
                 "2223000010309711"          // Mastercard
-            };
+        };
 
-            var cardCodes = new[]
-            {
+        public string[] CardCodes => new[]
+        {
                 "900",      // M 	Matched.
                 "901",      // N 	Does not match.
                 "902",      // S 	Should be on the card, but is not indicated.
                 "903",      // U 	The issuer is not certified for CVV processing or has not provided an encryption key.
                 "904",      // P 	Is not processed.
-            };
+        };
 
-            var zipCodes = new[]
-            {
+        public string[] ZipCodes => new[]
+        {
                 "46282",    // 2 	This transaction has been declined. 	General bank decline.
                             // Visa Response	Mastercard Response     Discover Response   American Express Response  JCB Response
                 "46201",    // A 	A 	A 	A 	A 	A
@@ -47,15 +45,17 @@ namespace AuthorizeNet.Worker
                 "46211",    // E 	W 	W 	N/A 	W 	W
                 "46214",    // N/A 	X 	X 	N/A 	X 	X
                 "46217",    // Z 	Z 	Z 	Y 	Z 	Z
-            };
+        };
 
+        public List<CustomerProfile> GetCustomerProfiles()
+        {
             return new Faker<CustomerProfile>()
 
                         .RuleFor(u => u.ReferenceId, f => f.Random.Number(1, 100).ToString())
                         .RuleFor(u => u.CustomerId, f => $"customer-{f.UniqueIndex}")
 
-                        .RuleFor(u => u.CardNumber, f => f.PickRandom(cardNumbers))
-                        .RuleFor(u => u.CardCode, f => f.PickRandom(cardCodes))
+                        .RuleFor(u => u.CardNumber, f => f.PickRandom(CardNumbers))
+                        .RuleFor(u => u.CardCode, f => f.PickRandom(CardCodes))
                         .RuleFor(u => u.ExpirationDate, f => $"{DateTime.Now.Year}-{DateTime.Now.AddMonths(f.Random.Number(1, 4)).Month.ToString("00")}")
 
                         .RuleFor(u => u.Company, f => f.Company.CompanyName())
@@ -70,7 +70,7 @@ namespace AuthorizeNet.Worker
                         .RuleFor(u => u.City, (f, u) => f.Address.City())
 
                          // .RuleFor(u => u.ZipCode, (f, u) => f.Address.ZipCode())
-                        .RuleFor(u => u.ZipCode, f => f.PickRandom(zipCodes))
+                        .RuleFor(u => u.ZipCode, f => f.PickRandom(ZipCodes))
                         .RuleFor(u => u.StateOrProvice, (f, u) => f.Address.State())
                         .RuleFor(u => u.Country, (f, u) => f.Address.CountryCode())
 

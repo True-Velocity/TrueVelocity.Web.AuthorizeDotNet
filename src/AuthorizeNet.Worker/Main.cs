@@ -43,17 +43,15 @@ namespace AuthorizeNet.Worker
 
             var ts = CancellationTokenSource.CreateLinkedTokenSource(_applicationLifetime.ApplicationStopping);
 
+            // create and deletes customer payment profiles.
+            //foreach (var card in _sampleData.GetCustomerProfiles())
+            //{
+            //    await _customerService.TestCustomerProfileAsync(card, ts.Token);
+            //}
+
+            await _transactionService.TestTransactionAsync(ts.Token);
+
             // await _transactionService.GetUnsettledTransactionAsync(ts.Token);
-
-            foreach (var card in _sampleData.GetCustomerProfiles())
-            {
-                await _customerService.TestCustomerProfileAsync(card, ts.Token);
-            }
-
-            //await _transactionService.TestTransactionAsync(ts.Token);
-
-            // validates existing payment profile
-            //await _customerService.ValidateCustomerProfileAsync(ts.Token);
 
             _logger.LogInformation("Main executed");
 

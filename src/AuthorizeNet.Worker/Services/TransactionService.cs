@@ -8,6 +8,7 @@ using AuthorizeNet.Api.V1.Contracts;
 using AuthorizeNet.Worker.Options;
 
 using Bet.Extensions.AuthorizeNet.Api.V1.Clients;
+using Bet.Extensions.AuthorizeNet.Api.V1.Contracts;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -39,14 +40,14 @@ namespace AuthorizeNet.Worker.Services
         {
             var refId = new Random(1000).Next().ToString();
 
-            var request = new CreateTransactionRequest
+            var createRequest = new CreateTransactionRequest
             {
                 RefId = refId,
                 TransactionRequest = new TransactionRequestType
                 {
                     CustomerIP = _options.IpAddress,
                     TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.AuthCaptureTransaction),
-                    Amount = 5.0m,
+                    Amount = 1.0m,
                     Payment = new PaymentType
                     {
                         CreditCard = new CreditCardType
@@ -54,15 +55,50 @@ namespace AuthorizeNet.Worker.Services
                             CardNumber = "5424000000000015",
                             ExpirationDate = "2021-12",
                             CardCode = "999"
-                        }
+                        },
+                    },
+                    Customer = new CustomerDataType
+                    {
+                        Id = "56789"
+                    },
+                    Order = new OrderType
+                    {
+                        InvoiceNumber = "invoice-123"
                     }
                 },
             };
 
-            var response = await _transactionClient.CreateAsync(request, cancellationToken);
+            var createResponse = await _transactionClient.CreateAsync(createRequest, cancellationToken);
+            _logger.LogInformation("Created AuthCapture Transaction: {code}", createResponse.Messages.ResultCode.ToString());
+            DisplayResponse("CreateTransaction", createResponse);
 
-            _logger.LogInformation("Created AuthCapture Transaction: {code}", response.Messages.ResultCode.ToString());
+            // transaction is successful then proceed with cancellation.
+            if (createResponse.Messages.ResultCode == MessageTypeEnum.Ok)
+            {
+                var createTransId = createResponse.TransactionResponse.TransId;
 
+                var voidRequest = new CreateTransactionRequest
+                {
+                    RefId = refId,
+                    TransactionRequest = new TransactionRequestType
+                    {
+                        CustomerIP = _options.IpAddress,
+                        TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.VoidTransaction),
+                        RefTransId = createTransId
+                    },
+                };
+
+                var voidResponse = await _transactionClient.CreateAsync(voidRequest, cancellationToken);
+                _logger.LogInformation(
+                    "Voided AuthCapture Transaction: {code} - {transId}",
+                    createResponse.Messages.ResultCode.ToString(),
+                    voidResponse.TransactionResponse.TransId);
+                DisplayResponse("VoidTransaction", voidResponse);
+            }
+        }
+
+        public async Task GetSettledBatch(CancellationToken cancellationToken)
+        {
             var batchRequest = new GetSettledBatchListRequest
             {
                 FirstSettlementDate = DateTime.Now.Subtract(TimeSpan.FromDays(2)),
@@ -71,6 +107,11 @@ namespace AuthorizeNet.Worker.Services
 
             var batchResponse = await _transactionClient.GetBatchListAsync(batchRequest, cancellationToken);
             _logger.LogInformation("Created batch transaction list: {code}", batchResponse.Messages.ResultCode.ToString());
+        }
+
+        public async Task RefundTransaction(CancellationToken cancellationToken)
+        {
+            var refId = new Random(1000).Next().ToString();
 
             var refundRequest = new CreateTransactionRequest
             {
@@ -88,12 +129,15 @@ namespace AuthorizeNet.Worker.Services
                             ExpirationDate = "2021-12",
                             CardCode = "999"
                         }
-                    }
+                    },
                 },
             };
 
             var refundReponse = await _transactionClient.CreateAsync(refundRequest, cancellationToken);
-            _logger.LogInformation("Created Refund Transaction: {code}", refundReponse.Messages.ResultCode.ToString());
+            _logger.LogInformation(
+                "Refund Transaction: {code} - {transId}",
+                refundReponse.Messages.ResultCode.ToString(),
+                refundReponse.TransactionResponse.TransId);
         }
 
         public async Task GetUnsettledTransactionAsync(CancellationToken cancellationToken)
@@ -106,7 +150,16 @@ namespace AuthorizeNet.Worker.Services
             _logger.LogInformation("{count}", result.Count());
         }
 
-        private async Task<List<GetUnsettledTransactionListResponse>> GetUnsettlePageAsync(int pageNumber, List<GetUnsettledTransactionListResponse> refList, CancellationToken cancellationToken = default)
+        private void DisplayResponse(string action, ANetApiResponse response)
+        {
+            _logger.LogInformation("{action} - {code}", action, response?.Messages?.ResultCode.ToString());
+            _logger.LogInformation("{action} - Code:{code}; Text:{text}", action, response?.Messages?.Message[0].Code, response?.Messages?.Message[0].Text);
+        }
+
+        private async Task<List<GetUnsettledTransactionListResponse>> GetUnsettlePageAsync(
+            int pageNumber,
+            List<GetUnsettledTransactionListResponse> refList,
+            CancellationToken cancellationToken = default)
         {
             var request = new GetUnsettledTransactionListRequest
             {
