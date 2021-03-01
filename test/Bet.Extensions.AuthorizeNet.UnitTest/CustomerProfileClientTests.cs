@@ -112,7 +112,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
 
             var parsed = new PaymentGatewayResponse(directResponse);
 
-            Assert.Equal("2", parsed.ResponseCode);
+            Assert.Equal(ResponseCodeEnum.Declined, parsed.ResponseCode);
         }
     }
 }
