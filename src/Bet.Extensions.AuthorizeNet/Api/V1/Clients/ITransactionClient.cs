@@ -14,5 +14,7 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
         Task<GetSettledBatchListResponse> GetBatchListAsync(GetSettledBatchListRequest request, CancellationToken cancellationToken = default);
 
         Task<GetTransactionListResponse> GetListAsync(GetTransactionListRequest request, CancellationToken cancellationToken = default);
+
+        Task<GetUnsettledTransactionListResponse> GetUnsettledListAsync(GetUnsettledTransactionListRequest request, CancellationToken cancellationToken = default);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -6,6 +5,7 @@ using System.Threading.Tasks;
 using AuthorizeNet.Api.V1.Contracts;
 
 using Bet.Extensions.AuthorizeNet.Api.V1.Clients;
+using Bet.Extensions.AuthorizeNet.Api.V1.Contracts;
 using Bet.Extensions.Testing.Logging;
 
 using Microsoft.Extensions.Configuration;
@@ -103,6 +103,16 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             var deleteRespnse = await customerProfile.DeleteAsync(deleteRequest);
 
             Assert.Equal(MessageTypeEnum.Ok, deleteRespnse.Messages.ResultCode);
+        }
+
+        [Fact]
+        public void Test_DirectResponse()
+        {
+            var directResponse = @"2,2,27,The transaction has been declined because of an AVS mismatch. The address provided does not match billing address of cardholder.,AE5V2W,N,40059863807,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,customer-48,Verdie,Farrell,Schimmel, McGlynn and Kling,214 Lucinda Streets,West Barrett,Kansas,46201,TC,,,Verdie_Farrell@gmail.com,,,,,,,,,0.00,0.00,0.00,FALSE,none,,P,2,,,,,,,,,,,XXXX0015,MasterCard,,,,,,,0S8C3LQM3HC6DEDAFV94OTO,,,,,,,,,,";
+
+            var parsed = new PaymentGatewayResponse(directResponse);
+
+            Assert.Equal(ResponseCodeEnum.Declined, parsed.ResponseCode);
         }
     }
 }
