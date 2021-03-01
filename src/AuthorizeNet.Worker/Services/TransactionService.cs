@@ -46,7 +46,7 @@ namespace AuthorizeNet.Worker.Services
                 TransactionRequest = new TransactionRequestType
                 {
                     CustomerIP = _options.IpAddress,
-                    TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.AuthCaptureTransaction),
+                    TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.AuthOnlyTransaction),
                     Amount = 1.0m,
                     Payment = new PaymentType
                     {
@@ -54,12 +54,12 @@ namespace AuthorizeNet.Worker.Services
                         {
                             CardNumber = "5424000000000015",
                             ExpirationDate = "2021-12",
-                            CardCode = "999"
+                            CardCode = "901"
                         },
                     },
                     Customer = new CustomerDataType
                     {
-                        Id = "56789"
+                        Id = "test-56789"
                     },
                     Order = new OrderType
                     {
@@ -73,7 +73,8 @@ namespace AuthorizeNet.Worker.Services
             DisplayResponse("CreateTransaction", createResponse);
 
             // transaction is successful then proceed with cancellation.
-            if (createResponse.Messages.ResultCode == MessageTypeEnum.Ok)
+            if (createResponse.Messages.ResultCode == MessageTypeEnum.Ok
+                && createResponse.TransactionResponse?.Errors?.Count == 0)
             {
                 var createTransId = createResponse.TransactionResponse.TransId;
 
@@ -94,6 +95,10 @@ namespace AuthorizeNet.Worker.Services
                     createResponse.Messages.ResultCode.ToString(),
                     voidResponse.TransactionResponse.TransId);
                 DisplayResponse("VoidTransaction", voidResponse);
+            }
+            else
+            {
+                _logger.LogWarning("Code: {code} - {text}", createResponse.TransactionResponse.Errors[0].ErrorCode, createResponse.TransactionResponse.Errors[0].ErrorText);
             }
         }
 
