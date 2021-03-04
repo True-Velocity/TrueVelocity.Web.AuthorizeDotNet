@@ -5,10 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using AuthorizeNet.Api.V1.Contracts;
-using AuthorizeNet.Worker.Options;
 
 using Bet.Extensions.AuthorizeNet.Api.V1.Clients;
-using Bet.Extensions.AuthorizeNet.Api.V1.Contracts;
+using Bet.Extensions.AuthorizeNet.Options;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -18,12 +17,12 @@ namespace AuthorizeNet.Worker.Services
     public class TransactionService
     {
         private readonly ITransactionClient _transactionClient;
-        private readonly AppOptions _options;
+        private readonly AuthorizeNetOptions _options;
         private readonly ILogger<TransactionService> _logger;
 
         public TransactionService(
             ITransactionClient transactionClient,
-            IOptions<AppOptions> options,
+            IOptions<AuthorizeNetOptions> options,
             ILogger<TransactionService> logger)
         {
             _transactionClient = transactionClient ?? throw new ArgumentNullException(nameof(transactionClient));

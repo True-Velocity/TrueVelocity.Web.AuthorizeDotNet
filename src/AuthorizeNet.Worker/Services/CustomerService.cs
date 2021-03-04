@@ -44,9 +44,6 @@ namespace AuthorizeNet.Worker.Services
 
         public async Task TestCustomerProfileAsync(CustomerProfile profile, CancellationToken cancellationToken)
         {
-            // set validation mode for the call.
-            var validationMode = ValidationModeEnum.LiveMode; //_options.IsSandBox ? ValidationModeEnum.TestMode : ValidationModeEnum.LiveMode;
-
             // 1. create customer / payment profile with validation enabled.
             var paymentProfiles = new Collection<CustomerPaymentProfileType>
             {
@@ -79,7 +76,7 @@ namespace AuthorizeNet.Worker.Services
             var createRequest = new CreateCustomerProfileRequest
             {
                 RefId = profile.ReferenceId,
-                ValidationMode = validationMode,
+                ValidationMode = _options.ValidationMode,
                 Profile = new CustomerProfileType
                 {
                     Description = profile.Description,
@@ -115,7 +112,7 @@ namespace AuthorizeNet.Worker.Services
                 var secondaryProfileRequest = new CreateCustomerPaymentProfileRequest
                 {
                     RefId = profile.ReferenceId,
-                    ValidationMode = validationMode,
+                    ValidationMode = _options.ValidationMode,
                     CustomerProfileId = customerProfileId,
                     PaymentProfile = new CustomerPaymentProfileType
                     {
@@ -152,7 +149,7 @@ namespace AuthorizeNet.Worker.Services
                     {
                         CustomerPaymentProfileId = secondaryProfileId,
                         CustomerProfileId = customerProfileId,
-                        ValidationMode = validationMode,
+                        ValidationMode = _options.ValidationMode,
                         RefId = profile.ReferenceId
                     };
 
