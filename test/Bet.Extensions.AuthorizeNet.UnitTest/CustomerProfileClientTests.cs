@@ -1,15 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 using AuthorizeNet.Api.V1.Contracts;
 
 using Bet.Extensions.AuthorizeNet.Api.V1.Clients;
 using Bet.Extensions.AuthorizeNet.Api.V1.Contracts;
+using Bet.Extensions.AuthorizeNet.Options;
 using Bet.Extensions.Testing.Logging;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 using Xunit;
 using Xunit.Abstractions;
@@ -40,7 +44,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
         }
 
         [Fact]
-        public async Task Create_Get_Delete_Test()
+        public async Task Create_Get_Delete_Customer_Profile_Test()
         {
             var services = new ServiceCollection();
 
@@ -51,7 +55,8 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
 
             var sp = services.BuildServiceProvider();
 
-            var customerProfile = sp.GetRequiredService<CustomerProfileClient>();
+            var client = sp.GetRequiredService<ICustomerProfileClient>();
+            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
 
             // customer payment profile
             var customerPaymentProfiles = new Collection<CustomerPaymentProfileType>
@@ -82,14 +87,14 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                     PaymentProfiles = customerPaymentProfiles,
                 },
 
-                ValidationMode = ValidationModeEnum.TestMode
+                ValidationMode = options.Value.ValidationMode
             };
 
-            var createResponse = await customerProfile.CreateAsync(createRequest);
+            var createResponse = await client.CreateAsync(createRequest);
 
             Assert.Equal(MessageTypeEnum.Ok, createResponse.Messages.ResultCode);
 
-            var getResponse = await customerProfile.GetAsync(new GetCustomerProfileRequest { CustomerProfileId = createResponse.CustomerProfileId });
+            var getResponse = await client.GetAsync(new GetCustomerProfileRequest { CustomerProfileId = createResponse.CustomerProfileId });
 
             Assert.Equal(MessageTypeEnum.Ok, getResponse.Messages.ResultCode);
 
@@ -100,9 +105,57 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                 CustomerProfileId = createResponse.CustomerProfileId
             };
 
-            var deleteRespnse = await customerProfile.DeleteAsync(deleteRequest);
+            var deleteRespnse = await client.DeleteAsync(deleteRequest);
 
             Assert.Equal(MessageTypeEnum.Ok, deleteRespnse.Messages.ResultCode);
+        }
+
+        [Fact]
+        public async Task Debit_Checking()
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton(_configuration);
+            services.AddLogging(b => b.AddXunit(_output));
+            services.AddAuthorizeNet();
+            var sp = services.BuildServiceProvider();
+
+            var client = sp.GetRequiredService<ITransactionClient>();
+            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
+
+            var randomAccountNumber = new Random().Next(10000, int.MaxValue);
+
+            var request = new CreateTransactionRequest
+            {
+                TransactionRequest = new TransactionRequestType
+                {
+                    TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.AuthCaptureTransaction),
+                    Amount = 13.01m,
+                    Payment = new PaymentType
+                    {
+                        BankAccount = new BankAccountType
+                        {
+                            BankName = "Bank of USSR",
+                            AccountType = BankAccountTypeEnum.Checking,
+                            RoutingNumber = "125008547",
+                            AccountNumber = randomAccountNumber.ToString(),
+                            //CheckNumber = "",
+                            NameOnAccount = "Brezhnev",
+                            EcheckType = EcheckTypeEnum.WEB
+                        },
+                    },
+                    CustomerIP = options.Value.IpAddress,
+                    Order = new OrderType
+                    {
+                        InvoiceNumber = "Invoice-456",
+                        Description = "e-Check purchase"
+                    },
+                },
+            };
+
+            var response = await client.CreateAsync(request);
+
+            Assert.Equal(MessageTypeEnum.Ok, response.Messages.ResultCode);
+            Assert.False(response.TransactionResponse.Errors.Any());
         }
 
         [Fact]

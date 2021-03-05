@@ -7,9 +7,9 @@
 
 The goal of this repository is to implement [Authorize.Net API](https://developer.authorize.net/api/upgrade_guide.html#aim) the latest Microsoft DotNetCore technology.
 
-The implementation is build with `Microsoft.Extensions.Http.Polly` library for `HttpClient` management.
+The implementation is build on top of `Microsoft.Extensions.Http.Polly` library for `HttpClient` management. It provides with an ability to provide custom `Polly` Policies if needed for resilience.
 
-The solution is split into two projets:
+The solution is split into two projects:
 
 1. `Bet.Extensions.AuthorizeNet` - base library that supports `dotnetcore` and `json`.
 2. `AuthorizeNet.Worker` example was created using `[Bet.Extensions.Templating](https://github.com/kdcllc/Bet.Extensions.Templating)
@@ -73,6 +73,16 @@ https://github.com/AuthorizeNet/sample-code-csharp/tree/master/CustomerProfiles
 
 ```
 
+### eCheck.Net
+
+* `accountType` - The type of bank account. Certain bank account types require you to use certain ACH transaction types.	String, either checking, savings, or businessChecking. See the Understanding ACH Codes section below for details.
+* `routingNumber` - The bank's routing number.	String, up to 9 characters. For refunds, use "XXXX" plus the first four digits of the account number.
+* `accountNumber` - The customer's account number.	String, up to 17 characters. For refunds, use "XXXX" plus the first four digits of the account number.
+* `nameOnAccount` - The name of the person who holds the bank account.	String, up to 22 characters.
+* `bankName` - The name of the bank	String, up to 50 characters.
+* `echeckType` - `web` the customer uses a website or smartphone app to authorize the transaction.
+
+
 ## Reference
 
 - https://www.authorize.net/content/dam/anet-redesign/documents/AIM_guide.pdf
@@ -87,3 +97,4 @@ https://github.com/AuthorizeNet/sample-code-csharp/tree/master/CustomerProfiles
 - [What Are the Different Address Verification Service AVS Response Codes](https://support.authorize.net/s/article/What-Are-the-Different-Address-Verification-Service-AVS-Response-Codes)
 - [Go Live](https://developer.authorize.net/hello_world/go-live.html)
 - [errorandresponsecodes](https://developer.authorize.net/api/reference/features/errorandresponsecodes.html)
+- [eCheck.Net](https://developer.authorize.net/api/reference/features/echeck.html)
