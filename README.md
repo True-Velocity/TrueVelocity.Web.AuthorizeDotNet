@@ -7,9 +7,9 @@
 
 The goal of this repository is to implement [Authorize.Net API](https://developer.authorize.net/api/upgrade_guide.html#aim) the latest Microsoft DotNetCore technology.
 
-The implementation is build with `Microsoft.Extensions.Http.Polly` library for `HttpClient` management.
+The implementation is build on top of `Microsoft.Extensions.Http.Polly` library for `HttpClient` management. It provides with an ability to provide custom `Polly` Policies if needed for resilience.
 
-The solution is split into two projets:
+The solution is split into two projects:
 
 1. `Bet.Extensions.AuthorizeNet` - base library that supports `dotnetcore` and `json`.
 2. `AuthorizeNet.Worker` example was created using `[Bet.Extensions.Templating](https://github.com/kdcllc/Bet.Extensions.Templating)
