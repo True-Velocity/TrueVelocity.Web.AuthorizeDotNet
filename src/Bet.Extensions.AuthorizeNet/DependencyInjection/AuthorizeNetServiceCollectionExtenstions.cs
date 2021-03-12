@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 
 using AuthorizeNet.Api.V1.Contracts;
 
@@ -8,14 +9,25 @@ using Bet.Extensions.AuthorizeNet.Options;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
+using Polly;
+
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class AuthorizeNetServiceCollectionExtenstions
     {
+        /// <summary>
+        /// Adds Authorize.Net Clients for DI.
+        /// </summary>
+        /// <param name="services">DI services.</param>
+        /// <param name="sectionName">The name of the configurations section.</param>
+        /// <param name="configureOptions">The configuration for <see cref="AuthorizeNetOptions"/>.</param>
+        /// <param name="retryPolicy">The Polly HttpClient Retry Policy.</param>
+        /// <returns></returns>
         public static IServiceCollection AddAuthorizeNet(
             this IServiceCollection services,
             string sectionName = nameof(AuthorizeNetOptions),
-            Action<AuthorizeNetOptions>? configureOptions = default)
+            Action<AuthorizeNetOptions>? configureOptions = default,
+            Func<IServiceProvider, HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>? retryPolicy = null)
         {
             services.AddChangeTokenOptions<AuthorizeNetOptions>(sectionName, configureAction: o => configureOptions?.Invoke(o));
 
@@ -30,11 +42,17 @@ namespace Microsoft.Extensions.DependencyInjection
                 };
             });
 
-            services.AddHttpClient(string.Empty, (sp, configure) =>
+            var httpClientBuilder = services.AddHttpClient(string.Empty, (sp, configure) =>
             {
                 var options = sp.GetRequiredService<IOptionsMonitor<AuthorizeNetOptions>>().CurrentValue;
                 configure.BaseAddress = options.BaseUri;
             });
+
+            // adds polly policy for retries etc. if needed.
+            if (retryPolicy != null)
+            {
+                httpClientBuilder.AddPolicyHandler(retryPolicy);
+            }
 
             services.TryAddTransient<IAuthorizeNetClient<CreateCustomerProfileRequest, CreateCustomerProfileResponse>, AuthorizeNetClient<CreateCustomerProfileRequest, CreateCustomerProfileResponse>>();
             services.TryAddTransient<IAuthorizeNetClient<GetCustomerProfileRequest, GetCustomerProfileResponse>, AuthorizeNetClient<GetCustomerProfileRequest, GetCustomerProfileResponse>>();

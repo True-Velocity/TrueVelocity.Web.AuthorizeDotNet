@@ -25,7 +25,7 @@
     <!-- https://docs.microsoft.com/en-us/nuget/reference/errors-and-warnings/nu5048 -->
     <PackageIcon>icon.png</PackageIcon>
 
-    <PackageTags>Authorize.Net API, AspNetCore, DotNet, DotNetCore, AuthorizeNet, Extensions, WebApi, e-commerce</PackageTags>
+    <PackageTags>Authorize.Net, API, AuthorizeNet, eCheck.net, Credit Cards, Payments, AspNetCore, DotNet, DotNetCore, Extensions, WebApi, e-commerce</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 

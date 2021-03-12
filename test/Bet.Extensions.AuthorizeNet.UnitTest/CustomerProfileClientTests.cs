@@ -27,24 +27,315 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
 
         public CustomerProfileClientTests(ITestOutputHelper output)
         {
-            var inMemoryConfiguration = new Dictionary<string, string>
-            {
-                { "Test:SomeNode", "Hello World" },
-            };
-
-            var configBuilder = new ConfigurationBuilder();
-
-            configBuilder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            configBuilder.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
-
-            configBuilder.AddInMemoryCollection(inMemoryConfiguration);
             _output = output;
-
-            _configuration = configBuilder.Build();
+            _configuration = TestConfigurations.GetConfiguration();
         }
 
         [Fact]
-        public async Task Create_Get_Delete_Customer_Profile_Test()
+        public async Task Create_Get_Delete_Customer_Profile_With_Credit_Card_Successfully_Test()
+        {
+            // Arrange
+            var services = new ServiceCollection();
+
+            services.AddSingleton(_configuration);
+
+            services.AddLogging(b => b.AddXunit(_output));
+            services.AddAuthorizeNet();
+
+            var sp = services.BuildServiceProvider();
+
+            var client = sp.GetRequiredService<ICustomerProfileClient>();
+            var paymentClient = sp.GetRequiredService<ICustomerPaymentProfileClient>();
+            var transactionClient = sp.GetRequiredService<ITransactionClient>();
+
+            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
+
+            // 1. Act create Customer/Payment profile
+            var creditCardPaymentProfiles = new Collection<CustomerPaymentProfileType>
+                {
+                    new CustomerPaymentProfileType
+                    {
+                        CustomerType = CustomerTypeEnum.Business,
+                        Payment = new PaymentType
+                        {
+                            CreditCard = new CreditCardType
+                            {
+                                CardNumber = "4111111111111111",
+                                ExpirationDate = "2024-12",
+                                CardCode = "901"
+                            }
+                        }
+                    }
+                };
+
+            // 1a. create request
+            var createProfileRequest = new CreateCustomerProfileRequest
+            {
+                Profile = new CustomerProfileType
+                {
+                    Description = "Test Customer Account",
+                    Email = "email2@email.com",
+                    MerchantCustomerId = "CustomerId-2",
+                    ProfileType = CustomerProfileTypeEnum.Regular,
+                    PaymentProfiles = creditCardPaymentProfiles,
+                },
+
+                ValidationMode = options.Value.ValidationMode
+            };
+
+            var createResponse = await client.CreateAsync(createProfileRequest);
+
+            // Code: E00039 Text: A duplicate record with ID 1517706258 already exists
+            var code = createResponse.Messages.Message[0].Code;
+            var text = createResponse.Messages.Message[0].Text;
+            Assert.Equal("I00001", code);
+            Assert.Equal("Successful.", text);
+
+            var createResult = new PaymentGatewayResponse(createResponse.ValidationDirectResponseList[0]);
+
+            Assert.Equal(MessageTypeEnum.Ok, createResponse.Messages.ResultCode);
+            Assert.Equal(ResponseCodeEnum.Approved, createResult.ResponseCode);
+            Assert.Equal("This transaction has been approved.", createResult.ResponseReasonCode);
+
+            await Task.Delay(TimeSpan.FromSeconds(10));
+
+            // 2. Act get Customer/Payment profiles by a customer email
+            var getProfileResponse = await client.GetAsync(new GetCustomerProfileRequest
+            {
+                Email = "email2@email.com",
+                // CustomerProfileId = createResponse.CustomerProfileId,
+                UnmaskExpirationDate = true,
+            });
+
+            Assert.Equal(MessageTypeEnum.Ok, getProfileResponse.Messages.ResultCode);
+            _output.WriteLine($"{getProfileResponse.Profile.CustomerProfileId} - {getProfileResponse.Messages.ResultCode}");
+
+            // 3. Act get Customer Payment profile with unmasked values prep for an update
+            var getPaymentResponse = await paymentClient.GetAsync(new GetCustomerPaymentProfileRequest
+            {
+                CustomerPaymentProfileId = getProfileResponse.Profile.PaymentProfiles[0].CustomerPaymentProfileId,
+                CustomerProfileId = getProfileResponse.Profile.CustomerProfileId,
+                UnmaskExpirationDate = true
+            });
+
+            Assert.Equal(MessageTypeEnum.Ok, getPaymentResponse.Messages.ResultCode);
+
+            // 4. Act update Customer Payment profile
+            var exp = "2025-10";
+
+            var updatePaymentRequest = new UpdateCustomerPaymentProfileRequest
+            {
+                ValidationMode = options.Value.ValidationMode,
+
+                CustomerProfileId = getPaymentResponse.PaymentProfile.CustomerProfileId,
+                PaymentProfile = new CustomerPaymentProfileExType
+                {
+                    CustomerPaymentProfileId = getPaymentResponse.PaymentProfile.CustomerPaymentProfileId,
+                    CustomerType = CustomerTypeEnum.Individual,
+                    Payment = new PaymentType
+                    {
+                        CreditCard = new CreditCardType
+                        {
+                            CardNumber = getPaymentResponse.PaymentProfile.Payment.CreditCard.CardNumber,
+                            ExpirationDate = exp, //,
+                            CardCode = "900"
+                        }
+                    }
+                }
+            };
+
+            _output.WriteLine($"Old: {getPaymentResponse.PaymentProfile.Payment.CreditCard.ExpirationDate}; New:{exp}");
+
+            var updatePaymentResponse = await paymentClient.UpdateAsync(updatePaymentRequest);
+            var updatePaymentResult = new PaymentGatewayResponse(updatePaymentResponse.ValidationDirectResponse);
+
+            Assert.Equal(MessageTypeEnum.Ok, updatePaymentResponse.Messages.ResultCode);
+            Assert.Equal(ResponseCodeEnum.Approved, updatePaymentResult.ResponseCode);
+
+            await Task.Delay(TimeSpan.FromSeconds(10));
+
+            // 5. Act get an Update Customer Payment profile
+            var getUpdatedProfileResponse = await client.GetAsync(new GetCustomerProfileRequest
+            {
+                Email = "email2@email.com",
+                UnmaskExpirationDate = true,
+            });
+
+            Assert.Equal(exp, getUpdatedProfileResponse.Profile.PaymentProfiles[0].Payment.CreditCard.ExpirationDate);
+
+            // 5. Act Charge Customer Payment profile
+
+            var chargeRequest = new CreateTransactionRequest
+            {
+                TransactionRequest = new TransactionRequestType
+                {
+                    Amount = 5.05m,
+                    TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.AuthCaptureTransaction),
+                    Profile = new CustomerProfilePaymentType
+                    {
+                        CustomerProfileId = getUpdatedProfileResponse.Profile.CustomerProfileId,
+                        PaymentProfile = new PaymentProfile
+                        {
+                            PaymentProfileId = getUpdatedProfileResponse.Profile.PaymentProfiles[0].CustomerPaymentProfileId
+                        }
+                    },
+
+                    Customer = new CustomerDataType
+                    {
+                        Id = "profile-test-56789"
+                    },
+                    Order = new OrderType
+                    {
+                        InvoiceNumber = "cp-invoice-123"
+                    },
+
+                    CustomerIP = options.Value.IpAddress,
+                }
+            };
+
+            var chargeResponse = await transactionClient.CreateAsync(chargeRequest);
+            Assert.Equal(MessageTypeEnum.Ok, chargeResponse.Messages.ResultCode);
+            Assert.Equal("1", chargeResponse.TransactionResponse.ResponseCode);
+            Assert.Equal("This transaction has been approved.", chargeResponse.TransactionResponse.Messages[0].Description);
+            _output.WriteLine(chargeResponse.TransactionResponse.TransId);
+
+            // 7. Act get an Update Customer Payment profile
+            var deleteRequest = new DeleteCustomerProfileRequest
+            {
+                CustomerProfileId = createResponse.CustomerProfileId
+            };
+
+            var deleteResponse = await client.DeleteAsync(deleteRequest);
+
+            Assert.Equal(MessageTypeEnum.Ok, deleteResponse.Messages.ResultCode);
+        }
+
+        [Fact]
+        public async Task Create_Get_Delete_Customer_Profile_With_eCheck_Successfully_Test()
+        {
+            // Arrange
+            var services = new ServiceCollection();
+
+            services.AddSingleton(_configuration);
+
+            services.AddLogging(b => b.AddXunit(_output));
+            services.AddAuthorizeNet();
+
+            var sp = services.BuildServiceProvider();
+
+            var client = sp.GetRequiredService<ICustomerProfileClient>();
+            var paymentClient = sp.GetRequiredService<ICustomerPaymentProfileClient>();
+            var transactionClient = sp.GetRequiredService<ITransactionClient>();
+
+            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
+
+            var randomAccountNumber = new Random().Next(10000, int.MaxValue);
+
+            // 1. Act create Customer/Payment profile
+            var eCheckPaymentProfiles = new Collection<CustomerPaymentProfileType>
+                {
+                    new CustomerPaymentProfileType
+                    {
+                        CustomerType = CustomerTypeEnum.Business,
+                        Payment = new PaymentType
+                        {
+                            BankAccount = new BankAccountType
+                            {
+                                BankName = "Bank of China",
+                                AccountType = BankAccountTypeEnum.BusinessChecking,
+                                RoutingNumber = "125008547",
+                                AccountNumber = randomAccountNumber.ToString(),
+
+                                // CheckNumber = "",
+                                NameOnAccount = "Joseph Stalin(Biden)", //.Substring(0, 22),
+                                EcheckType = EcheckTypeEnum.CCD
+                            },
+                        }
+                    }
+                };
+
+            // 1a. create request
+            var createProfileRequest = new CreateCustomerProfileRequest
+            {
+                Profile = new CustomerProfileType
+                {
+                    Description = "Test Customer Account",
+                    Email = "echeck1@email.com",
+                    MerchantCustomerId = "echeck-Id-2",
+                    ProfileType = CustomerProfileTypeEnum.Regular,
+                    PaymentProfiles = eCheckPaymentProfiles,
+                },
+
+                ValidationMode = options.Value.ValidationMode
+            };
+
+            var createResponse = await client.CreateAsync(createProfileRequest);
+
+            var code = createResponse.Messages.Message[0].Code;
+            var text = createResponse.Messages.Message[0].Text;
+            Assert.Equal("I00001", code);
+            Assert.Equal("Successful.", text);
+            var createResult = new PaymentGatewayResponse(createResponse.ValidationDirectResponseList[0]);
+
+            Assert.Equal(MessageTypeEnum.Ok, createResponse.Messages.ResultCode);
+            Assert.Equal(ResponseCodeEnum.Approved, createResult.ResponseCode);
+            Assert.Equal("This transaction has been approved.", createResult.ResponseReasonCode);
+
+            // 2. Act get an Customer/Payment profile
+            var getUpdatedProfileResponse = await client.GetAsync(new GetCustomerProfileRequest
+            {
+                Email = "echeck1@email.com",
+                UnmaskExpirationDate = true,
+            });
+
+            // 3. Act Charge Customer Payment profile
+            var chargeRequest = new CreateTransactionRequest
+            {
+                TransactionRequest = new TransactionRequestType
+                {
+                    Amount = 15.05m,
+                    TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.AuthCaptureTransaction),
+                    Profile = new CustomerProfilePaymentType
+                    {
+                        CustomerProfileId = getUpdatedProfileResponse.Profile.CustomerProfileId,
+                        PaymentProfile = new PaymentProfile
+                        {
+                            PaymentProfileId = getUpdatedProfileResponse.Profile.PaymentProfiles[0].CustomerPaymentProfileId
+                        }
+                    },
+
+                    Customer = new CustomerDataType
+                    {
+                        Id = "profile-test-56789"
+                    },
+                    Order = new OrderType
+                    {
+                        InvoiceNumber = "eck-invoice-1"
+                    },
+
+                    CustomerIP = options.Value.IpAddress,
+                }
+            };
+
+            var chargeResponse = await transactionClient.CreateAsync(chargeRequest);
+            Assert.Equal(MessageTypeEnum.Ok, chargeResponse.Messages.ResultCode);
+            Assert.Equal(ResponseCodeEnum.Approved, ResponseMapper.GetResponseCode(chargeResponse.TransactionResponse.ResponseCode));
+            Assert.Equal("This transaction has been approved.", chargeResponse.TransactionResponse.Messages[0].Description);
+            _output.WriteLine(chargeResponse.TransactionResponse.TransId);
+
+            // 4. Act get an Update Customer Payment profile
+            var deleteRequest = new DeleteCustomerProfileRequest
+            {
+                CustomerProfileId = createResponse.CustomerProfileId
+            };
+
+            var deleteResponse = await client.DeleteAsync(deleteRequest);
+
+            Assert.Equal(MessageTypeEnum.Ok, deleteResponse.Messages.ResultCode);
+        }
+
+        [Fact]
+        public async Task Fail_To_Create_Customer_Profile_With_Credit_Card_That_Expired_Test()
         {
             var services = new ServiceCollection();
 
@@ -69,9 +360,10 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                             CreditCard = new CreditCardType
                             {
                                 CardNumber = "4111111111111111",
-                                ExpirationDate = "2020-12"
-                            }
-                        }
+                                ExpirationDate = "2020-12",
+                                CardCode = "900"
+                            },
+                        },
                     }
                 };
 
@@ -80,9 +372,88 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             {
                 Profile = new CustomerProfileType
                 {
-                    Description = "Test Customer Account",
-                    Email = "email2@email.com",
-                    MerchantCustomerId = "CustomerId-2",
+                    Description = "Expired Test Customer Account",
+                    Email = "expried@email.com",
+                    MerchantCustomerId = "Expired-CustomerId-2",
+                    ProfileType = CustomerProfileTypeEnum.Regular,
+                    PaymentProfiles = customerPaymentProfiles,
+                },
+
+                ValidationMode = options.Value.ValidationMode
+            };
+
+            var createResponse = await client.CreateAsync(createRequest);
+            Assert.Equal(MessageTypeEnum.Error, createResponse.Messages.ResultCode);
+
+            var code = createResponse.Messages.Message[0].Code;
+            var text = createResponse.Messages.Message[0].Text;
+            Assert.Equal("E00027", code);
+            Assert.Equal("The credit card has expired.", text);
+
+            var createResult = new PaymentGatewayResponse(createResponse.ValidationDirectResponseList[0]);
+
+            _output.WriteLine($"Account: [{createResult.AccountNumber}]; " +
+                             $": [{createResult.ResponseCode}]");
+
+            Assert.Equal("P", createResult.AVSResponseCode);
+            Assert.Equal("auth_only", createResult.TransactionType);
+            Assert.Equal("This transaction is an uknown state.", createResult.ResponseReasonCode);
+            Assert.Equal("Visa", createResult.CardType);
+            Assert.Equal("", createResult.CardCodeResponse);
+            Assert.Equal("", createResult.AuthorizationCode);
+            Assert.Equal("", createResult.CardholderAuthenticationVerificationResponse);
+            Assert.Equal("", createResult.AuthorizationCode);
+            Assert.Equal("CC", createResult.Method);
+        }
+
+        [Fact]
+        public async Task Fail_To_Create_Customer_Profile_With_Credit_Card_That_Declined_Test()
+        {
+            var services = new ServiceCollection();
+
+            services.AddSingleton(_configuration);
+
+            services.AddLogging(b => b.AddXunit(_output));
+            services.AddAuthorizeNet();
+
+            var sp = services.BuildServiceProvider();
+
+            var client = sp.GetRequiredService<ICustomerProfileClient>();
+            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
+
+            // customer payment profile
+            var customerPaymentProfiles = new Collection<CustomerPaymentProfileType>
+                {
+                    new CustomerPaymentProfileType
+                    {
+                        CustomerType = CustomerTypeEnum.Business,
+                        Payment = new PaymentType
+                        {
+                            CreditCard = new CreditCardType
+                            {
+                                CardNumber = "5424000000000015",
+                                ExpirationDate = "2024-02",
+                                CardCode = "904",
+                            }
+                        },
+                        BillTo = new CustomerAddressType
+                        {
+                            Address = "1234 main st",
+                            City = "Washington",
+                            State = "DC",
+                            Zip = "46282"
+                        },
+                    }
+                };
+
+            // create request
+            var createRequest = new CreateCustomerProfileRequest
+            {
+                Profile = new CustomerProfileType
+                {
+                    Description = "Declined Test Customer Account",
+                    Email = "declined@email.com",
+                    MerchantCustomerId = "Declined-Id-2",
                     ProfileType = CustomerProfileTypeEnum.Regular,
                     PaymentProfiles = customerPaymentProfiles,
                 },
@@ -92,75 +463,45 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
 
             var createResponse = await client.CreateAsync(createRequest);
 
-            Assert.Equal(MessageTypeEnum.Ok, createResponse.Messages.ResultCode);
+            // E00039 - A duplicate record with ID 1517706063 already exists.
+            var code = createResponse.Messages.Message[0].Code;
+            var text = createResponse.Messages.Message[0].Text;
+            Assert.Equal("E00027", code);
+            Assert.Equal("This transaction has been declined.", text);
+            Assert.Equal(MessageTypeEnum.Error, createResponse.Messages.ResultCode);
 
-            var getResponse = await client.GetAsync(new GetCustomerProfileRequest { CustomerProfileId = createResponse.CustomerProfileId });
+            var createResult = new PaymentGatewayResponse(createResponse.ValidationDirectResponseList[0]);
 
-            Assert.Equal(MessageTypeEnum.Ok, getResponse.Messages.ResultCode);
+            // Assert.Equal(ResponseCodeEnum.HeldForReview, createResult.ResponseCode);
 
-            _output.WriteLine(getResponse.Profile.CustomerProfileId);
+            Assert.Equal(ResponseCodeEnum.Declined, createResult.ResponseCode);
 
-            var deleteRequest = new DeleteCustomerProfileRequest
-            {
-                CustomerProfileId = createResponse.CustomerProfileId
-            };
+            // "N" => "No Match on Address(Street) or ZIP"
+            Assert.Equal("Z", createResult.AVSResponseCode);
+            Assert.Equal("Five digit ZIP matches, Address (Street) does not", createResult.AVSResponseText);
 
-            var deleteRespnse = await client.DeleteAsync(deleteRequest);
+            // Assert.Equal("A", createResult.AVSResponseCode);
+            // Assert.Equal("Address(Street) matches, ZIP does not", createResult.AVSResponseText);
 
-            Assert.Equal(MessageTypeEnum.Ok, deleteRespnse.Messages.ResultCode);
-        }
+            // good address match
+            // Assert.Equal("Y", createResult.AVSResponseCode);
+            // Assert.Equal("Address(Street) and five digit ZIP match", createResult.AVSResponseText);
 
-        [Fact]
-        public async Task Debit_Checking()
-        {
-            var services = new ServiceCollection();
-            services.AddSingleton(_configuration);
-            services.AddLogging(b => b.AddXunit(_output));
-            services.AddAuthorizeNet();
-            var sp = services.BuildServiceProvider();
+            Assert.Equal("auth_only", createResult.TransactionType);
+            Assert.Equal("This transaction has been declined", createResult.ResponseReasonCode);
+            Assert.Equal("Visa", createResult.CardType);
 
-            var client = sp.GetRequiredService<ITransactionClient>();
-            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
-
-            var randomAccountNumber = new Random().Next(10000, int.MaxValue);
-
-            var request = new CreateTransactionRequest
-            {
-                TransactionRequest = new TransactionRequestType
-                {
-                    TransactionType = Enum.GetName(typeof(TransactionTypeEnum), TransactionTypeEnum.AuthCaptureTransaction),
-                    Amount = 13.01m,
-                    Payment = new PaymentType
-                    {
-                        BankAccount = new BankAccountType
-                        {
-                            BankName = "Bank of USSR",
-                            AccountType = BankAccountTypeEnum.Checking,
-                            RoutingNumber = "125008547",
-                            AccountNumber = randomAccountNumber.ToString(),
-                            //CheckNumber = "",
-                            NameOnAccount = "Brezhnev",
-                            EcheckType = EcheckTypeEnum.WEB
-                        },
-                    },
-                    CustomerIP = options.Value.IpAddress,
-                    Order = new OrderType
-                    {
-                        InvoiceNumber = "Invoice-456",
-                        Description = "e-Check purchase"
-                    },
-                },
-            };
-
-            var response = await client.CreateAsync(request);
-
-            Assert.Equal(MessageTypeEnum.Ok, response.Messages.ResultCode);
-            Assert.False(response.TransactionResponse.Errors.Any());
+            // N - No Match indicates the code entered is incorrect.
+            Assert.Equal("N", createResult.CardCodeResponse);
+            Assert.Equal("000000", createResult.AuthorizationCode);
+            Assert.Equal("", createResult.CardholderAuthenticationVerificationResponse);
+            Assert.Equal("CC", createResult.Method);
         }
 
         [Fact]
         public void Test_DirectResponse()
         {
+            // customer profile returns this as string
             var directResponse = @"2,2,27,The transaction has been declined because of an AVS mismatch. The address provided does not match billing address of cardholder.,AE5V2W,N,40059863807,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,customer-48,Verdie,Farrell,Schimmel, McGlynn and Kling,214 Lucinda Streets,West Barrett,Kansas,46201,TC,,,Verdie_Farrell@gmail.com,,,,,,,,,0.00,0.00,0.00,FALSE,none,,P,2,,,,,,,,,,,XXXX0015,MasterCard,,,,,,,0S8C3LQM3HC6DEDAFV94OTO,,,,,,,,,,";
 
             var parsed = new PaymentGatewayResponse(directResponse);

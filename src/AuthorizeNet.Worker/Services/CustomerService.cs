@@ -188,11 +188,13 @@ namespace AuthorizeNet.Worker.Services
             _logger.LogWarning("CreateResponse - {responseCode}", parsedCreation.ResponseCode);
 
             // delete
-            var deleteResponse = await _customerProfileClient.DeleteAsync(new DeleteCustomerProfileRequest
-            {
-                CustomerProfileId = createResponse.CustomerProfileId,
-                RefId = profile.ReferenceId
-            });
+            var deleteResponse = await _customerProfileClient.DeleteAsync(
+                new DeleteCustomerProfileRequest
+                {
+                    CustomerProfileId = createResponse.CustomerProfileId,
+                    RefId = profile.ReferenceId
+                },
+                cancellationToken);
             DisplayResponse("DeleteResponse", deleteResponse);
         }
 

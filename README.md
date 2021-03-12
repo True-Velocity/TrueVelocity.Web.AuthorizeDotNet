@@ -73,15 +73,47 @@ https://github.com/AuthorizeNet/sample-code-csharp/tree/master/CustomerProfiles
 
 ```
 
+### Sandbox testing
+
+In order for profile create to work, we need to have TestMode set in the configuration.
+
+```json
+
+  "AuthorizeNetOptions": {
+    "IsSandBox": true,
+    "ClientName": "",
+    "TransactionKey": "",
+    "IpAddress": "",
+    "ValidationMode": "TestMode"
+  }
+```
+
 ### eCheck.Net
 
-* `accountType` - The type of bank account. Certain bank account types require you to use certain ACH transaction types.	String, either checking, savings, or businessChecking. See the Understanding ACH Codes section below for details.
-* `routingNumber` - The bank's routing number.	String, up to 9 characters. For refunds, use "XXXX" plus the first four digits of the account number.
-* `accountNumber` - The customer's account number.	String, up to 17 characters. For refunds, use "XXXX" plus the first four digits of the account number.
-* `nameOnAccount` - The name of the person who holds the bank account.	String, up to 22 characters.
-* `bankName` - The name of the bank	String, up to 50 characters.
-* `echeckType` - `web` the customer uses a website or smartphone app to authorize the transaction.
+- `accountType` - The type of bank account. Certain bank account types require you to use certain ACH transaction types. String, either checking, savings, or businessChecking. See the Understanding ACH Codes section below for details.
+- `routingNumber` - The bank's routing number. String, up to 9 characters. For refunds, use "XXXX" plus the first four digits of the account number.
+- `accountNumber` - The customer's account number. String, up to 17 characters. For refunds, use "XXXX" plus the first four digits of the account number.
+- `nameOnAccount` - The name of the person who holds the bank account. String, up to 22 characters.
+- `bankName` - The name of the bank String, up to 50 characters.
+- `echeckType` - `web` the customer uses a website or smartphone app to authorize the transaction.
 
+#### Testing in Sandbox
+
+Test Routing Number:
+
+- 021000021
+- 011401533
+- 09100001
+
+Test Account Number:
+
+- 111111111
+
+Test Name on Account:
+
+- Demo
+
+For testing purposes, eCheck.Net transactions under $100 will be accepted. To generate a decline, submit a transactions over $100.
 
 ## Reference
 
