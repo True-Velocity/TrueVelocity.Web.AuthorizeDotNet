@@ -55,7 +55,7 @@ namespace Bet.Extensions.AuthorizeNet
                 serializer.Serialize(writer, entity);
                 xmlString = writer.ToString();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -86,7 +86,7 @@ namespace Bet.Extensions.AuthorizeNet
                         entity = t;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw;
                 }

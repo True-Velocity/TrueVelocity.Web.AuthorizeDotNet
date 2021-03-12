@@ -151,7 +151,7 @@ namespace AuthorizeNet.Worker.Services
 
             var result = await GetUnsettlePageAsync(pageNumber, list, cancellationToken);
 
-            _logger.LogInformation("{count}", result.Count());
+            _logger.LogInformation("{count}", result.Count);
         }
 
         private void DisplayResponse(string action, ANetApiResponse response)

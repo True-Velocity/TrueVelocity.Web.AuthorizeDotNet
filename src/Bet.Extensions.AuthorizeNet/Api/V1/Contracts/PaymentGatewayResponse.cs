@@ -10,9 +10,8 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
     /// </summary>
     public class PaymentGatewayResponse
     {
-        private string _responseCode;
-        private string _responseReasonCode;
-        private string _aVSResponseCode;
+        private readonly string _responseCode;
+        private readonly string _responseReasonCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentGatewayResponse"/> class.
@@ -31,7 +30,7 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
             _responseReasonCode = parsed[2];
             ResponseReasonText = parsed[3];
             AuthorizationCode = parsed[4];
-            _aVSResponseCode = parsed[5];
+            AVSResponseCode = parsed[5];
             TransactionId = parsed[6];
             InvoiceNumber = parsed[7];
             Description = parsed[8];
@@ -54,14 +53,7 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
         /// 3 = Error
         /// 4 = Held for review.
         /// </summary>
-        public ResponseCodeEnum ResponseCode => _responseCode switch
-        {
-            "1" => ResponseCodeEnum.Approved,
-            "2" => ResponseCodeEnum.Declined,
-            "3" => ResponseCodeEnum.Error,
-            "4" => ResponseCodeEnum.HeldForReview,
-            _ => ResponseCodeEnum.Unknown,
-        };
+        public ResponseCodeEnum ResponseCode => ResponseMapper.GetResponseCode(_responseCode);
 
         /// <summary>
         /// 3 Response
@@ -72,14 +64,7 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
         /// 3 - There has been an error processing this transaction.
         /// 4 - This transaction is being held for review.
         /// </summary>
-        public string ResponseReasonCode => _responseReasonCode switch
-        {
-            "1" => "This transaction has been approved",
-            "2" => "This transaction has been declined",
-            "3" => "There has been an error processing this transaction",
-            "4" => "This transaction is being held for review",
-            _ => "This transaction is an uknown state.",
-        };
+        public string ResponseReasonCode => ResponseMapper.GetResponseReasonCode(_responseReasonCode);
 
         /// <summary>
         /// 4 Response Reason Text
@@ -112,25 +97,27 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
         ///  Z = Five digit ZIP matches, Address (Street) does not
         /// Notes: Indicates the result of the AVS filter.
         /// </summary>
-        public string AVSResponseCode => _aVSResponseCode;
+        public string AVSResponseCode { get; }
 
-        public string AVSResponseText => _aVSResponseCode switch
-        {
-            "A" => "Address(Street) matches, ZIP does not",
-            "B" => "Address information not provided for AVS check",
-            "E" => "AVS error",
-            "G" => "Non-U.S.Card Issuing Bank",
-            "N" => "No Match on Address(Street) or ZIP",
-            "P" => "AVS not applicable for this transaction",
-            "R" => "Retry—System unavailable or timed out",
-            "S" => "Service not supported by issuer",
-            "U" => "Address information is unavailable",
-            "W" => "Nine digit ZIP matches, Address (Street) does not",
-            "X" => "Address(Street) and nine digit ZIP match",
-            "Y" => "Address(Street) and five digit ZIP match",
-            "Z" => "Five digit ZIP matches, Address (Street) does not",
-            _ => "Unknown"
-        };
+        /// <summary>
+        /// 6 AVS Response Value: The Address Verification Service (AVS) response code.
+        /// Format:
+        ///  A = Address(Street) matches, ZIP does not
+        ///  B = Address information not provided for AVS check
+        ///  E = AVS error
+        ///  G = Non-U.S.Card Issuing Bank
+        ///  N = No Match on Address(Street) or ZIP
+        ///  P = AVS not applicable for this transaction
+        ///  R = Retry—System unavailable or timed out
+        ///  S = Service not supported by issuer
+        ///  U = Address information is unavailable
+        ///  W = Nine digit ZIP matches, Address (Street) does not
+        ///  X = Address(Street) and nine digit ZIP match
+        ///  Y = Address(Street) and five digit ZIP match
+        ///  Z = Five digit ZIP matches, Address (Street) does not
+        /// Notes: Indicates the result of the AVS filter.
+        /// </summary>
+        public string AVSResponseText => ResponseMapper.GetAVSResponseText(AVSResponseCode);
 
         /// <summary>
         /// 7 Transaction ID Value: The payment gateway-assigned identification number for the transaction.
@@ -195,6 +182,19 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Contracts
         /// Notes: Indicates the result of the CCV filter.
         /// </summary>
         public string CardCodeResponse { get; set; }
+
+        /// <summary>
+        /// 39 Card Code Response
+        /// Value: The card code verification(CCV) response code
+        /// Format:
+        ///  M = Match
+        ///  N = No Match
+        ///  P = Not Processed
+        ///  S = Should have been present
+        ///  U = Issuer unable to process request
+        /// Notes: Indicates the result of the CCV filter.
+        /// </summary>
+        public string CardCodeResponseText => ResponseMapper.GetCardCodeResponseText(CardCodeResponse);
 
         /// <summary>
         /// 40 Cardholder
