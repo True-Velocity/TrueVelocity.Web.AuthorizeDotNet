@@ -55,7 +55,11 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             services.TryAddTransient<IAuthorizeNetClient<CreateCustomerProfileRequest, CreateCustomerProfileResponse>, AuthorizeNetClient<CreateCustomerProfileRequest, CreateCustomerProfileResponse>>();
+            services.TryAddTransient<IAuthorizeNetClient<CreateCustomerProfileFromTransactionRequest, CreateCustomerProfileResponse>, AuthorizeNetClient<CreateCustomerProfileFromTransactionRequest, CreateCustomerProfileResponse>>();
+
             services.TryAddTransient<IAuthorizeNetClient<GetCustomerProfileRequest, GetCustomerProfileResponse>, AuthorizeNetClient<GetCustomerProfileRequest, GetCustomerProfileResponse>>();
+            services.TryAddTransient<IAuthorizeNetClient<GetCustomerProfileIdsRequest, GetCustomerProfileIdsResponse>, AuthorizeNetClient<GetCustomerProfileIdsRequest, GetCustomerProfileIdsResponse>>();
+
             services.TryAddTransient<IAuthorizeNetClient<DeleteCustomerProfileRequest, DeleteCustomerProfileResponse>, AuthorizeNetClient<DeleteCustomerProfileRequest, DeleteCustomerProfileResponse>>();
             services.TryAddTransient<IAuthorizeNetClient<UpdateCustomerProfileRequest, UpdateCustomerProfileResponse>, AuthorizeNetClient<UpdateCustomerProfileRequest, UpdateCustomerProfileResponse>>();
 

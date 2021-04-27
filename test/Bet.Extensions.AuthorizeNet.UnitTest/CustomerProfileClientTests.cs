@@ -62,9 +62,17 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                             {
                                 CardNumber = "4111111111111111",
                                 ExpirationDate = "2024-12",
-                                CardCode = "901"
+                                CardCode = "900"
                             }
-                        }
+                        },
+                        // visa requires to have the address
+                        BillTo = new CustomerAddressType
+                        {
+                            Address = "1234 main st",
+                            City = "Washington",
+                            State = "DC",
+                            Zip = "46282"
+                        },
                     }
                 };
 
