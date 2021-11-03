@@ -40,9 +40,9 @@ public class Main : IMain
         // {
         //    await _customerService.TestCustomerProfileAsync(card, ts.Token);
         // }
-        await _transactionService.TestTransactionAsync(ts.Token);
+        // await _transactionService.TestTransactionAsync(ts.Token);
 
-        // await _transactionService.GetUnsettledTransactionAsync(ts.Token);
+        await _transactionService.GetUnsettledTransactionAsync(ts.Token);
         _logger.LogInformation("Main executed");
 
         return await Task.FromResult(0);

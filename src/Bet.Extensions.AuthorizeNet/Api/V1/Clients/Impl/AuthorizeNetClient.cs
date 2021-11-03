@@ -21,12 +21,13 @@ public class AuthorizeNetClient<TRequest, TResponse>
 
     public AuthorizeNetClient(
         MerchantAuthenticationType merchantAuthenticationType,
+        IAuthorizeNetClientOptions options,
         IHttpClientFactory httpClientFactory,
         ILogger<AuthorizeNetClient<TRequest, TResponse>> logger)
     {
         _merchantAuthenticationType = merchantAuthenticationType ?? throw new ArgumentNullException(nameof(merchantAuthenticationType));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _httpClient = httpClientFactory.CreateClient();
+        _httpClient = httpClientFactory.CreateClient(options.Name);
     }
 
     public async Task<TResponse> PostAsync(TRequest request, CancellationToken cancellationToken = default)

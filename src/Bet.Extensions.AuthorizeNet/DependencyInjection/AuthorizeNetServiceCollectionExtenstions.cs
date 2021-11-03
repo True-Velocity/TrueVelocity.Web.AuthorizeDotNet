@@ -1,5 +1,6 @@
 ﻿using AuthorizeNet.Api.V1.Contracts;
 
+using Bet.Extensions.AuthorizeNet;
 using Bet.Extensions.AuthorizeNet.Api.V1.Clients;
 using Bet.Extensions.AuthorizeNet.Api.V1.Clients.Impl;
 using Bet.Extensions.AuthorizeNet.Options;
@@ -17,16 +18,22 @@ public static class AuthorizeNetServiceCollectionExtenstions
     /// Adds Authorize.Net Clients for DI.
     /// </summary>
     /// <param name="services">DI services.</param>
+    /// <param name="name">The name of the HttpClient to be used for AuthorizeNet calls.</param>
     /// <param name="sectionName">The name of the configurations section.</param>
     /// <param name="configureOptions">The configuration for <see cref="AuthorizeNetOptions"/>.</param>
     /// <param name="retryPolicy">The Polly HttpClient Retry Policy.</param>
     /// <returns></returns>
     public static IServiceCollection AddAuthorizeNet(
         this IServiceCollection services,
+        string? name = null,
         string sectionName = nameof(AuthorizeNetOptions),
         Action<AuthorizeNetOptions>? configureOptions = default,
         Func<IServiceProvider, HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>? retryPolicy = null)
     {
+        var namedClient = name ?? "AuthorizeNetClient";
+
+        services.AddSingleton<IAuthorizeNetClientOptions, AuthorizeNetClientOptions>(sp => new AuthorizeNetClientOptions(namedClient));
+
         services.AddChangeTokenOptions<AuthorizeNetOptions>(sectionName, configureAction: o => configureOptions?.Invoke(o));
 
         services.AddScoped(sp =>
@@ -40,7 +47,7 @@ public static class AuthorizeNetServiceCollectionExtenstions
             };
         });
 
-        var httpClientBuilder = services.AddHttpClient(string.Empty, (sp, configure) =>
+        var httpClientBuilder = services.AddHttpClient(namedClient, (sp, configure) =>
         {
             var options = sp.GetRequiredService<IOptionsMonitor<AuthorizeNetOptions>>().CurrentValue;
             configure.BaseAddress = options.BaseUri;
