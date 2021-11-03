@@ -23,32 +23,22 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
     public class CustomerProfileClientTests
     {
         private readonly ITestOutputHelper _output;
-        private readonly IConfiguration _configuration;
+        private readonly IServiceProvider _sp;
 
         public CustomerProfileClientTests(ITestOutputHelper output)
         {
             _output = output;
-            _configuration = TestConfigurations.GetConfiguration();
+            _sp = GetServiceProvider(output);
         }
 
         [Fact]
         public async Task Create_Get_Delete_Customer_Profile_With_Credit_Card_Successfully_Test()
         {
             // Arrange
-            var services = new ServiceCollection();
-
-            services.AddSingleton(_configuration);
-
-            services.AddLogging(b => b.AddXunit(_output));
-            services.AddAuthorizeNet();
-
-            var sp = services.BuildServiceProvider();
-
-            var client = sp.GetRequiredService<ICustomerProfileClient>();
-            var paymentClient = sp.GetRequiredService<ICustomerPaymentProfileClient>();
-            var transactionClient = sp.GetRequiredService<ITransactionClient>();
-
-            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
+            var client = _sp.GetRequiredService<ICustomerProfileClient>();
+            var paymentClient = _sp.GetRequiredService<ICustomerPaymentProfileClient>();
+            var transactionClient = _sp.GetRequiredService<ITransactionClient>();
+            var options = _sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
 
             // 1. Act create Customer/Payment profile
             var creditCardPaymentProfiles = new Collection<CustomerPaymentProfileType>
@@ -62,9 +52,18 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                             {
                                 CardNumber = "4111111111111111",
                                 ExpirationDate = "2024-12",
-                                CardCode = "901"
+                                CardCode = "900"
                             }
-                        }
+                        },
+
+                        // visa requires to have the address
+                        BillTo = new CustomerAddressType
+                        {
+                            Address = "1234 main st",
+                            City = "Washington",
+                            State = "DC",
+                            Zip = "46282"
+                        },
                     }
                 };
 
@@ -103,6 +102,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             var getProfileResponse = await client.GetAsync(new GetCustomerProfileRequest
             {
                 Email = "email2@email.com",
+
                 // CustomerProfileId = createResponse.CustomerProfileId,
                 UnmaskExpirationDate = true,
             });
@@ -137,7 +137,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                         CreditCard = new CreditCardType
                         {
                             CardNumber = getPaymentResponse.PaymentProfile.Payment.CreditCard.CardNumber,
-                            ExpirationDate = exp, //,
+                            ExpirationDate = exp,
                             CardCode = "900"
                         }
                     }
@@ -164,7 +164,6 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             Assert.Equal(exp, getUpdatedProfileResponse.Profile.PaymentProfiles[0].Payment.CreditCard.ExpirationDate);
 
             // 5. Act Charge Customer Payment profile
-
             var chargeRequest = new CreateTransactionRequest
             {
                 TransactionRequest = new TransactionRequestType
@@ -211,29 +210,20 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
         }
 
         [Fact]
-        public async Task Create_Get_Delete_Customer_Profile_With_eCheck_Successfully_Test()
+        public async Task Create_Get_Delete_Customer_Profile_With_eCheck_Business_Checking_Successfully_Test()
         {
             // Arrange
-            var services = new ServiceCollection();
-
-            services.AddSingleton(_configuration);
-
-            services.AddLogging(b => b.AddXunit(_output));
-            services.AddAuthorizeNet();
-
-            var sp = services.BuildServiceProvider();
-
-            var client = sp.GetRequiredService<ICustomerProfileClient>();
-            var paymentClient = sp.GetRequiredService<ICustomerPaymentProfileClient>();
-            var transactionClient = sp.GetRequiredService<ITransactionClient>();
-
-            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
+            var client = _sp.GetRequiredService<ICustomerProfileClient>();
+            var paymentClient = _sp.GetRequiredService<ICustomerPaymentProfileClient>();
+            var transactionClient = _sp.GetRequiredService<ITransactionClient>();
+            var options = _sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
 
             var randomAccountNumber = new Random().Next(10000, int.MaxValue);
 
-            // 1. Act create Customer/Payment profile
+            // 1. Act create eCheck Customer/Payment profile
             var eCheckPaymentProfiles = new Collection<CustomerPaymentProfileType>
                 {
+                    // e-check business checking
                     new CustomerPaymentProfileType
                     {
                         CustomerType = CustomerTypeEnum.Business,
@@ -245,12 +235,33 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                                 AccountType = BankAccountTypeEnum.BusinessChecking,
                                 RoutingNumber = "125008547",
                                 AccountNumber = randomAccountNumber.ToString(),
-
-                                // CheckNumber = "",
-                                NameOnAccount = "Joseph Stalin(Biden)", //.Substring(0, 22),
+                                NameOnAccount = "Joseph Stalin(Biden)", // .Substring(0, 22),
                                 EcheckType = EcheckTypeEnum.CCD
                             },
                         }
+                    },
+
+                    new CustomerPaymentProfileType
+                    {
+                        CustomerType = CustomerTypeEnum.Business,
+                        Payment = new PaymentType
+                        {
+                            CreditCard = new CreditCardType
+                            {
+                                CardNumber = "2223000010309703",
+                                ExpirationDate = "2024-12",
+                                CardCode = "900"
+                            }
+                        },
+
+                        // visa requires to have the address
+                        BillTo = new CustomerAddressType
+                        {
+                            Address = "1600 Pennsylvania Avenue NW",
+                            City = "Washington",
+                            State = "DC",
+                            Zip = "20500"
+                        },
                     }
                 };
 
@@ -259,9 +270,11 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             {
                 Profile = new CustomerProfileType
                 {
-                    Description = "Test Customer Account",
-                    Email = "echeck1@email.com",
-                    MerchantCustomerId = "echeck-Id-2",
+                    Description = "eCheck Business Checking Customer",
+                    Email = "echeck-business-checking@email.com",
+
+                    // id within e-commerce site for the customer
+                    MerchantCustomerId = "echeck-id-2",
                     ProfileType = CustomerProfileTypeEnum.Regular,
                     PaymentProfiles = eCheckPaymentProfiles,
                 },
@@ -281,6 +294,9 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             Assert.Equal(ResponseCodeEnum.Approved, createResult.ResponseCode);
             Assert.Equal("This transaction has been approved.", createResult.ResponseReasonCode);
 
+            // delay for the time to process the record
+            await Task.Delay(TimeSpan.FromSeconds(10));
+
             // 2. Act get an Customer/Payment profile
             var getUpdatedProfileResponse = await client.GetAsync(new GetCustomerProfileRequest
             {
@@ -289,6 +305,13 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             });
 
             // 3. Act Charge Customer Payment profile
+            // pay with e-check
+            var paymentProfileId = getUpdatedProfileResponse
+                                    .Profile
+                                    .PaymentProfiles
+                                    .FirstOrDefault(x => x.Payment.BankAccount.EcheckType == EcheckTypeEnum.CCD)?
+                                    .CustomerPaymentProfileId;
+
             var chargeRequest = new CreateTransactionRequest
             {
                 TransactionRequest = new TransactionRequestType
@@ -300,7 +323,8 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                         CustomerProfileId = getUpdatedProfileResponse.Profile.CustomerProfileId,
                         PaymentProfile = new PaymentProfile
                         {
-                            PaymentProfileId = getUpdatedProfileResponse.Profile.PaymentProfiles[0].CustomerPaymentProfileId
+                            // pay with e-check
+                            PaymentProfileId = paymentProfileId
                         }
                     },
 
@@ -337,17 +361,8 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
         [Fact]
         public async Task Fail_To_Create_Customer_Profile_With_Credit_Card_That_Expired_Test()
         {
-            var services = new ServiceCollection();
-
-            services.AddSingleton(_configuration);
-
-            services.AddLogging(b => b.AddXunit(_output));
-            services.AddAuthorizeNet();
-
-            var sp = services.BuildServiceProvider();
-
-            var client = sp.GetRequiredService<ICustomerProfileClient>();
-            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
+            var client = _sp.GetRequiredService<ICustomerProfileClient>();
+            var options = _sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
 
             // customer payment profile
             var customerPaymentProfiles = new Collection<CustomerPaymentProfileType>
@@ -399,27 +414,19 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             Assert.Equal("auth_only", createResult.TransactionType);
             Assert.Equal("This transaction is an uknown state.", createResult.ResponseReasonCode);
             Assert.Equal("Visa", createResult.CardType);
-            Assert.Equal("", createResult.CardCodeResponse);
-            Assert.Equal("", createResult.AuthorizationCode);
-            Assert.Equal("", createResult.CardholderAuthenticationVerificationResponse);
-            Assert.Equal("", createResult.AuthorizationCode);
+            Assert.Equal(string.Empty, createResult.CardCodeResponse);
+            Assert.Equal(string.Empty, createResult.AuthorizationCode);
+            Assert.Equal(string.Empty, createResult.CardholderAuthenticationVerificationResponse);
+            Assert.Equal(string.Empty, createResult.AuthorizationCode);
             Assert.Equal("CC", createResult.Method);
         }
 
         [Fact]
         public async Task Fail_To_Create_Customer_Profile_With_Credit_Card_That_Declined_Test()
         {
-            var services = new ServiceCollection();
-
-            services.AddSingleton(_configuration);
-
-            services.AddLogging(b => b.AddXunit(_output));
-            services.AddAuthorizeNet();
-
-            var sp = services.BuildServiceProvider();
-
-            var client = sp.GetRequiredService<ICustomerProfileClient>();
-            var options = sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
+            // Arrange
+            var client = _sp.GetRequiredService<ICustomerProfileClient>();
+            var options = _sp.GetRequiredService<IOptions<AuthorizeNetOptions>>();
 
             // customer payment profile
             var customerPaymentProfiles = new Collection<CustomerPaymentProfileType>
@@ -473,7 +480,6 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             var createResult = new PaymentGatewayResponse(createResponse.ValidationDirectResponseList[0]);
 
             // Assert.Equal(ResponseCodeEnum.HeldForReview, createResult.ResponseCode);
-
             Assert.Equal(ResponseCodeEnum.Declined, createResult.ResponseCode);
 
             // "N" => "No Match on Address(Street) or ZIP"
@@ -486,7 +492,6 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             // good address match
             // Assert.Equal("Y", createResult.AVSResponseCode);
             // Assert.Equal("Address(Street) and five digit ZIP match", createResult.AVSResponseText);
-
             Assert.Equal("auth_only", createResult.TransactionType);
             Assert.Equal("This transaction has been declined", createResult.ResponseReasonCode);
             Assert.Equal("Visa", createResult.CardType);
@@ -494,7 +499,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             // N - No Match indicates the code entered is incorrect.
             Assert.Equal("N", createResult.CardCodeResponse);
             Assert.Equal("000000", createResult.AuthorizationCode);
-            Assert.Equal("", createResult.CardholderAuthenticationVerificationResponse);
+            Assert.Equal(string.Empty, createResult.CardholderAuthenticationVerificationResponse);
             Assert.Equal("CC", createResult.Method);
         }
 
@@ -507,6 +512,19 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             var parsed = new PaymentGatewayResponse(directResponse);
 
             Assert.Equal(ResponseCodeEnum.Declined, parsed.ResponseCode);
+        }
+
+        private IServiceProvider GetServiceProvider(ITestOutputHelper output)
+        {
+            var services = new ServiceCollection();
+            var configuration = TestConfigurations.GetConfiguration();
+
+            services.AddSingleton(configuration);
+
+            services.AddLogging(b => b.AddXunit(output));
+
+            services.AddAuthorizeNet();
+            return services.BuildServiceProvider();
         }
     }
 }

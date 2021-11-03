@@ -1,12 +1,16 @@
 <Project>
 
   <PropertyGroup Label="Basic Settings">
-    <VersionPrefix>1.0.2-preview1</VersionPrefix>
+    <VersionPrefix>1.0.4-preview1</VersionPrefix>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
-    <LangVersion>latest</LangVersion>
-    <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);CS1591;NU1605;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Label="Ownership Settings">
@@ -16,7 +20,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget Package Settings">
-    <Description>Collection of AspNetCore extensions and reusable functionality.</Description>
+    <Description>The Authorize.Net APIs DotNetCore implementation for Payment Transactions, Recurring Billing, Customer Payment Profiles and Reporting.</Description>
     <PackageProjectUrl>https://github.com/kdcllc/Bet.Extensions.AuthorizeNet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/kdcllc/Bet.Extensions.AuthorizeNet.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

@@ -22,35 +22,44 @@ The solution is split into two projects:
 
 ## Authorize.Net Reference
 
-### [Customer Profiles](https://developer.authorize.net/api/reference/features/customer_profiles.html)
 
-https://github.com/AuthorizeNet/sample-code-csharp/tree/master/CustomerProfiles
-`CustomerProfileClient` implements:
+### Customer Profile APIs - [`ICustomerProfileClient`](src\Bet.Extensions.AuthorizeNet\Api\V1\Clients\ICustomerProfileClient.cs)
 
-- [x] Create Customer Profile
-- [x] Get Customer Profile
-- [x] Get Customer Profile IDs
-- [x] Update Customer Profile
+- [x] [Create Customer Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles)
+- [x] [Create a Customer Profile from a Transaction](https://developer.authorize.net/api/reference/index.html#customer-profiles-create-a-customer-profile-from-a-transaction)
+- [x] [Get Customer Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles-get-customer-profile)
+- [x] [Get Customer Profile IDs](https://developer.authorize.net/api/reference/index.html#customer-profiles-get-customer-profile-ids)
+- [x] [Update Customer Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles-update-customer-profile)
+- [ ] [Create Customer Shipping Address](https://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-shipping-address)
+- [ ] [Get Customer Shipping Address](https://developer.authorize.net/api/reference/index.html#customer-profiles-get-customer-shipping-address)
+- [ ] [Update Customer Shipping Address](https://developer.authorize.net/api/reference/index.html#customer-profiles-update-customer-shipping-address)
+- [ ] [Delete Customer Shipping Address](https://developer.authorize.net/api/reference/index.html#customer-profiles-delete-customer-shipping-address)
 
-### Customer Payment Profile
+### Customer Payment Profile APIs - [`ICustomerPaymentProfileClient`](src\Bet.Extensions.AuthorizeNet\Api\V1\Clients\ICustomerProfileClient.cs)
 
-`CustomerPaymentProfileClient` implements:
+- [x] [Create Customer Payment Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-payment-profile)
+- [x] [Get Customer Payment Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles-get-customer-payment-profile)
+- [x] [Get Customer Payment Profile List](https://developer.authorize.net/api/reference/index.html#customer-profiles-get-customer-payment-profile-list)
+- [x] [Update Customer Payment Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles-update-customer-payment-profile)
+- [x] [Delete Customer Payment Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles-delete-customer-payment-profile)
+- [x] [Validate Customer Payment Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles-validate-customer-payment-profile)
 
-- [x] Create Customer Payment Profile
-- [x] Get Customer Payment Profile
-- [x] Get Customer Payment Profile List
-- [x] Update Customer Payment Profile
-- [x] Delete Customer Payment Profile
-- [x] Validate Customer Payment Profile
+### Payment Transactions && Transaction Reporting APIs - [`TransactionClient`]()
 
-### [Transactions](https://github.com/AuthorizeNet/sample-code-csharp/tree/master/PaymentTransactions)
-
-`TransactionClient` implements:
-
-- [x] Create Transaction
-- [x] Get Transaction Details
-- [x] Get Settled Batch List
-- [x] Get Transaction List
+- [x] Create Transaction 
+  * [Charge a Credit Card](https://developer.authorize.net/api/reference/index.html#payment-transactions-charge-a-credit-card)
+  * [Authorize a Credit Card](https://developer.authorize.net/api/reference/index.html#payment-transactions-authorize-a-credit-card)
+  * [Capture a Previously Authorized Amount](https://developer.authorize.net/api/reference/index.html#payment-transactions-capture-a-previously-authorized-amount)
+  * [Refund a Transaction](https://developer.authorize.net/api/reference/index.html#payment-transactions-refund-a-transaction)
+  * [Void a Transaction](https://developer.authorize.net/api/reference/index.html#payment-transactions-void-a-transaction)
+  * [Debit a Bank Account](https://developer.authorize.net/api/reference/index.html#payment-transactions-debit-a-bank-account)
+  * [Credit a Bank Account](https://developer.authorize.net/api/reference/index.html#payment-transactions-credit-a-bank-account)
+  * [Charge a Customer Profile](https://developer.authorize.net/api/reference/index.html#payment-transactions-charge-a-customer-profile)
+  * [Charge a Tokenized Credit Card](https://developer.authorize.net/api/reference/index.html#payment-transactions-charge-a-tokenized-credit-card)
+- [x] [Get Transaction Details](https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-transaction-details)
+- [x] [Get Settled Batch List](https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-settled-batch-list)
+- [x] [Get Transaction List](https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-transaction-list)
+- [x] [Get Unsettled Transaction List](https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-unsettled-transaction-list)
 
 ## Authorize.net
 
@@ -130,3 +139,5 @@ For testing purposes, eCheck.Net transactions under $100 will be accepted. To ge
 - [Go Live](https://developer.authorize.net/hello_world/go-live.html)
 - [errorandresponsecodes](https://developer.authorize.net/api/reference/features/errorandresponsecodes.html)
 - [eCheck.Net](https://developer.authorize.net/api/reference/features/echeck.html)
+- [CustomerProfiles](https://github.com/AuthorizeNet/sample-code-csharp/tree/master/CustomerProfiles)
+- [Transactions](https://github.com/AuthorizeNet/sample-code-csharp/tree/master/PaymentTransactions)

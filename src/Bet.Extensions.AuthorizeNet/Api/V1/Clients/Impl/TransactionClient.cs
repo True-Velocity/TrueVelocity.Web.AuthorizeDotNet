@@ -20,11 +20,11 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
             IAuthorizeNetClient<GetTransactionListRequest, GetTransactionListResponse> getList,
             IAuthorizeNetClient<GetUnsettledTransactionListRequest, GetUnsettledTransactionListResponse> getUnsettledList)
         {
-            _create = create ?? throw new System.ArgumentNullException(nameof(create));
-            _get = get ?? throw new System.ArgumentNullException(nameof(get));
-            _getBatchList = getBatchList ?? throw new System.ArgumentNullException(nameof(getBatchList));
-            _getList = getList ?? throw new System.ArgumentNullException(nameof(getList));
-            _getUnsettledList = getUnsettledList ?? throw new System.ArgumentNullException(nameof(getUnsettledList));
+            _create = create ?? throw new ArgumentNullException(nameof(create));
+            _get = get ?? throw new ArgumentNullException(nameof(get));
+            _getBatchList = getBatchList ?? throw new ArgumentNullException(nameof(getBatchList));
+            _getList = getList ?? throw new ArgumentNullException(nameof(getList));
+            _getUnsettledList = getUnsettledList ?? throw new ArgumentNullException(nameof(getUnsettledList));
         }
 
         public Task<CreateTransactionResponse> CreateAsync(
