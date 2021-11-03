@@ -21,7 +21,7 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
         /// - Credit a Bank Account
         /// - Charge a Customer Profile
         /// - Charge a Tokenized Credit Card.
-        /// https://developer.authorize.net/api/reference/index.html#payment-transactions.
+        /// See <see href="https://developer.authorize.net/api/reference/index.html#payment-transactions"/>.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
@@ -31,7 +31,7 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
         /// <summary>
         /// Get Transaction Details.
         /// Use this function to get detailed information about a specific transaction.
-        /// https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-transaction-details.
+        /// See <see href="https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-transaction-details"/>.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
@@ -44,7 +44,7 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
         /// If includeStatistics is true, you also receive batch statistics by payment type and batch totals.
         /// All input parameters other than merchant authentication are optional.
         /// If no dates are specified, then the default is the past 24 hours, ending at the time of the call to getSettledBatchListRequest.
-        /// https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-settled-batch-list.
+        /// See <see href="https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-settled-batch-list"/>.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
@@ -58,7 +58,7 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
         /// Paging options can be sent to limit the result set or to retrieve additional transactions beyond the 1000 transaction limit.
         /// No input parameters are required other than the authentication information and a batch ID.
         /// However, you can add the sorting and paging options shown below to customize the result set.
-        /// https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-transaction-list.
+        /// See <see href="https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-transaction-list"/>.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
@@ -72,10 +72,11 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
         /// Paging options can be sent to limit the result set or to retrieve additional transactions beyond the 1000 transaction limit.
         /// No input parameters are required other than the authentication information.
         /// However, you can add the sorting and paging options shown below to customize the result set.
-        /// https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-unsettled-transaction-list.
+        /// See <see href="https://developer.authorize.net/api/reference/index.html#transaction-reporting-get-unsettled-transaction-list"/>.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<GetUnsettledTransactionListResponse> GetUnsettledListAsync(GetUnsettledTransactionListRequest request, CancellationToken cancellationToken = default);
-    }}
+    }
+}

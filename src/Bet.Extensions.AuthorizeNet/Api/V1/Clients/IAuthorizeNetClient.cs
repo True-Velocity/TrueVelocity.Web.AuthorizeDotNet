@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 using AuthorizeNet.Api.V1.Contracts;
@@ -9,6 +10,12 @@ namespace Bet.Extensions.AuthorizeNet.Api.V1.Clients
         where TRequest : ANetApiRequest
         where TResponse : ANetApiResponse
     {
+        /// <summary>
+        /// Generic <see cref="HttpClient"/> post method implementation.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         Task<TResponse> PostAsync(TRequest request, CancellationToken cancellationToken = default);
     }
 }
