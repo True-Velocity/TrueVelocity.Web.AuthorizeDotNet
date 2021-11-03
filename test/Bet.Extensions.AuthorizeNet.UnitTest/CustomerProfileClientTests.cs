@@ -23,7 +23,6 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
     public class CustomerProfileClientTests
     {
         private readonly ITestOutputHelper _output;
-        private readonly IConfiguration _configuration;
         private readonly IServiceProvider _sp;
 
         public CustomerProfileClientTests(ITestOutputHelper output)
@@ -138,7 +137,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                         CreditCard = new CreditCardType
                         {
                             CardNumber = getPaymentResponse.PaymentProfile.Payment.CreditCard.CardNumber,
-                            ExpirationDate = exp, //,
+                            ExpirationDate = exp,
                             CardCode = "900"
                         }
                     }
@@ -236,7 +235,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                                 AccountType = BankAccountTypeEnum.BusinessChecking,
                                 RoutingNumber = "125008547",
                                 AccountNumber = randomAccountNumber.ToString(),
-                                NameOnAccount = "Joseph Stalin(Biden)", //.Substring(0, 22),
+                                NameOnAccount = "Joseph Stalin(Biden)", // .Substring(0, 22),
                                 EcheckType = EcheckTypeEnum.CCD
                             },
                         }
@@ -481,7 +480,6 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             var createResult = new PaymentGatewayResponse(createResponse.ValidationDirectResponseList[0]);
 
             // Assert.Equal(ResponseCodeEnum.HeldForReview, createResult.ResponseCode);
-
             Assert.Equal(ResponseCodeEnum.Declined, createResult.ResponseCode);
 
             // "N" => "No Match on Address(Street) or ZIP"
@@ -494,7 +492,6 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             // good address match
             // Assert.Equal("Y", createResult.AVSResponseCode);
             // Assert.Equal("Address(Street) and five digit ZIP match", createResult.AVSResponseText);
-
             Assert.Equal("auth_only", createResult.TransactionType);
             Assert.Equal("This transaction has been declined", createResult.ResponseReasonCode);
             Assert.Equal("Visa", createResult.CardType);

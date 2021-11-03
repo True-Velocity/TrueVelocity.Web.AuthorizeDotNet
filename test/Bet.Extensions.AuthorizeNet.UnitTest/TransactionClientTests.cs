@@ -185,7 +185,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                         {
                             CardNumber = "5424000000000015",
                             ExpirationDate = "2021-12",
-                            CardCode = "901" // N 	Does not match.
+                            CardCode = "901" // N   Does not match.
                         },
                     },
                     Customer = new CustomerDataType
@@ -229,7 +229,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
             Assert.False(string.IsNullOrEmpty(response.TransactionResponse.TransId));
 
             // auth code doesn't have values
-            Assert.Equal("", response.TransactionResponse.AuthCode);
+            Assert.Equal(string.Empty, response.TransactionResponse.AuthCode);
 
             // https://support.authorize.net/s/article/What-Are-the-Different-Address-Verification-Service-AVS-Response-Codes
             Assert.Equal("Y", response.TransactionResponse.AvsResultCode);
@@ -269,7 +269,7 @@ namespace Bet.Extensions.AuthorizeNet.UnitTest
                         {
                             CardNumber = carNumber,
                             ExpirationDate = "2021-12",
-                            CardCode = "901" // N 	Does not match.
+                            CardCode = "901" // N   Does not match.
                         },
                     },
                     Customer = new CustomerDataType

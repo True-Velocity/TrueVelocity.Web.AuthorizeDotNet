@@ -1,23 +1,20 @@
 ﻿using AuthorizeNet.Worker;
 using AuthorizeNet.Worker.Services;
 
-using Microsoft.Extensions.Hosting;
+namespace Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection
+public static class ConsoleServiceCollectionExtensions
 {
-    public static class ConsoleServiceCollectionExtensions
+    public static void ConfigureServices(HostBuilderContext hostBuilder, IServiceCollection services)
     {
-        public static void ConfigureServices(HostBuilderContext hostBuilder, IServiceCollection services)
-        {
-            services.AddScoped<IMain, Main>();
+        services.AddScoped<IMain, Main>();
 
-            // add authorize registration
-            services.AddAuthorizeNet();
+        // add authorize registration
+        services.AddAuthorizeNet();
 
-            // add services
-            services.AddScoped<CustomerService>();
-            services.AddScoped<TransactionService>();
-            services.AddScoped<SampleData>();
-        }
+        // add services
+        services.AddScoped<CustomerService>();
+        services.AddScoped<TransactionService>();
+        services.AddScoped<SampleData>();
     }
 }
