@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 using AuthorizeNet.Api.V1.Contracts;
 
@@ -11,7 +7,6 @@ using Bet.Extensions.AuthorizeNet.Api.V1.Contracts;
 using Bet.Extensions.AuthorizeNet.Options;
 using Bet.Extensions.Testing.Logging;
 
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 

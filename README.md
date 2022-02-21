@@ -44,9 +44,16 @@ The solution is split into two projects:
 - [x] [Delete Customer Payment Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles-delete-customer-payment-profile)
 - [x] [Validate Customer Payment Profile](https://developer.authorize.net/api/reference/index.html#customer-profiles-validate-customer-payment-profile)
 
+### Customer Shipping Address APIs - [`ICustomerShippingAddressClient`](src\Bet.Extensions.AuthorizeNet\Api\V1\Clients\ICustomerShippingAddressClient.cs)
+
+- [x] [Create Customer Shipping Address](https://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-shipping-address)
+- [x] [Get Customer Shipping Address](https://developer.authorize.net/api/reference/index.html#customer-profiles-get-customer-shipping-address)
+- [x] [Update Customer Shipping Address](https://developer.authorize.net/api/reference/index.html#customer-profiles-update-customer-shipping-address)
+- [x] [Delete Customer Shipping Address](https://developer.authorize.net/api/reference/index.html#customer-profiles-delete-customer-shipping-address)
+
 ### Payment Transactions && Transaction Reporting APIs - [`TransactionClient`]()
 
-- [x] Create Transaction 
+- [x] Create Transaction
   * [Charge a Credit Card](https://developer.authorize.net/api/reference/index.html#payment-transactions-charge-a-credit-card)
   * [Authorize a Credit Card](https://developer.authorize.net/api/reference/index.html#payment-transactions-authorize-a-credit-card)
   * [Capture a Previously Authorized Amount](https://developer.authorize.net/api/reference/index.html#payment-transactions-capture-a-previously-authorized-amount)

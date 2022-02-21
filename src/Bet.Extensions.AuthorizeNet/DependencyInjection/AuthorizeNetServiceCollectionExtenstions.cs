@@ -79,6 +79,13 @@ public static class AuthorizeNetServiceCollectionExtenstions
 
         services.TryAddTransient<ICustomerPaymentProfileClient, CustomerPaymentProfileClient>();
 
+        services.TryAddTransient<IAuthorizeNetClient<CreateCustomerShippingAddressRequest, CreateCustomerShippingAddressResponse>, AuthorizeNetClient<CreateCustomerShippingAddressRequest, CreateCustomerShippingAddressResponse>>();
+        services.TryAddTransient<IAuthorizeNetClient<GetCustomerShippingAddressRequest, GetCustomerShippingAddressResponse>, AuthorizeNetClient<GetCustomerShippingAddressRequest, GetCustomerShippingAddressResponse>>();
+        services.TryAddTransient<IAuthorizeNetClient<UpdateCustomerShippingAddressRequest, UpdateCustomerShippingAddressResponse>, AuthorizeNetClient<UpdateCustomerShippingAddressRequest, UpdateCustomerShippingAddressResponse>>();
+        services.TryAddTransient<IAuthorizeNetClient<DeleteCustomerShippingAddressRequest, DeleteCustomerShippingAddressResponse>, AuthorizeNetClient<DeleteCustomerShippingAddressRequest, DeleteCustomerShippingAddressResponse>>();
+
+        services.TryAddTransient<ICustomerShippingAddressClient, CustomerShippingAddressClient>();
+
         services.TryAddTransient<IAuthorizeNetClient<CreateTransactionRequest, CreateTransactionResponse>, AuthorizeNetClient<CreateTransactionRequest, CreateTransactionResponse>>();
         services.TryAddTransient<IAuthorizeNetClient<GetTransactionDetailsRequest, GetTransactionDetailsResponse>, AuthorizeNetClient<GetTransactionDetailsRequest, GetTransactionDetailsResponse>>();
         services.TryAddTransient<IAuthorizeNetClient<GetSettledBatchListRequest, GetSettledBatchListResponse>, AuthorizeNetClient<GetSettledBatchListRequest, GetSettledBatchListResponse>>();
