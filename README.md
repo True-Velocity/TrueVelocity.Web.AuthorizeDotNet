@@ -1,4 +1,4 @@
-# Bet.Extensions.AuthorizeNet
+# TrueVelocity.Extensions.AuthorizeNet
 
 [![Build status](https://ci.appveyor.com/api/projects/status/62hg47fx8erd9rw4/branch/master?svg=true)](https://ci.appveyor.com/project/kdcllc/bet-extensions-authorizenet/branch/master)
 [![NuGet](https://img.shields.io/nuget/v/Bet.Extensions.AuthorizeNet.svg)](https://www.nuget.org/packages?q=Bet.Extensions.AuthorizeNet)
